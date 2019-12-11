@@ -1,9 +1,40 @@
+<!--
+========== HEADER ===========
+-->
 <ion-header>
-  <ion-toolbar>
-    <ion-title>base</ion-title>
+  <ion-toolbar class="ion-text-center">
+    <img src="assets/logo.png">
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<!--
+========== FOOTER ===========
+-->
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button routerLink="/">
+      <ion-icon name="logo-foursquare"></ion-icon>
+      <ion-label>Accueil</ion-label>
+    </ion-tab-button>
 
-</ion-content>
+    <ion-tab-button routerLink="/favoris">
+      <ion-icon name="heart"></ion-icon>
+      <ion-label>Favoris</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/leagues">
+      <ion-icon name="football"></ion-icon>
+      <ion-label>Championnats</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/account">
+      <ion-icon name="person"></ion-icon>
+      <ion-label>Mon compte</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/panier">
+      <ion-icon name="cart"></ion-icon>
+      <ion-label>Panier</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

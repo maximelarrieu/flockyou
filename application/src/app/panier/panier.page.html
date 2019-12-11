@@ -1,0 +1,94 @@
+<ion-content>
+    <ion-toolbar>
+        <ion-title>panier</ion-title>
+    </ion-toolbar>
+    <div class="wrap cf">
+        <div class="heading cf">
+            <h1>Mon panier</h1>
+            <a routerLink="/" class="continue">Continuer mes achats</a>
+        </div>
+        <div class="cart">
+            <ul class="cartWrap">
+                <li class="items even">
+                    <div class="infoWrap">
+                        <div class="cartSection">
+                            <img src="assets/teams/TOTT_dom.png" alt="Maillot choisi" class="itemImg"/>
+                            <p class="itemNumber">Tottenham - Maillot domicile 2019/2010</p>
+                            <h3>Taille : L <br> Flocage : 9. Kane</h3>
+
+                            <p><input type="text" class="qty" placeholder="1"/> x $59.99</p>
+                        </div>
+                    </div>
+                </li>
+                <li class="items odd">
+                    <div class="infoWrap">
+                        <div class="cartSection">
+                            <img src="assets/teams/MC_dom.png" alt="" class="itemImg"/>
+                            <p class="itemNumber">Manchester City - Maillot domicile 2019/2010</p>
+                            <h3>Taille : L <br> Flocage : 7. Sterling</h3>
+
+                            <p><input type="text" class="qty" placeholder="1"/> x $59.99</p>
+                        </div>
+                        <div class="prodTotal cartSection">
+                            <p>$15.00</p>
+                        </div>
+                        <div class="cartSection removeWrap">
+                            <a href="#" class="remove">x</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="items even">
+                    <div class="infoWrap">
+                        <div class="cartSection">
+                            <img src="assets/teams/JUV_dom.png" alt="" class="itemImg"/>
+                            <p class="itemNumber">Juventus - Maillot domicile 2019/2010</p>
+                            <h3>Taille : S <br> Flocage : 9. Ronaldo</h3>
+
+                            <p><input type="text" class="qty" placeholder="1"/> x $59.99</p>
+                        </div>
+                        <div class="prodTotal cartSection">
+                            <p>$15.00</p>
+                        </div>
+                        <div class="cartSection removeWrap">
+                            <a href="#" class="remove">x</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="items odd">
+                    <div class="infoWrap">
+                        <div class="cartSection info">
+                            <img src="assets/teams/PSG_dom.png" alt="" class="itemImg"/>
+                            <p class="itemNumber">Paris-Saint-Germain - Maillot domicile 2019/2010</p>
+                            <h3>Taille : M <br> Flocage : 20. Kurzawwa</h3>
+                            <p><input type="text" class="qty" placeholder="1"/> x $59.99</p>
+                        </div>
+                        <div class="prodTotal cartSection">
+                            <p>$15.00</p>
+                        </div>
+                        <div class="cartSection removeWrap">
+                            <a href="#" class="remove">x</a>
+                        </div>
+                    </div>
+                    <div class="special">
+                        <div class="specialContent">Free gift with purchase!</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="promoCode">
+            <label for="promo">Vous avez un code promo? </label>
+            <input type="text" name="promo" placholder="Enter Code"/>
+            <a href="#" class="btn"></a>
+        </div>
+        <div class="subtotal cf">
+            <div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><b>Sous-total :</b> <i> 200.98$</i></li>
+                    <li class="list-group-item"><b>Livraison :</b> 2.99$</li>
+                    <li class="list-group-item"><b>Total :</b> 203.98$</li>
+                </ul>
+            </div>
+            <button type="button" class="btn btn-info btn-lg btn-block">Commander</button>
+        </div>
+    </div>
+</ion-content>
