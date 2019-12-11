@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { BasePage } from './base.page';
 
+//@ts-ignore
 const routes: Routes = [
   {
     path: '',
@@ -35,6 +36,16 @@ const routes: Routes = [
             path: '',
             loadChildren: () =>
                 import('../leagues/leagues.module').then(m => m.LeaguesPageModule)
+          }
+        ]
+      },
+      {
+        path: 'product',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+                import('../product/product.module').then(m => m.ProductPageModule)
           }
         ]
       },
