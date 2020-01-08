@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre panier - Flockyou{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset("build/cart.css") }}"/>
+    <h2 class="deepshadow">Votre panier</h2>
+    <div class="cart">
+        <div class="d-flex bd-highlight">
+            <div class="one p-2 flex-md-fill bd-highlight m-1">
+                <h4>PRODUITS</h4>
+                <ul>
+                    <li>
+                        <img src="{{ asset('build/images/teams/JUV_dom.png') }}">
+                        Maillot JUVENTUS
+                    </li>
+                    <hr/>
+                </ul>
+            </div>
+            <div class="two p-2 flex-md-fill bd-highlight bg-dark m-1">
+                <h4>ADRESSE DE LIVRAISON</h4>
+            </div>
+            <div class="three p-2 flex-md-fill bd-highlight bg-dark m-1">
+                <h4>COORDONNÉES BANCAIRES</h4>
+            </div>
+        </div>
+    </div>
+{% endblock %}

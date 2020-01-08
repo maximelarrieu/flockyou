@@ -1,0 +1,25 @@
+.cart {
+    width: 80%;
+    background-color: white;
+    border-radius: 3px;
+    margin-left: auto;
+    margin-right: auto;
+}
+h4 {
+    margin: 3%;
+    margin-bottom: 5%;
+    font-weight: bold;
+}
+
+ul {
+    list-style: none;
+}
+
+.one {
+    width: 40%;
+}
+.two, .three {
+    width: 30%;
+    color: white;
+    border-radius: 3px;
+}

@@ -20,4 +20,12 @@ class ProductsController extends AbstractController
     public function show() {
 
     }
+
+    public function championsleague() {
+        return $this->render('leagues/cl.html.twig');
+    }
+
+    public function euro() {
+        return $this->render('leagues/euro.html.twig');
+    }
 }
