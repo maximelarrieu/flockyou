@@ -24,4 +24,8 @@ class HomeController extends AbstractController
     public function caroussel() {
         return $this->render('home/caroussel.html.twig');
     }
+
+    public function footer() {
+        return $this->render('footer.html.twig');
+    }
 }

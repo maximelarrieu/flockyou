@@ -1,11 +1,11 @@
 .cart {
-    width: 80%;
+    max-width: 80%;
     background-color: white;
     border-radius: 3px;
     margin-left: auto;
     margin-right: auto;
 }
-h4 {
+h3 {
     margin: 3%;
     margin-bottom: 5%;
     font-weight: bold;
@@ -15,11 +15,100 @@ ul {
     list-style: none;
 }
 
+/*****------ZONE PRODUITS-------******/
 .one {
-    width: 40%;
+    width: 45%;
 }
 .two, .three {
+    /*margin-top: 30px;*/
     width: 30%;
     color: white;
-    border-radius: 3px;
+    border-radius: 10px;
+    box-shadow: -6px 4px 15px 1px  black;
+    background-image: linear-gradient(to left bottom, #150936, #131039, #11163c, #111a3f, #111f41, #101f41, #101f42, #0f1f42, #0e1a41, #0e143f, #0f0e3c, #130539);}
+.one li {
+    height: 180px;
+    position: relative;
+    margin-bottom: 30px;
+}
+.image {
+    position: relative;
+    width: 30%;
+    float: left;
+}
+.image img {
+    width: 100%;
+    height: 100%;
+}
+.info {
+    float: left;
+    width: 70%;
+    height: 100%;
+}
+.one, .info {
+    vertical-align: top;
+}
+.price {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.suppr {
+    vertical-align: top;
+    float: right;
+}
+.total {
+    padding: 3%;
+    width: 16%;
+    float: right;
+    border: 1px solid;
+    border-radius: 4px;
+    font-size: 20px;
+}
+/*****------------------*****/
+/*****---ADRESSE LIVRAION---*****/
+label {
+    color: #a3a3a3;
+    margin-bottom: -5px;
+}
+.one input, .two input, .three input {
+    height: 40px;
+    color: #ddd;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    outline: none;
+    font-size: 20px;
+    margin-bottom: 30px;
+    width: 90%;
+}
+
+/*****------------------*****/
+/*****-----PAIEMENT-------*****/
+.credit_card {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.credit_card img {
+    width: 100%;
+}
+.expiration {
+    width: 40%;
+    float: left;
+    display: inline;
+}
+.code {
+    vertical-align: top;
+    display: inline;
+    width: 40%;
+}
+.code input {
+    width: 40%;
+}
+button {
+    height: 60px;
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    width: 80%;
 }
