@@ -5,7 +5,7 @@
 {% block body %}
     {{ render(controller('App\\Controller\\HomeController::caroussel', {} )) }}
     <h2 class="deepshadow">Nouveautés</h2>
-    <div class="mainwrapper row">
+    <div class="mainwrapper index row">
         {{ render(controller('App\\Controller\\ProductsController::index', {} )) }}
         {{ render(controller('App\\Controller\\ProductsController::index', {} )) }}
         {{ render(controller('App\\Controller\\ProductsController::index', {} )) }}
@@ -13,7 +13,7 @@
         {{ render(controller('App\\Controller\\ProductsController::index', {} )) }}
     </div>
     <h2 class="deepshadow">Promo !</h2>
-    <div class="mainwrapper row">
+    <div class="mainwrapper index row">
         {{ render(controller('App\\Controller\\ProductsController::index', {} )) }}
         {{ render(controller('App\\Controller\\ProductsController::index', {} )) }}
         {{ render(controller('App\\Controller\\ProductsController::index', {} )) }}
