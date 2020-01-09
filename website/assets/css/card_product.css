@@ -12,7 +12,7 @@
 .card:hover {
     transition: all .2s ease-in-out;
     transform: scale(1.1);
-    box-shadow: -11px 11px 7px rgba(0, 0, 0, 0.3);
+    box-shadow: -11px 11px 10px 10px rgba(0, 0, 0, 0.3);
 }
 
 .card-head {
@@ -91,7 +91,7 @@
     font-size: 10px;
     font-weight: 300;
     color: #fff;
-    background: #11e95b;
+    background: #006be9;
     padding: 2px 5px;
     border-radius: 4px;
     top: -2px;
@@ -159,7 +159,7 @@
 
 .product-price {
     position: absolute;
-    background: #11e95b;
+    background: #222978;
     padding: 7px 20px;
     text-align: center;
     display: inline-block;
@@ -169,7 +169,7 @@
     border-radius: 7px;
     margin-top: 25px;
     margin-left: 120px;
-    box-shadow: -10px 20px 15px -7px rgba(17, 233, 91, 0.3);
+    box-shadow: -10px 20px 15px -7px rgba(15, 34, 233, 0.3);
 }
 
 .product-price b {
