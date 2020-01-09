@@ -6,13 +6,19 @@
 }
 
 body {
-    background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+    background-image: url("../images/ressources/background.jpg");
 }
-
+nav {
+    background-image: radial-gradient(circle, #2a2a2a, #343434, #3f3f3f, #4a4a4a, #555555);
+}
 .mainwrapper {
-    width: 90%;
     margin-left: auto;
     margin-right: auto;
+    width: 90%;
+}
+
+.index {
+    padding-left: 5%;
 }
 
 h2 {
