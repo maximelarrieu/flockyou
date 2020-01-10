@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark primary-color">
 
     <!-- Navbar brand -->
-    <a class="navbar-brand" href="{{ path('home') }}"><img src="{{asset('build/images/ressources/flockyou.png')}}" title="flockyou" alt="logo"></a>
+    <a class="navbar-brand" href="{{ path('home') }}"><img src="{{asset('build/images/ressources/flockyou.png')}}" title="flockyou" alt="logo" style="width: 200px;" class="mr-5"></a>
 
     <!-- Collapse button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
@@ -15,16 +15,15 @@
 
         <!-- Links -->
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ path('championsleague') }}">
-                    <img src="{{asset('build/images/leagues/championsleague.png')}}" title="cl" alt="cl" style="width: 70px; height: 70px" class="mr-2">
+            <li class="nav-item">
+                <a class="nav-link mr-2" href="{{ path('championsleague') }}">
+                    <img src="{{asset('build/images/leagues/cl.png')}}" title="cl" alt="cl" style="width: 60px; height: 60px; ">
                     Champion's League
-                    <span class="sr-only">(current)</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('euro') }}">
-                    <img src="{{asset('build/images/leagues/euro.png')}}" title="euro" alt="euro" style="width: 60px; height: 70px" class="mr-2">
+                    <img src="{{asset('build/images/leagues/euro.png')}}" title="euro" alt="euro" style="width: 55px; height: 60px">
                     Euro 2020
                 </a>
             </li>
