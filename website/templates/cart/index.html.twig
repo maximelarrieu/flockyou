@@ -8,86 +8,95 @@
     <div class="cart">
         <div class="d-flex bd-highlight">
             <div class="one p-2 flex-md-fill bd-highlight m-1">
-                <h3 class="mb-5">PRODUITS</h3>
-                <ul>
-                    <li>
-                        <div class="image">
-                            <img src="{{ asset('build/images/teams/JUV_dom.png') }}" class="mr-3">
-                        </div>
-                        <div class="info pl-5">
-                            <i class="suppr far fa-times-circle pull-right"></i>
-                            <i class="suppr fas fa-pen pull-right mr-2"></i>
-                            <h4 class="">JUVENTUS - DOMICILE</h4>
-                            <h5>Taille : M</h5>
-                            <h5>Flocage : 10 - BENZEMA</h5>
-                            <h5>Quantité : <input type="number" id="quantity" name="quantity" value="1" style="width: 15%"></h5>
-                            <h5 class="price">49.99 €</h5>
-                        </div>
-                    </li>
-                    <hr>
-                    <li>
-                        <div class="image">
-                            <img src="{{ asset('build/images/teams/FCBarcelone_dom.png') }}" class="mr-3">
-                        </div>
-                        <div class="info pl-5">
-                            <i class="suppr far fa-times-circle pull-right"></i>
-                            <i class="suppr fas fa-pen pull-right mr-2"></i>
-                            <h4 class="">FC BARCELONE - DOMICILE</h4>
-                            <h5>Taille : L</h5>
-                            <h5>Flocage : 10 - MESSI</h5>
-                            <h5>Quantité : <input type="number" id="quantity" name="quantity" value="1" style="width: 15%"></h5>
-                            <h5 class="price">49.99 €</h5>
-                        </div>
-                    </li>
-                    <hr>
-                    <li>
-                        <div class="image">
-                            <img src="{{ asset('build/images/teams/TOTT_dom.png') }}" class="mr-3">
-                        </div>
-                        <div class="info pl-5">
-                            <i class="suppr far fa-times-circle pull-right"></i>
-                            <i class="suppr fas fa-pen pull-right mr-2"></i>
-                            <h4 class="">TOTTHENAM - DOMICILE</h4>
-                            <h5>Taille : S</h5>
-                            <h5>Flocage : 7 - SON</h5>
-                            <h5>Quantité : <input type="number" id="quantity" name="quantity" value="1" style="width: 15%"></h5>
-                            <h5 class="price">49.99 €</h5>
-                        </div>
-                        <hr>
-                    </li>
-                    <hr>
-                </ul>
-                <div class="total" style="float:right">
+                <h3 class="mb-3">PRODUITS</h3>
+                <p>Continuer mes achats <i class="fas fa-arrow-right ml-2"></i></p>
+                <div class="total">
                     <b>Total</b><br> 150€
                 </div>
-            </div>
-            <div class="two p-2 flex-md-fill bd-highlight m-3">
-                <h3 class="mb-5">DETAILS DE LIVRAISON</h3>
-                <div class="m-5">
-                    <label for="name">Nom complet</label><input type="text" name="name" id="name" class="name">
-                    <label for="phone">Numéro de téléphone</label><input type="text" name="phone" id="phone" class="phone">
-                    <label for="email">Adresse email</label><input type="email" name="email" id="email" class="email">
-                    <label for="country">Pays</label><input type="text" name="country" id="country" class="country">
-                    <label for="city">Ville exacte</label><input type="text" name="city" id="city" class="city">
-                    <label for="address1">Adressee livraion</label><input type="text" name="address1" id="address1" class="address1">
-                    <label for="address2">Adresse 2 (non nécessaire)</label><input type="text" name="address2" id="address2" class="address2">
-                </div>
-            </div>
-            <div class="three p-2 flex-md-fill bd-highlight m-3">
-                <h3 class="mb-5">DONNÉES BANCAIRES</h3>
-                <div class="credit_card">
-                    <img src="{{ asset('build/images/ressources/fake_credit_card.png') }}" class="mb-5">
-                    <label for="name_titu">Nom titulaire de carte</label><input type="text" name="name" id="name_titu" class="name_titu">
-                    <label for="card_num">Numéro de carte</label><input type="text" name="card_num" id="card_num" class="card_num">
-                    <div class="expiration mr-5">
-                        <label for="month">Date expiration</label><input type="month" name="month" id="month" class="month"><input type="month" name="month" id="month" class="month">
+            <ul>
+                <li>
+                    <div class="image">
+                        <img src="{{ asset('build/images/teams/JUV_dom.png') }}" class="mr-3">
                     </div>
-                    <div class="code">
-                        <label for="code">Code carte</label><input type="text" name="code" id="code" class="code">
+                    <div class="info pl-5">
+                        <i class="suppr far fa-times-circle pull-right"></i>
+                        <i class="suppr fas fa-pen pull-right mr-2"></i>
+                        <h4 class="">JUVENTUS - DOMICILE</h4>
+                        <h5>Taille : M</h5>
+                        <h5>Flocage : 7 - RONALDO</h5>
+                        <h5>Quantité : <input type="number" id="quantity" name="quantity" value="1" style="width: 15%">
+                        </h5>
+                        <h5 class="price">49.99 €</h5>
                     </div>
-                </div>
-                <button type="submit" class="btn btn-primary btn-lg m-5">Valider le panier</button>
+                </li>
+                <hr>
+                <li>
+                    <div class="image">
+                        <img src="{{ asset('build/images/teams/FCBarcelone_dom.png') }}" class="mr-3">
+                    </div>
+                    <div class="info pl-5">
+                        <i class="suppr far fa-times-circle pull-right"></i>
+                        <i class="suppr fas fa-pen pull-right mr-2"></i>
+                        <h4 class="">FC BARCELONE - DOMICILE</h4>
+                        <h5>Taille : L</h5>
+                        <h5>Flocage : 10 - MESSI</h5>
+                        <h5>Quantité : <input type="number" id="quantity" name="quantity" value="1" style="width: 15%">
+                        </h5>
+                        <h5 class="price">49.99 €</h5>
+                    </div>
+                </li>
+                <hr>
+                <li>
+                    <div class="image">
+                        <img src="{{ asset('build/images/teams/TOTT_dom.png') }}" class="mr-3">
+                    </div>
+                    <div class="info pl-5">
+                        <i class="suppr far fa-times-circle pull-right"></i>
+                        <i class="suppr fas fa-pen pull-right mr-2"></i>
+                        <h4 class="">TOTTHENAM - DOMICILE</h4>
+                        <h5>Taille : S</h5>
+                        <h5>Flocage : 7 - SON</h5>
+                        <h5>Quantité : <input type="number" id="quantity" name="quantity" value="1" style="width: 15%">
+                        </h5>
+                        <h5 class="price">49.99 €</h5>
+                    </div>
+                    <hr>
+                </li>
+                <hr>
+            </ul>
+        </div>
+        <div class="two p-2 flex-md-fill bd-highlight m-3">
+            <h3 class="mb-5">DETAILS DE LIVRAISON</h3>
+            <div class="m-5">
+                <label for="name">Nom complet</label><input type="text" name="name" id="name" class="name">
+                <label for="phone">Numéro de téléphone</label><input type="text" name="phone" id="phone" class="phone">
+                <label for="email">Adresse email</label><input type="email" name="email" id="email" class="email">
+                <label for="country">Pays</label><input type="text" name="country" id="country" class="country">
+                <label for="city">Ville exacte</label><input type="text" name="city" id="city" class="city">
+                <label for="address1">Adressee livraion</label><input type="text" name="address1" id="address1"
+                                                                      class="address1">
+                <label for="address2">Adresse 2 (non nécessaire)</label><input type="text" name="address2" id="address2"
+                                                                               class="address2">
             </div>
         </div>
+        <div class="three p-2 flex-md-fill bd-highlight m-3">
+            <h3 class="mb-5">DONNÉES BANCAIRES</h3>
+            <div class="credit_card">
+                <img src="{{ asset('build/images/ressources/fake_credit_card.png') }}" class="mb-5">
+                <label for="name_titu">Nom titulaire de carte</label><input type="text" name="name" id="name_titu"
+                                                                            class="name_titu">
+                <label for="card_num">Numéro de carte</label><input type="text" name="card_num" id="card_num"
+                                                                    class="card_num">
+                <div class="expiration mr-5">
+                    <label for="month">Date expiration</label><input type="month" name="month" id="month" class="month"><input
+                            type="month" name="month" id="month" class="month">
+                </div>
+                <div class="code">
+                    <label for="code">Code carte</label><input type="text" name="code" id="code" class="code">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg m-5">Valider le panier</button>
+        </div>
+    </div>
     </div>
 {% endblock %}
