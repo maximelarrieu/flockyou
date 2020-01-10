@@ -21,6 +21,7 @@ ul {
 }
 .two, .three {
     /*margin-top: 30px;*/
+    max-height: 870px;
     width: 30%;
     color: white;
     border-radius: 10px;
@@ -58,13 +59,19 @@ ul {
     float: right;
 }
 .total {
+    margin: 3%;
     padding: 3%;
     width: 16%;
-    float: right;
     border: 1px solid;
     border-radius: 4px;
     font-size: 20px;
+    position: relative;
+    margin-bottom: 5%;
 }
+p {
+    float: right;
+}
+
 /*****------------------*****/
 /*****---ADRESSE LIVRAION---*****/
 label {
