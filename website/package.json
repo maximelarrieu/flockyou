@@ -4,5 +4,8 @@
     "bootstrap": "^4.4.1",
     "copy-webpack-plugin": "^5.1.1",
     "webpack-notifier": "^1.8.0"
+  },
+  "scripts": {
+    "css": "yarn encore dev-server"
   }
 }
