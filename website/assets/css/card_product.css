@@ -1,9 +1,14 @@
 @import url(https://fonts.googleapis.com/css?family=Mr+Dafoe);
 
+.global-link {
+    text-decoration: none;
+    color: black;
+}
 .card {
     border-radius: 25px;
     width: 300px;
-    height: 500px;
+    min-height: 499px;
+    max-height: 500px;
     margin: 40px;
     /*box-shadow: -11px 11px 1px rgba(0, 0, 0, 0.3);*/
     transition: all .2s ease-in-out;
@@ -118,8 +123,8 @@
 .product-size h4 {
     font-size: 11px;
     padding: 0 10px;
-    margin-top: 20px;
-    margin-bottom: -5px;
+    margin-top: 7px;
+    margin-bottom: -12px;
     text-transform: uppercase;
 }
 
@@ -167,8 +172,8 @@
     font-weight: 200;
     color: #fff;
     border-radius: 7px;
-    margin-top: 25px;
-    margin-left: 120px;
+    margin-top: 15px;
+    margin-left: 165px;
     box-shadow: -10px 20px 15px -7px rgba(15, 34, 233, 0.3);
 }
 
