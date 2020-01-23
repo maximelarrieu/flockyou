@@ -2,30 +2,45 @@
 
 namespace App\Controller;
 
+use App\Entity\Products;
+
+use App\Repository\LeaguesRepository;
+use App\Repository\ProductsRepository;
+use App\Repository\SizesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProductsController extends AbstractController
 {
+
     /**
-     * @Route("/products", name="products")
+     * @var ProductsRepository
+     * @var SizesRepository
      */
-    public function index()
+    private $productsRepository;
+    private $sizesRepository;
+
+    /**
+     * LeaguesController constructor.
+     *
+     * @param ProductsRepository $productsRepository
+     * @param SizesRepository $sizesRepository
+     */
+    public function __construct(ProductsRepository $productsRepository, SizesRepository $sizesRepository)
     {
-        return $this->render('products/cardProduct.html.twig', [
-            'controller_name' => 'ProductsController',
+        $this->productsRepository = $productsRepository;
+        $this->sizesRepository = $sizesRepository;
+    }
+    public function index(ProductsRepository $products, $id)
+    {
+        $product = $products->findOneById($id);
+
+        return $this->render('products/index.html.twig', [
+            'product' => $product
         ]);
     }
 
     public function show() {
 
-    }
-
-    public function championsleague() {
-        return $this->render('leagues/cl.html.twig');
-    }
-
-    public function euro() {
-        return $this->render('leagues/euro.html.twig');
     }
 }
