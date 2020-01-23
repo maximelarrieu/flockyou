@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ league_name }} - Flockyou{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset("build/cl.css") }}"/>
+    {% if league_name == 'Ligue des champions' %}
+        <div class="product-league" style="background-image: url({{ asset('build/images/leagues/championsleague.jpg') }})">
+            <div class="container">
+                <h2 class="deepshadow">{{ league_name }}</h2>
+            </div>
+        </div>
+    {% else %}
+        <div class="product-league" style="background-image: url({{ asset('build/images/leagues/eurobanner.png') }})">
+            <div class="container">
+                <h2 class="deepshadow">{{ league_name }}</h2>
+            </div>
+        </div>
+    {% endif %}
+    <div class="sidenav">
+        <li class="nav-item dropright">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Equipes :
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item">
+                    <input type="checkbox" id="psg" name="psg" checked>
+                    <label for="scales">Paris-Saint-Germain</label>
+                </a>
+                <a class="dropdown-item">
+                    <input type="checkbox" id="psg" name="psg" checked>
+                    <label for="scales">FC Barcelone</label>
+                </a>
+            </div>
+        </li>
+        <a href="#">
+            <input type="checkbox" id="psg" name="psg" checked>
+            <label for="scales">Domicile</label>
+        </a>
+        <a href="#">
+            <input type="checkbox" id="psg" name="psg" checked>
+            <label for="scales">Extérieur</label>
+        </a>
+        <a href="#">
+            <input type="checkbox" id="psg" name="psg" checked>
+            <label for="scales">Third</label>
+        </a>
+        <a href="#">Contact</a>
+        <a href="#">Contact</a>
+        <a href="#">Contact</a>
+        <a href="#">Contact</a>
+    </div>
+    <div class="main">
+        <h2 class="deepshadow">{{ league_name }}</h2>
+        <div class="mainwrapper row">
+            {% for product in products %}
+                <div class="card">
+                    <div class="card-head">
+                        <img src="https://s5.postimg.cc/wy79025cz/nike_Logo_White.png" alt="logo" class="card-logo">
+                        <img src="{{ asset('build/images/teams/PSG_dom.png') }}" alt="Shoe" class="product-img">
+                        <div class="product-detail">
+                            <h3>Maillot football</h3> Support and Nike Zoom Air come together for a more supportive feel
+                            with high-speed
+                            responsiveness
+                        </div>
+                        <span class="back-text">
+                      {{ product.team.slug }}
+                    </span>
+                    </div>
+                    <div class="card-body">
+                        <div class="product-desc">
+                    <span class="product-title">
+                        <a href="{{ path('product', {'id': product.id }) }}" class="global-link">
+                        <b>{{ product.team.teamName }}</b><br>
+                            {{ product.state.state }}
+                        </a>
+                    </span>
+                            <span class="product-caption">
+                        {{ product.team.league.leagueName }}
+                      </span>
+                            <span class="product-rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </span>
+                        </div>
+                        <div class="product-properties">
+                    <span class="product-size">
+                    <h4>Size</h4>
+                        <ul class="ul-size">
+                            {% for size in sizes %}
+                                <li><a href="#" class="active">{{ size.size }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </span>
+                        </div>
+                        <span class="product-price">
+                        USD<b>50</b>
+                    </span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -15,14 +15,16 @@
 
         <!-- Links -->
         <ul class="navbar-nav mr-auto">
+            {% for league in leagues %}
             <li class="nav-item">
-                <a class="nav-link mr-2" href="{{ path('championsleague') }}">
-                    <img src="{{asset('build/images/leagues/cl.png')}}" title="cl" alt="cl" style="width: 60px; height: 60px; ">
-                    Champion's League
+                <a class="nav-link mr-2" href="{{ path('league', {'league_name': league.leagueName }) }}">
+                    <img src="{{ league.leagueImg }}" title="cl" alt="cl" style="width: 60px; height: 60px; ">
+                    {{ league.leagueName }}
                 </a>
             </li>
+            {% endfor %}
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('euro') }}">
+                <a class="nav-link" href="">
                     <img src="{{asset('build/images/leagues/euro.png')}}" title="euro" alt="euro" style="width: 55px; height: 60px">
                     Euro 2020
                 </a>

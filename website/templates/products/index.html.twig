@@ -3,18 +3,31 @@
 {% block title %}Hello ProductsController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/sh3gu3y/Ynov/Annee-02/flockyou/website/src/Controller/ProductsController.php'|file_link(0) }}">src/Controller/ProductsController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/sh3gu3y/Ynov/Annee-02/flockyou/website/templates/products/index.html.twig'|file_link(0) }}">templates/products/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/product.css') }}">
+    <div class="product-league" style="background-image: url({{ asset('build/images/leagues/championsleague.jpg') }})">
+        <div class="container">
+            <h2 class="deepshadow">{{ product.team.league.leagueName }}</h2>
+        </div>
+    </div>
+    <div class="container">
+        <div class="blank">
+            <div class="row">
+                <div class="col-md-8 mb-3">
+                    <img src="http://placehold.it/700x400" alt="">
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-4">
+                            <img src="http://placehold.it/64x64" alt="">
+                        </div>
+                        <div class="col">
+                            <h3>test</h3>
+                            <span class="badge-primary">1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
