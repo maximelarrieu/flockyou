@@ -2,13 +2,13 @@ home:
     path: /
     controller: App\Controller\HomeController::index
 
-championsleague:
-    path: /championsleague
-    controller: App\Controller\ProductsController::championsleague
+product:
+    path: /product/{id}
+    controller: App\Controller\ProductsController:index
 
-euro:
-    path: /euro2020
-    controller: App\Controller\ProductsController::euro
+league:
+    path: /ligue/{league_name}
+    controller: App\Controller\LeaguesController:index
 
 cart:
     path: /panier
