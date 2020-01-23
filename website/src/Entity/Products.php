@@ -17,16 +17,6 @@ class Products
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $product_name;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $product_slug;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Teams", inversedBy="products")
      */
     private $team;
@@ -37,14 +27,9 @@ class Products
     private $state;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Sizes", inversedBy="products")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $size;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $product_image;
+    private $product_img;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -54,30 +39,6 @@ class Products
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getProductName(): ?string
-    {
-        return $this->product_name;
-    }
-
-    public function setProductName(string $product_name): self
-    {
-        $this->product_name = $product_name;
-
-        return $this;
-    }
-
-    public function getProductSlug(): ?string
-    {
-        return $this->product_slug;
-    }
-
-    public function setProductSlug(string $product_slug): self
-    {
-        $this->product_slug = $product_slug;
-
-        return $this;
     }
 
     public function getTeam(): ?Teams
@@ -104,26 +65,14 @@ class Products
         return $this;
     }
 
-    public function getSize(): ?Sizes
+    public function getProductImg(): ?string
     {
-        return $this->size;
+        return $this->product_img;
     }
 
-    public function setSize(?Sizes $size): self
+    public function setProductImg(?string $product_img): self
     {
-        $this->size = $size;
-
-        return $this;
-    }
-
-    public function getProductImage(): ?string
-    {
-        return $this->product_image;
-    }
-
-    public function setProductImage(string $product_image): self
-    {
-        $this->product_image = $product_image;
+        $this->product_img = $product_img;
 
         return $this;
     }

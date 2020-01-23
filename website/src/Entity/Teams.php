@@ -29,9 +29,14 @@ class Teams
     private $team_name;
 
     /**
+     * @ORM\Column(type="string", length=6, nullable=true)
+     */
+    private $slug;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $team_image;
+    private $team_img;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Products", mappedBy="team")
@@ -72,14 +77,26 @@ class Teams
         return $this;
     }
 
-    public function getTeamImage(): ?string
+    public function getSlug(): ?string
     {
-        return $this->team_image;
+        return $this->slug;
     }
 
-    public function setTeamImage(?string $team_image): self
+    public function setSlug(?string $slug): self
     {
-        $this->team_image = $team_image;
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getTeamImg(): ?string
+    {
+        return $this->team_img;
+    }
+
+    public function setTeamImg(?string $team_img): self
+    {
+        $this->team_img = $team_img;
 
         return $this;
     }

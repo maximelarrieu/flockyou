@@ -26,12 +26,7 @@ class Leagues
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $league_image;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Teams", mappedBy="league")
-     */
-    private $team_name;
+    private $league_img;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Teams", mappedBy="league")
@@ -40,7 +35,6 @@ class Leagues
 
     public function __construct()
     {
-        $this->team_name = new ArrayCollection();
         $this->teams = new ArrayCollection();
     }
 
@@ -61,45 +55,14 @@ class Leagues
         return $this;
     }
 
-    public function getLeagueImage(): ?string
+    public function getLeagueImg(): ?string
     {
-        return $this->league_image;
+        return $this->league_img;
     }
 
-    public function setLeagueImage(?string $league_image): self
+    public function setLeagueImg(?string $league_img): self
     {
-        $this->league_image = $league_image;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Teams[]
-     */
-    public function getTeamName(): Collection
-    {
-        return $this->team_name;
-    }
-
-    public function addTeamName(Teams $teamName): self
-    {
-        if (!$this->team_name->contains($teamName)) {
-            $this->team_name[] = $teamName;
-            $teamName->setLeague($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTeamName(Teams $teamName): self
-    {
-        if ($this->team_name->contains($teamName)) {
-            $this->team_name->removeElement($teamName);
-            // set the owning side to null (unless already changed)
-            if ($teamName->getLeague() === $this) {
-                $teamName->setLeague(null);
-            }
-        }
+        $this->league_img = $league_img;
 
         return $this;
     }
