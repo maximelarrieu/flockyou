@@ -14,16 +14,17 @@
         <div class="blank">
             <div class="row">
                 <div class="col-md-8 mb-3">
-                    <img src="http://placehold.it/700x400" alt="">
+                    <img src="https://picsum.photos/700/400" alt="produit">
                 </div>
                 <div class="col">
                     <div class="row">
-                        <div class="col-4">
-                            <img src="http://placehold.it/64x64" alt="">
-                        </div>
+{#                        <div class="col-4">#}
+{#                            <img src="https://picsum.photos/100/100" alt="">#}
+{#                        </div>#}
                         <div class="col">
-                            <h3>test</h3>
-                            <span class="badge-primary">1</span>
+                            <h3>{{ product.team.teamName }}</h3>
+                            <h4>Maillot - {{ product.state.state }}</h4>
+                            <span class="badge badge-pill badge-primary">{{ product.team.league.leagueName }}</span>
                         </div>
                     </div>
                 </div>

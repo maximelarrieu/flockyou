@@ -5,13 +5,13 @@
 {% block body %}
     <link rel="stylesheet" href="{{ asset("build/cl.css") }}"/>
     {% if league_name == 'Ligue des champions' %}
-        <div class="product-league" style="background-image: url({{ asset('build/images/leagues/championsleague.jpg') }})">
+        <div class="product-league" style="background-image: url({{ asset('build/images/leagues/championsleague.jpg') }}); height: 300px">
             <div class="container">
                 <h2 class="deepshadow">{{ league_name }}</h2>
             </div>
         </div>
     {% else %}
-        <div class="product-league" style="background-image: url({{ asset('build/images/leagues/eurobanner.png') }})">
+        <div class="product-league" style="background-image: url({{ asset('build/images/leagues/eurobanner.png') }}); height: 300px">
             <div class="container">
                 <h2 class="deepshadow">{{ league_name }}</h2>
             </div>
@@ -51,17 +51,20 @@
         <a href="#">Contact</a>
     </div>
     <div class="main">
-        <h2 class="deepshadow">{{ league_name }}</h2>
+        <h3></h3>
         <div class="mainwrapper row">
             {% for product in products %}
                 <div class="card">
+                    {% if league_name == 'Euro 2020' %}
                     <div class="card-head">
-                        <img src="https://s5.postimg.cc/wy79025cz/nike_Logo_White.png" alt="logo" class="card-logo">
+                    {% else %}
+                    <div class="card-head-cl">
+                    {% endif %}
+                        <img src="{{ product.team.teamImg }}" alt="logo" class="card-logo" style="width: 5%">
                         <img src="{{ asset('build/images/teams/PSG_dom.png') }}" alt="Shoe" class="product-img">
                         <div class="product-detail">
-                            <h3>Maillot football</h3> Support and Nike Zoom Air come together for a more supportive feel
-                            with high-speed
-                            responsiveness
+                            <h3>Maillot football</h3>
+                            <p>kjkfkhjiodnzbcezcyuencubezbcncihbrevcrelzcruezbcekzb</p>
                         </div>
                         <span class="back-text">
                       {{ product.team.slug }}
@@ -97,7 +100,7 @@
                     </span>
                         </div>
                         <span class="product-price">
-                        USD<b>50</b>
+                        <b>{{ product.price }}</b>€UR
                     </span>
                     </div>
                 </div>
