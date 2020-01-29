@@ -27,3 +27,7 @@
 
 /* Import CSS Bootstrap theme */
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+ion-content {
+  --background: url("assets/background.jpg");
+}

@@ -1,8 +1,8 @@
 <!--
 ========== HEADER ===========
 -->
-<ion-header style="background-color: black">
-  <ion-toolbar class="ion-text-center">
+<ion-header class="mb-5">
+  <ion-toolbar class="ion-text-center header-background">
     <img src="assets/logo.png">
   </ion-toolbar>
 </ion-header>
@@ -11,7 +11,7 @@
 ========== FOOTER ===========
 -->
 <ion-tabs>
-  <ion-tab-bar slot="bottom">
+  <ion-tab-bar slot="bottom" class="tab-bar-background">
     <ion-tab-button routerLink="/">
       <ion-icon name="logo-foursquare"></ion-icon>
       <ion-label>Accueil</ion-label>
@@ -22,7 +22,7 @@
       <ion-label>Favoris</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button routerLink="/leagues">
+    <ion-tab-button routerLink="/leagues" class="float-left">
       <ion-icon name="football"></ion-icon>
       <ion-label>Championnats</ion-label>
     </ion-tab-button>

@@ -7,8 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeaguesComponent implements OnInit {
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {}
 
+}
+
+export interface League {
+    id: number;
+    title: string;
+    category: string;
 }
