@@ -8,12 +8,21 @@ use App\Entity\Sizes;
 use App\Entity\States;
 use App\Entity\Products;
 
+use App\Entity\Users;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+    private $encoder;
+
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
+
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create('fr_FR');
@@ -34,6 +43,7 @@ class AppFixtures extends Fixture
         for ($l = 0; $l < 1; $l++) {
             $league = new Leagues();
             $league->setLeagueName($euro[$l]);
+            $league->setLeagueImg('/assets/images/leagues/eurobanner.png');
             $euro_tab[] = $league;
             $manager->persist($league);
         }
@@ -57,13 +67,13 @@ class AppFixtures extends Fixture
         }
 
         $euro_teams = ['Portugal', 'France', 'Allemagne',
-            'Belgique', 'Suède', 'Suisse', 'Autriche', 'Russie',
+            'Belgique', 'Suede', 'Suisse', 'Autriche', 'Russie',
             'Italie', 'Espagne', 'Pays-Bas', 'Irlande'];
         $euro_teams_tab = [];
         for ($t = 0; $t < sizeof($euro_teams); $t++) {
             $team = new Teams();
             $team->setTeamName($euro_teams[$t]);
-            //$team->setSlug(strtoupper(substr($euro_teams[$t], 0, 3)));
+            $team->setSlug(strtoupper(substr($euro_teams[$t], 0, 3)));
 
             $teamsLeague = $faker->randomElements($euro_tab, $faker->numberBetween(1, 1));
             foreach ($teamsLeague as $league) {
@@ -112,7 +122,20 @@ class AppFixtures extends Fixture
             $products[] = $product;
         }
         /****====================================****/
+        /****============== USERS ===============****/
+        $users = [];
+            for ($u = 0; $u <= 3; $u++) {
+                $user = new Users();
 
+                $password = $this->encoder->encodePassword($user, 'password');
+
+                $user->setUsername($faker->userName);
+                $user->setEmail($faker->freeEmail);
+                $user->setPassword($password);
+                $manager->persist($user);
+                $users[] = $user;
+            }
+        /****====================================****/
         $manager->flush();
     }
 }
