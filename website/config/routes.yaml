@@ -2,6 +2,24 @@ home:
     path: /
     controller: App\Controller\HomeController::index
 
+############## FORMULAIRE UTILISATEUR #################
+register:
+    path: /register
+    controller: App\Controller\AccountController:register
+login:
+    path: /login
+    controller: App\Controller\AccountController::login
+logout:
+    path: /logout
+    controller: App\Controller\AccountController:logout
+account_edit:
+    path: /account/edit
+    controller: App\Controller\AccountController:editAccount
+account_password_edit:
+    path: /account/password/edit
+    controller: App\Controller\AccountController:editPassword
+#######################################################
+
 product:
     path: /product/{id}
     controller: App\Controller\ProductsController:index
