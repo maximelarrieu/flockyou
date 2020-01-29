@@ -35,6 +35,22 @@
     /* IE6-9 fallback on horizontal gradient */
     border-radius: 25px 25px 0 0;
 }
+.card-head-cl {
+    position: relative;
+    height: 252px;
+    background: #051937;
+    /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #051937 8%, #4487DC 83%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #051937 8%, #4487DC 83%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #051937 8%, #4487DC 83%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#fa782e', endColorstr='#c82930', GradientType=1);
+    /* IE6-9 fallback on horizontal gradient */
+    border-radius: 25px 25px 0 0;
+}
+
 
 .card-logo {
     width: 55px;
