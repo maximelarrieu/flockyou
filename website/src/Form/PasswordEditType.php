@@ -27,9 +27,9 @@ class PasswordEditType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('oldPassword', PasswordType::class, $this->getConfiguration("Mot de passe actuel", "Renseignez votre mot de passe actuel..."))
-            ->add('newPassword', PasswordType::class, $this->getConfiguration("Nouveau mot de passe", "Renseignez votre nouveau mot de passe..."))
-            ->add('confirmPassword', PasswordType::class, $this->getConfiguration("Confirmez le nouveau mot de passe", "Confirmez votre nouveau mot de passe..."))
+            ->add('oldPassword', PasswordType::class, $this->getConfiguration("Mot de passe actuel :", "Renseignez votre mot de passe actuel..."))
+            ->add('newPassword', PasswordType::class, $this->getConfiguration("Nouveau mot de passe :", "Renseignez votre nouveau mot de passe..."))
+            ->add('confirmPassword', PasswordType::class, $this->getConfiguration("Confirmation du nouveau mot de passe :", "Confirmez votre nouveau mot de passe..."))
 
         ;
     }
