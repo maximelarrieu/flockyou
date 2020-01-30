@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sortie du terrain{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset("build/form.css") }}">
+
+    <div class="container">
+        <h2 class="deepshadow">Oops !<br> Le ballon est sorti du terrain !</h2>
+        <div class="login-form bg-light py-3 px-3">
+            <p>Il semblerait que vous soyez sortie du terrain. Cette page n'existe pas.
+            <p>Le coach vous laisse retourner sur le terrain..</p></p>
+            <a href="{{ path('home') }}" class="btn btn-success">Retourner sur le terrain</a>
+        </div>
+    </div>
+
+{% endblock %}
