@@ -3,12 +3,15 @@
 {% block title %}Modification du compte{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h2>Modification du compte</h2>
+    <link rel="stylesheet" href="{{ asset("build/form.css") }}"/>
 
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
-        {{ form_end(form) }}
+    <div class="container">
+        <h2 class="deepshadow">Modification du compte</h2>
+        <div class="login-form bg-light py-3 px-3">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit" class="btn btn-success">Enregistrer les modifications</button>
+            {{ form_end(form) }}
+        </div>
     </div>
 {% endblock %}
