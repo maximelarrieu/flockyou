@@ -8,6 +8,8 @@ use App\Form\AccountType;
 use App\Form\PasswordEditType;
 use App\Form\RegistrationType;
 use Doctrine\Persistence\ObjectManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,8 +50,8 @@ class AccountController extends AbstractController
             $manager->flush();
 
             $this->addFlash(
-                'succes',
-                "Votre compte a bien été crée !"
+                'success',
+                "Votre compte a bien été créée !"
             );
 
             return $this->redirectToRoute('login');
@@ -59,7 +61,9 @@ class AccountController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-
+    /**
+     * @IsGranted("ROLE_USER")
+     */
     public function editAccount(Request $request, objectManager $manager) {
         $user = $this->getUser();
         $form = $this->createForm(AccountType::class, $user);
@@ -81,6 +85,9 @@ class AccountController extends AbstractController
         ]);
     }
 
+    /**
+     * @IsGranted("ROLE_USER")
+     */
     public function editPassword(Request $request, UserPasswordEncoderInterface $encoder, ObjectManager $manager) {
         $user = $this->getUser();
         $passwordEdit = new PasswordEdit();
