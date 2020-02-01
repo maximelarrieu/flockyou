@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Leagues;
+use App\Entity\Roles;
 use App\Entity\Teams;
 use App\Entity\Sizes;
 use App\Entity\States;
@@ -123,8 +124,19 @@ class AppFixtures extends Fixture
         }
         /****====================================****/
         /****============== USERS ===============****/
+        $adminRole = new Roles();
+        $adminRole->setTitle('ROLE_ADMIN');
+        $manager->persist($adminRole);
+
+        $adminUser = new Users();
+        $adminUser->setUsername('maximelarrieu')
+            ->setEmail('maxime.larrieu@ynov.com')
+            ->setPassword($this->encoder->encodePassword($adminUser, 'password'))
+            ->addUserRole($adminRole);
+        $manager->persist($adminUser);
+
         $users = [];
-            for ($u = 0; $u <= 3; $u++) {
+            for ($u = 0; $u < 3; $u++) {
                 $user = new Users();
 
                 $password = $this->encoder->encodePassword($user, 'password');
