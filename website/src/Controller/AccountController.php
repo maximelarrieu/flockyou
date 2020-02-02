@@ -116,9 +116,6 @@ class AccountController extends AbstractController
                 return $this->redirectToRoute('home');
             }
         }
-
-
-
         return $this->render('account/editPassword.html.twig', [
             'form' => $form->createView()
         ]);
