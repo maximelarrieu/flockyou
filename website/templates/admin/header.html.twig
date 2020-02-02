@@ -1,5 +1,5 @@
 <!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark primary-color">
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
 
     <!-- Navbar brand -->
     <a class="navbar-brand" href="{{ path('home') }}"><img src="{{asset('build/images/ressources/flockyou.png')}}" title="flockyou" alt="logo" style="width: 200px;" class="mr-5"></a>
@@ -15,19 +15,14 @@
 
         <!-- Links -->
         <ul class="navbar-nav mr-auto">
-            {% for league in leagues %}
             <li class="nav-item">
-                <a class="nav-link mr-2" href="{{ path('league', {'league_name': league.leagueName }) }}">
-                    <img src="{{ league.leagueImg }}" title="league_logo" alt="league_logo" style="width: 60px; height: 60px; ">
-                    {{ league.leagueName }}
-                </a>
+                <a class="nav-link" href="#"><i class="fas fa-chart-line mr-1"></i>Dashboard</a>
             </li>
-            {% endfor %}
             <li class="nav-item">
-                <a class="nav-link" href="">
-                    <img src="{{asset('build/images/leagues/euro.png')}}" title="euro" alt="euro" style="width: 55px; height: 60px">
-                    Euro 2020
-                </a>
+                <a class="nav-link" href="{{ path('admin_products') }}"><i class="fas fa-tshirt mr-1"></i>Produits</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-users mr-1"></i>Utilisateurs</a>
             </li>
         </ul>
 
@@ -39,17 +34,9 @@
             </div>
         </form>
         {% if app.user %}
-            <a href="{{ path('cart') }}" class="mr-3"><i class="fas fa-shopping-cart" style="color: white"></i><span class="badge badge-danger">3</span></a>
             <a href="{{ path('account', {'username' : app.user.username}) }}"><i class="fas fa-user m-3" style="color: white"></i></a>
             <li class="nav-item">
-                <a href="{{ path('logout') }}" class="nav-link"><i class="fas fa-sign-out-alt" style="color: white"></i></a>
-            </li>
-        {% else %}
-            <li class="nav-item">
-                <a href="{{ path('login') }}" class="nav-link">Se connecter</a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ path('register') }}" class="nav-link">S'inscrire</a>
+                <a href="{{ path('admin_logout') }}" class="nav-link"><i class="fas fa-sign-out-alt" style="color: white"></i></a>
             </li>
         {% endif %}
     </div>
