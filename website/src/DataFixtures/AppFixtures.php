@@ -35,6 +35,7 @@ class AppFixtures extends Fixture
             $league = new Leagues();
             $league->setLeagueName($cl[$l]);
             $league->setLeagueImg('/build/images/leagues/cl.png');
+            $league->setLeagueSlug('ligue-des-champions');
             $cl_tab[] = $league;
 
             $manager->persist($league);
@@ -45,7 +46,9 @@ class AppFixtures extends Fixture
             $league = new Leagues();
             $league->setLeagueName($euro[$l]);
             $league->setLeagueImg('/assets/images/leagues/eurobanner.png');
+            $league->setLeagueSlug('euro-2020');
             $euro_tab[] = $league;
+
             $manager->persist($league);
         }
         /****=====================================****/
