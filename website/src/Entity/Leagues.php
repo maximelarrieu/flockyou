@@ -33,6 +33,11 @@ class Leagues
      */
     private $teams;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $league_slug;
+
     public function __construct()
     {
         $this->teams = new ArrayCollection();
@@ -94,6 +99,18 @@ class Leagues
                 $team->setLeague(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLeagueSlug(): ?string
+    {
+        return $this->league_slug;
+    }
+
+    public function setLeagueSlug(string $league_slug): self
+    {
+        $this->league_slug = $league_slug;
 
         return $this;
     }
