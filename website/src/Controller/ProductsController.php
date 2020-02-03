@@ -39,7 +39,7 @@ class ProductsController extends AbstractController
     public function create() {
         $product = new Products();
 
-        $form = $this->createFormBuilder($product)
+        $form = $this->createFormBuilder()
                     ->add('product_img', TextType::class, [
                         'label' => 'Image du produit',
                         'attr' => [
