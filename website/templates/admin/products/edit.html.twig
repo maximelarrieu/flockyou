@@ -1,0 +1,25 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Modifier le produit {{ product.id }}{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('build/form.css') }}">
+
+    <div class="container">
+        <h2 class="deepshadow">Modifier le produit</h2>
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <div class="login-form bg-light py-3 px-3">
+
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit" class="btn btn-success">Modifier le produit</button>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+
+{% endblock %}
