@@ -16,10 +16,6 @@ logout:
     path: /logout
     controller: App\Controller\AccountController:logout
 
-account:
-    path: /account/{username}
-    controller: App\Controller\UsersController:index
-
 account_edit:
     path: /account/edit
     controller: App\Controller\AccountController:editAccount
@@ -27,6 +23,10 @@ account_edit:
 account_password_edit:
     path: /account/password/edit
     controller: App\Controller\AccountController:editPassword
+
+account:
+    path: /account/{username}
+    controller: App\Controller\UsersController:index
 #######################################################
 ################## ADMINISTRATION #####################
 admin_login:
@@ -38,22 +38,44 @@ admin_logout:
     controller: App\Controller\AdminAccountController:logout
 
 admin_products:
-    path: /admin/products
+    path: /admin/products/{page<\d+>?1}
     controller: App\Controller\AdminProductController:index
+
+admin_users:
+    path: /admin/users/{page<\d+>?1}
+    controller: App\Controller\AdminUsersController:index
 #######################################################
 ##################### PRODUITS ########################
 add_product:
     path: /product/create
     controller: App\Controller\ProductsController:create
+
 product:
     path: /product/{id}
     controller: App\Controller\ProductsController:index
-    #######################################################
+
+admin_product_edit:
+    path: /admin/product/{id}/edit
+    controller: App\Controller\AdminProductController:edit
+
+admin_product_delete:
+    path: /admin/product/{id}/destroy
+    controller: App\Controller\AdminProductController:destroy
+###########################################################
+##################### UTILISATEURS ########################
+admin_user_edit:
+    path: /admin/user/{id}/edit
+    controller: App\Controller\AdminUsersController:edit
+
+admin_user_delete:
+    path: /admin/user/{id}/destroy
+    controller: App\Controller\AdminUsersController:destroy
+###########################################################
 
 league:
     path: /league/{league_name}
     controller: App\Controller\LeaguesController:index
 
 cart:
-    path: /car
+    path: /cart
     controller: App\Controller\CartController::index
