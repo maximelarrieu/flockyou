@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\Products;
-use App\Repository\ProductsRepository;
-use App\Repository\LeaguesRepository;
+use App\Entity\Product;
+use App\Repository\ProductRepository;
+use App\Repository\LeagueRepository;
 
-use App\Repository\SizesRepository;
+use App\Repository\SizeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,28 +14,28 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * @var ProductsRepository
+     * @var ProductRepository
      */
     private $productsRepository;
 
     /**
-     * @var LeaguesRepository
+     * @var LeagueRepository
      */
     private $leaguesRepository;
 
     /**
-     * @var SizesRepository
+     * @var SizeRepository
      */
     private $sizesRepository;
 
     /**
      * HomeController constructor.
      *
-     * @param LeaguesRepository $leaguesRepository
-     * @param ProductsRepository $productsRepository
-     * @param SizesRepository $sizesRepository
+     * @param LeagueRepository $leaguesRepository
+     * @param ProductRepository $productsRepository
+     * @param SizeRepository $sizesRepository
      */
-    public function __construct(LeaguesRepository $leaguesRepository, ProductsRepository $productsRepository, SizesRepository $sizesRepository)
+    public function __construct(LeagueRepository $leaguesRepository, ProductRepository $productsRepository, SizeRepository $sizesRepository)
     {
         $this->productsRepository =  $productsRepository;
         $this->leaguesRepository = $leaguesRepository;

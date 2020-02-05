@@ -17,18 +17,12 @@
         <ul class="navbar-nav mr-auto">
             {% for league in leagues %}
             <li class="nav-item">
-                <a class="nav-link mr-2" href="{{ path('league', {'league_name': league.leagueName }) }}">
-                    <img src="{{ league.leagueImg }}" title="league_logo" alt="league_logo" style="width: 60px; height: 60px; ">
-                    {{ league.leagueName }}
+                <a class="nav-link mr-2" href="{{ path('league', {'league_name': league.name }) }}">
+                    <img src="{{ asset(league.image) }}" title="league_logo" alt="league_logo" style="width: 55px; height: 60px; ">
+                    {{ league.name }}
                 </a>
             </li>
             {% endfor %}
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    <img src="{{asset('build/images/leagues/euro.png')}}" title="euro" alt="euro" style="width: 55px; height: 60px">
-                    Euro 2020
-                </a>
-            </li>
         </ul>
 
         <!-- Links -->

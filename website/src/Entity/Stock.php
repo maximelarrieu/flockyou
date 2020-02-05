@@ -19,7 +19,7 @@ class Stock
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Products", mappedBy="stock")
+     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="stock")
      */
     private $product;
 
@@ -44,30 +44,30 @@ class Stock
     }
 
     /**
-     * @return Collection|Products[]
+     * @return Collection|Product[]
      */
     public function getProduct(): Collection
     {
         return $this->product;
     }
 
-    public function addProduct(Products $product): self
+    public function addProduct(Product $product): self
     {
         if (!$this->product->contains($product)) {
             $this->product[] = $product;
-            $product->setStock($this);
+            $product->setQuantity($this);
         }
 
         return $this;
     }
 
-    public function removeProduct(Products $product): self
+    public function removeProduct(Product $product): self
     {
         if ($this->product->contains($product)) {
             $this->product->removeElement($product);
             // set the owning side to null (unless already changed)
-            if ($product->getStock() === $this) {
-                $product->setStock(null);
+            if ($product->getQuantity() === $this) {
+                $product->setQuantity(null);
             }
         }
 

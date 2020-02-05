@@ -3,9 +3,10 @@
 {% block title %}{{ league_name }} - Flockyou{% endblock %}
 
 {% block body %}
+    <link rel="stylesheet" href="{{ asset("build/product_card.css") }}"/>
     <link rel="stylesheet" href="{{ asset("build/cl.css") }}"/>
     {% if league_name == 'Ligue des champions' %}
-        <div class="product-league" style="background-image: url({{ asset('build/images/leagues/championsleague.jpg') }}); height: 300px">
+        <div class="product-league" style="background-image: url({{ asset('build/images/leagues/clbanner.jpg') }}); height: 300px">
             <div class="container">
                 <h2 class="deepshadow">{{ league_name }}</h2>
             </div>
@@ -61,7 +62,7 @@
                     <div class="card-head-cl">
                     {% endif %}
                         <img src="https://s5.postimg.cc/wy79025cz/nike_Logo_White.png" alt="logo" class="card-logo">
-                        <img src="{{ asset('build/images/teams/PSG_dom.png') }}" alt="Shoe" class="product-img">
+                        <img src="{{ asset(product.image) }}" alt="Shoe" class="product-img">
                         <div class="product-detail">
                             <h3>Maillot football</h3>
                             <p>kjkfkhjiodnzbcezcyuencubezbcncihbrevcrelzcruezbcekzb</p>
@@ -74,12 +75,12 @@
                         <div class="product-desc">
                     <span class="product-title">
                         <a href="{{ path('product', {'id': product.id }) }}" class="global-link">
-                        <b>{{ product.team.teamName }}</b><br>
+                        <b>{{ product.team.name }}</b><br>
                             {{ product.state.state }}
                         </a>
                     </span>
                             <span class="product-caption">
-                        {{ product.team.league.leagueName }}
+                        {{ product.team.league.name }}
                       </span>
                             <span class="product-rating">
                         <i class="fa fa-star"></i>
@@ -94,7 +95,7 @@
                     <h4>Size</h4>
                         <ul class="ul-size">
                             {% for size in sizes %}
-                                <li><a href="#" class="active">{{ size.size }}</a></li>
+                                <li><a href="#" class="active">{{ size.name }}</a></li>
                             {% endfor %}
                         </ul>
                     </span>

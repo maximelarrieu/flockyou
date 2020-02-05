@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\PasswordEdit;
+use App\Entity\User;
 use App\Entity\Users;
 use App\Form\AccountType;
 use App\Form\PasswordEditType;

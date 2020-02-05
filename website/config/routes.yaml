@@ -1,58 +1,59 @@
-######################### HOME #########################
+########################################################
+######################## HOME ##########################
+########################################################
 home:
     path: /
     controller: App\Controller\HomeController::index
 ########################################################
-############## FORMULAIRE UTILISATEUR #################
+############## FORMULAIRE UTILISATEUR ##################
+########################################################
+#------------ Formulaire d'inscription ---------------#
 register:
     path: /register
     controller: App\Controller\AccountController:register
-
+#-------------- Formulaire connexion -----------------#
 login:
     path: /login
     controller: App\Controller\AccountController::login
-
+#------------- Formulaire déconnexion ----------------#
 logout:
     path: /logout
     controller: App\Controller\AccountController:logout
-
+#--------------- Edition du compte ------------------#
 account_edit:
     path: /account/edit
     controller: App\Controller\AccountController:editAccount
-
+#------------ Edition du mot de passe ---------------#
 account_password_edit:
     path: /account/password/edit
     controller: App\Controller\AccountController:editPassword
-
+#---------- Accès du compte utilisateur -------------#
 account:
     path: /account/{username}
     controller: App\Controller\UsersController:index
 #######################################################
 ################## ADMINISTRATION #####################
+#######################################################
+#-------------- Formulaire connexion -----------------#
 admin_login:
     path: /admin/login
     controller: App\Controller\AdminAccountController:login
-
+#------------- Formulaire déconnexion ----------------#
 admin_logout:
     path: /admin/logout
     controller: App\Controller\AdminAccountController:logout
-
+#-------------- Panel administration -----------------#
+admin_dashboard:
+    path: /admin/
+    controller: App\Controller\AdminDashboardController:index
+#++++++++++++++ Gestion des produits +++++++++++++++++#
 admin_products:
     path: /admin/products/{page<\d+>?1}
     controller: App\Controller\AdminProductController:index
 
-admin_users:
-    path: /admin/users/{page<\d+>?1}
-    controller: App\Controller\AdminUsersController:index
-#######################################################
-##################### PRODUITS ########################
-add_product:
-    path: /product/create
-    controller: App\Controller\ProductsController:create
-
-product:
-    path: /product/{id}
-    controller: App\Controller\ProductsController:index
+admin_product_add:
+    path: admin/product/create
+    controller: App\Controller\AdminProductController:create
 
 admin_product_edit:
     path: /admin/product/{id}/edit
@@ -61,8 +62,12 @@ admin_product_edit:
 admin_product_delete:
     path: /admin/product/{id}/destroy
     controller: App\Controller\AdminProductController:destroy
-###########################################################
-##################### UTILISATEURS ########################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++#
+#++++++++++ Gestion des utilisateurs +++++++++++++++++#
+admin_users:
+    path: /admin/users/{page<\d+>?1}
+    controller: App\Controller\AdminUsersController:index
+
 admin_user_edit:
     path: /admin/user/{id}/edit
     controller: App\Controller\AdminUsersController:edit
@@ -70,8 +75,18 @@ admin_user_edit:
 admin_user_delete:
     path: /admin/user/{id}/destroy
     controller: App\Controller\AdminUsersController:destroy
-###########################################################
+#-----------------------------------------------------#
+#######################################################
+##################### PRODUITS ########################
+#######################################################
+product:
+    path: /product/{id}
+    controller: App\Controller\ProductsController:index
 
+###########################################################
+##################### UTILISATEURS ########################
+
+###########################################################
 league:
     path: /league/{league_name}
     controller: App\Controller\LeaguesController:index

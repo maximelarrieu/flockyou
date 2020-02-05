@@ -1,20 +1,20 @@
 <?php
 
 namespace App\Controller;
-use App\Entity\Leagues;
+use App\Entity\League;
 
-use App\Entity\Products;
-use App\Repository\LeaguesRepository;
-use App\Repository\ProductsRepository;
-use App\Repository\SizesRepository;
+use App\Entity\Product;
+use App\Repository\LeagueRepository;
+use App\Repository\ProductRepository;
+use App\Repository\SizeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class LeaguesController extends AbstractController
 {
     /**
-     * @var ProductsRepository
-     * @var SizesRepository
+     * @var ProductRepository
+     * @var SizeRepository
      */
     private $productsRepository;
     private $sizesRepository;
@@ -23,18 +23,18 @@ class LeaguesController extends AbstractController
     /**
      * LeaguesController constructor.
      *
-     * @param ProductsRepository $productsRepository
-     * @param SizesRepository $sizesRepository
-     * @param LeaguesRepository $leaguesRepository
+     * @param ProductRepository $productsRepository
+     * @param SizeRepository $sizesRepository
+     * @param LeagueRepository $leaguesRepository
      */
-    public function __construct(ProductsRepository $productsRepository, SizesRepository $sizesRepository, LeaguesRepository $leaguesRepository)
+    public function __construct(ProductRepository $productsRepository, SizeRepository $sizesRepository, LeagueRepository $leaguesRepository)
     {
         $this->productsRepository = $productsRepository;
         $this->sizesRepository = $sizesRepository;
         $this->leaguesRepository = $leaguesRepository;
     }
 
-    public function index(Leagues $leagues, $league_name)
+    public function index($league_name)
     {
         return $this->render('leagues/index.html.twig', [
             'league_name' => $league_name,

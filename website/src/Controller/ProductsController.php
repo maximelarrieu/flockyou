@@ -2,12 +2,12 @@
 
 namespace App\Controller;
 
-use App\Entity\Products;
+use App\Entity\Product;
 
-use App\Entity\Teams;
-use App\Repository\LeaguesRepository;
-use App\Repository\ProductsRepository;
-use App\Repository\SizesRepository;
+use App\Entity\Team;
+use App\Repository\LeagueRepository;
+use App\Repository\ProductRepository;
+use App\Repository\SizeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -18,8 +18,8 @@ class ProductsController extends AbstractController
 {
 
     /**
-     * @var ProductsRepository
-     * @var SizesRepository
+     * @var ProductRepository
+     * @var SizeRepository
      */
     private $productsRepository;
     private $sizesRepository;
@@ -27,17 +27,17 @@ class ProductsController extends AbstractController
     /**
      * LeaguesController constructor.
      *
-     * @param ProductsRepository $productsRepository
-     * @param SizesRepository $sizesRepository
+     * @param ProductRepository $productsRepository
+     * @param SizeRepository $sizesRepository
      */
-    public function __construct(ProductsRepository $productsRepository, SizesRepository $sizesRepository)
+    public function __construct(ProductRepository $productsRepository, SizeRepository $sizesRepository)
     {
         $this->productsRepository = $productsRepository;
         $this->sizesRepository = $sizesRepository;
     }
 
     public function create() {
-        $product = new Products();
+        $product = new Product();
 
         $form = $this->createFormBuilder()
                     ->add('product_img', TextType::class, [
@@ -59,7 +59,7 @@ class ProductsController extends AbstractController
         ]);
     }
 
-    public function index(ProductsRepository $products, $id)
+    public function index(ProductRepository $products, $id)
     {
         $product = $products->findOneById($id);
 

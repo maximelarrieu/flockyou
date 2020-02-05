@@ -2,18 +2,20 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Leagues;
+use App\Entity\Bank;
+use App\Entity\League;
 use App\Entity\Roles;
-use App\Entity\Teams;
-use App\Entity\Sizes;
-use App\Entity\States;
-use App\Entity\Products;
-
+use App\Entity\Team;
+use App\Entity\Size;
+use App\Entity\State;
+use App\Entity\Product;
 use App\Entity\Users;
+
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use function GuzzleHttp\_current_time;
 
 class AppFixtures extends Fixture
 {
@@ -32,10 +34,10 @@ class AppFixtures extends Fixture
         $cl = ['Ligue des champions'];
         $cl_tab = [];
         for ($l = 0; $l < 1; $l++) {
-            $league = new Leagues();
-            $league->setLeagueName($cl[$l]);
-            $league->setLeagueImg('/build/images/leagues/cl.png');
-            $league->setLeagueSlug('ligue-des-champions');
+            $league = new League();
+            $league->setName($cl[$l]);
+            $league->setImage('build/images/leagues/'.$league->getName().'/Logo.png');
+            $league->setSlug('ligue-des-champions');
             $cl_tab[] = $league;
 
             $manager->persist($league);
@@ -43,10 +45,10 @@ class AppFixtures extends Fixture
         $euro = ['Euro 2020'];
         $euro_tab = [];
         for ($l = 0; $l < 1; $l++) {
-            $league = new Leagues();
-            $league->setLeagueName($euro[$l]);
-            $league->setLeagueImg('/assets/images/leagues/eurobanner.png');
-            $league->setLeagueSlug('euro-2020');
+            $league = new League();
+            $league->setName($euro[$l]);
+            $league->setImage('build/images/leagues/'.$league->getName().'/Logo.png');
+            $league->setSlug('euro-2020');
             $euro_tab[] = $league;
 
             $manager->persist($league);
@@ -55,12 +57,13 @@ class AppFixtures extends Fixture
         /****============== TEAMS ==============****/
         $cl_teams = ['Juventus', 'Real Madrid', 'Manchester United',
             'Paris-Saint-Germain', 'Liverpool', 'Arsenal', 'AC Milan',
-            'Bayern Munich', 'Borussia Dortmund', 'Ajax'];
+            'Bayern Munich', 'Borussia Dortmund', 'Ajax', 'FC Barcelone'];
         $cl_teams_tab = [];
         for ($t = 0; $t < sizeof($cl_teams); $t++) {
-            $team = new Teams();
-            $team->setTeamName($cl_teams[$t]);
+            $team = new Team();
+            $team->setName($cl_teams[$t]);
             $team->setSlug(strtoupper(substr($cl_teams[$t], 0, 3)));
+            $team->setImage('build/images/leagues/Ligue des champions/teams/'.$team->getName().'/Logo.png');
 
             $teamsLeague = $faker->randomElements($cl_tab, $faker->numberBetween(1, 1));
             foreach ($teamsLeague as $league) {
@@ -75,9 +78,10 @@ class AppFixtures extends Fixture
             'Italie', 'Espagne', 'Pays-Bas', 'Irlande'];
         $euro_teams_tab = [];
         for ($t = 0; $t < sizeof($euro_teams); $t++) {
-            $team = new Teams();
-            $team->setTeamName($euro_teams[$t]);
+            $team = new Team();
+            $team->setName($euro_teams[$t]);
             $team->setSlug(strtoupper(substr($euro_teams[$t], 0, 3)));
+            $team->setImage('build/images/leagues/Euro 2020/teams/'.$team->getName().'/Logo.png');
 
             $teamsLeague = $faker->randomElements($euro_tab, $faker->numberBetween(1, 1));
             foreach ($teamsLeague as $league) {
@@ -92,17 +96,17 @@ class AppFixtures extends Fixture
         $sizes = ['XS', 'S', 'M', 'L', 'XL'];
         $sizes_tab = [];
         for ($s = 0; $s < sizeof($sizes); $s++) {
-            $size = new Sizes();
-            $size->setSize($sizes[$s]);
+            $size = new Size();
+            $size->setName($sizes[$s]);
             $sizes_tab[] = $size;
             $manager->persist($size);
         }
         /****====================================****/
         /****============== STATUS ==============****/
-        $states = ['Domicile', 'Extérieur', 'Third'];
+        $states = ['Domicile', 'Extérieur'];
         $states_tab = [];
         for ($s = 0; $s < sizeof($states); $s++) {
-            $state = new States();
+            $state = new State();
             $state->setState($states[$s]);
             $manager->persist($state);
             $states_tab[] = $state;
@@ -110,9 +114,10 @@ class AppFixtures extends Fixture
         /****====================================****/
         /****============== PRODUCTS ============****/
         $products = [];
-        for ($p = 0; $p <= 50; $p++) {
-            $product = new Products();
-            $product->setPrice(50);
+        for ($p = 0; $p <= 25; $p++) {
+            $product = new Product();
+            $product->setPrice(49.99);
+            $product->setQuantity(10);
 
             $productTeam = $faker->randomElements($all_teams, $faker->numberBetween(1, sizeof($all_teams)));
             foreach ($productTeam as $team) {
@@ -122,6 +127,8 @@ class AppFixtures extends Fixture
             foreach ($productState as $state) {
                 $product->setState($state);
             }
+            $product->setImage('build/images/leagues/'.$product->getTeam()->getLeague()->getName().'/teams/'. $product->getTeam()->getName() .'/'. $product->getState()->getState() .'.png');
+
             $manager->persist($product);
             $products[] = $product;
         }
@@ -151,6 +158,7 @@ class AppFixtures extends Fixture
                 $users[] = $user;
             }
         /****====================================****/
+
         $manager->flush();
     }
 }
