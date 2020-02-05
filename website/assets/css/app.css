@@ -55,3 +55,7 @@ h2.deepshadow {
             0 15px 0 #121212,
             0 22px 30px rgba(0, 0, 0, 0.9);
 }
+
+.container-fluid {
+    margin-top: 20px;
+}
