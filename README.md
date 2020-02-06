@@ -1,2 +1,2 @@
 # flockyou
-Site e-commerce réalisé en Laravel
+Site e-commerce réalisé en Symfony
