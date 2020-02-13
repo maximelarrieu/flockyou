@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Entity\Users;
 use App\Form\AccountType;
-use App\Repository\UsersRepository;
 use App\Service\Pagination;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AdminUsersController extends AbstractController
 {
-    public function index(UsersRepository $repo, $page, Pagination $pagination)
+    public function index($page, Pagination $pagination)
     {
         $pagination->setEntityClass(Users::class)
             ->setPage($page);
