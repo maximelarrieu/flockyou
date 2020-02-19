@@ -7,23 +7,8 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PasswordEditType extends AbstractType
+class PasswordEditType extends ConfigType
 {
-    /**
-     * @param string $label
-     * @param string $placeholder
-     * @param array $options
-     * @return array
-     */
-    private function getConfiguration($label, $placeholder, $options = []) {
-        return array_merge([
-            'label' => $label,
-            'attr' => [
-                'placeholder' => $placeholder
-            ]
-        ], $options);
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
