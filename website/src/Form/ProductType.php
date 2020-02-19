@@ -16,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProductType extends AbstractType
+class ProductType extends ConfigType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
