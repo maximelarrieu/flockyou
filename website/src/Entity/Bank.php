@@ -31,6 +31,11 @@ class Bank
      */
     private $cart_code;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Users", inversedBy="banks")
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +73,18 @@ class Bank
     public function setCartCode(?int $cart_code): self
     {
         $this->cart_code = $cart_code;
+
+        return $this;
+    }
+
+    public function getUser(): ?Users
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Users $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
