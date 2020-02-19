@@ -1,27 +1,23 @@
 import { Component } from '@angular/core';
+import { OnInit } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Product } from './product';
+import { PRODUCTS } from './mock-products'
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss']
+    selector: 'flockyou-app',
+    templateUrl: `./app/app.component.html`,
 })
-export class AppComponent {
-  constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar
-  ) {
-    this.initializeApp();
-  }
+export class AppComponent implements OnInit { 
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
-  }
+    private products: Product[];
+    private title: string = "Liste des produits"
+
+    ngOnInit() {
+        this.products = PRODUCTS;    
+    }
+
+    selectProduct(product: Product) {
+        alert("Vous avez cliqué sur le maillot " + product.team + " - " + product.state);
+    }
 }

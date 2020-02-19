@@ -1,27 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+  <head>
+    <title>Angular QuickStart</title>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
 
-<head>
-  <meta charset="utf-8" />
-  <title>FlockYou</title>
+    <!-- Polyfill(s) for older browsers -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
 
-  <base href="/" />
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
 
-  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="format-detection" content="telephone=no" />
-  <meta name="msapplication-tap-highlight" content="no" />
+    <script src="systemjs.config.js"></script>
+    <script>
+      System.import('dist/main.js').catch(function(err){ console.error(err); });
+    </script>
+  </head>
 
-  <link rel="icon" type="image/png" href="assets/icon/favicon.png" />
-  <script src="https://kit.fontawesome.com/8100dbee1b.js" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-  <!-- add to homescreen for ios -->
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-</head>
-
-<body>
-  <app-root></app-root>
-</body>
-
+  <body>
+    <flockyou-app>Chargement..</flockyou-app>
+  </body>
 </html>
