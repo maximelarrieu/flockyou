@@ -1,0 +1,17 @@
+{%  extends "base.html.twig" %}
+
+{% block title %}Modification livraison{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset("build/form.css") }}"/>
+
+    <div class="container">
+        <h2 class="deepshadow">Modification des détails de livraison</h2>
+        <div class="login-form bg-light py-3 px-3">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit" class="btn btn-success">Enregistrer les modifications</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
