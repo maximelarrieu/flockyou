@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Livraison;
 use App\Entity\PasswordEdit;
 use App\Entity\Users;
 use App\Form\AccountType;
+use App\Form\LivraisonType;
 use App\Form\PasswordEditType;
 use App\Form\RegistrationType;
 use Doctrine\Persistence\ObjectManager;
+use GuzzleHttp\Psr7\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -117,6 +120,37 @@ class AccountController extends AbstractController
             }
         }
         return $this->render('account/editPassword.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    public function createLivraison(Request $request, ObjectManager $manager) {
+        $username = $this->getUser()->getUsername();
+        $livraison = new Livraison();
+
+        $form = $this->createForm(LivraisonType::class, $livraison);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($livraison);
+            $manager->flush();
+
+            return $this->redirectToRoute('account', [
+                'username' => $username
+            ]);
+        }
+
+        return $this->render('account/editLivraison.html.twig', [
+            'livraison' => $livraison,
+            'form' => $form->createView()
+        ]);
+    }
+
+    public function editLivraison(Livraison $livraison) {
+        $form = $this->createForm(LivraisonType::class, $livraison);
+
+        return $this->render('account/editLivraison.html.twig', [
             'form' => $form->createView()
         ]);
     }
