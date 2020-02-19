@@ -27,6 +27,23 @@ account_edit:
 account_password_edit:
     path: /account/password/edit
     controller: App\Controller\AccountController:editPassword
+#------------ Ajout + Edition de la livraison ---------------#
+account_livraison_create:
+    path: /account/livraison/create
+    controller: App\Controller\LivraisonController:create
+account_livraison_edit:
+    path: /account/livraison/{id}/edit
+    controller: App\Controller\LivraisonController:edit
+account_livraison_delete:
+    path: /account/livraison/{id}/delete
+    controller: App\Controller\LivraisonController:delete
+#-------------- Ajout + Edition du paiement -----------------#
+account_bank_create:
+    path: /account/bank/create
+    controller: App\Controller\BankController:create
+account_bank_edit:
+    path: /account/bank/{id}/edit
+    controller: App\Controller\BankController:edit
 #---------- Accès du compte utilisateur -------------#
 account:
     path: /account/{username}
