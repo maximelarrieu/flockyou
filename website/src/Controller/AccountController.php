@@ -123,35 +123,4 @@ class AccountController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-
-    public function createLivraison(Request $request, ObjectManager $manager) {
-        $username = $this->getUser()->getUsername();
-        $livraison = new Livraison();
-
-        $form = $this->createForm(LivraisonType::class, $livraison);
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()) {
-            $manager->persist($livraison);
-            $manager->flush();
-
-            return $this->redirectToRoute('account', [
-                'username' => $username
-            ]);
-        }
-
-        return $this->render('account/editLivraison.html.twig', [
-            'livraison' => $livraison,
-            'form' => $form->createView()
-        ]);
-    }
-
-    public function editLivraison(Livraison $livraison) {
-        $form = $this->createForm(LivraisonType::class, $livraison);
-
-        return $this->render('account/editLivraison.html.twig', [
-            'form' => $form->createView()
-        ]);
-    }
 }
