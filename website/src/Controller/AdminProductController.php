@@ -37,7 +37,7 @@ class AdminProductController extends AbstractController
 
         $this->addFlash(
             'success',
-            'Le produit a bien été créé'
+            'Le produit a bien été créée'
         );
 
         return $this->render('admin/products/create.html.twig', [
@@ -46,10 +46,13 @@ class AdminProductController extends AbstractController
         ]);
     }
 
-    public function edit(Product $products) {
+    public function edit(Request $request, Product $products) {
+
         $form = $this->createForm(ProductType::class, $products);
+
+        $form->handleRequest($request);
+
             return $this->render('admin/products/edit.html.twig', [
-                'product' => $products,
                 'form' => $form->createView()
             ]);
     }
