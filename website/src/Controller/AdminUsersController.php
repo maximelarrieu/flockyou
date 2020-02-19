@@ -2,12 +2,12 @@
 
 namespace App\Controller;
 
-use App\Entity\Product;
 use App\Entity\Users;
 use App\Form\AccountType;
 use App\Service\Pagination;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminUsersController extends AbstractController
@@ -22,8 +22,11 @@ class AdminUsersController extends AbstractController
         ]);
     }
 
-    public function edit(Users $users, ObjectManager $manager) {
+    public function edit(Users $users, Request $request) {
+
         $form = $this->createForm(AccountType::class, $users);
+
+        $form->handleRequest($request);
 
         $this->addFlash(
             'success',
@@ -31,7 +34,6 @@ class AdminUsersController extends AbstractController
         );
 
         return $this->render('admin/users/edit.html.twig', [
-            'user' => $users,
             'form' => $form->createView()
         ]);
     }
