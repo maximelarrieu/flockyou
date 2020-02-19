@@ -2,16 +2,27 @@
 
 namespace App\Controller;
 
+use App\Entity\Bank;
+use App\Entity\Livraison;
 use App\Entity\Users;
+use App\Form\LivraisonType;
+use App\Repository\LivraisonRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UsersController extends AbstractController
 {
-    public function index()
+    /**
+     * @param Users $user
+     * @param Livraison $livraison ;
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function index(Users $user, Livraison $livraison = null, Bank $bank = null)
     {
-        return $this->render('profile/index.html.twig', [
-            'user' => $this->getUser(),
+        return $this->render('account/index.html.twig', [
+            'user' => $user,
+            'livraison' => $livraison,
+            'bank' => $bank
         ]);
     }
 }
