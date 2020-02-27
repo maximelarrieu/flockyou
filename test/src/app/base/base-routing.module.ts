@@ -50,6 +50,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'login',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+                import('../login.component').then(m => m.LoginComponent)
+          }
+        ]
+      },
+      {
         path: 'account',
         children: [
           {

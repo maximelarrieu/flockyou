@@ -19,16 +19,17 @@ const routes: Routes = [
   {
     path: 'product',
     loadChildren: () => import('./product/product.module').then( m => m.ProductPageModule)
-  }
+  },
   /*{ path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
   {
     path: 'leagues',
     loadChildren: () => import('./leagues/leagues.module').then( m => m.LeaguesPageModule)
   },
-  {
-    path: 'base',
-    loadChildren: () => import('./base/base.module').then( m => m.BasePageModule)
-  },*/
+  */
+//  {
+//     path: 'login',
+//     loadChildren: () => import('./login.component').then( m => m.LoginComponent)
+//   },
 ];
 
 @NgModule({

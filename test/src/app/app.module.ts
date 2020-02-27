@@ -11,16 +11,30 @@ import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 
+import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './login.component';
+import { LoginRoutingModule } from './login-routing.module';
+
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoginComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, StoreModule.forRoot(reducers, {
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    FormsModule,
+    LoginRoutingModule,
+    AppRoutingModule,
+    HttpClientModule,
+    StoreModule.forRoot(reducers, {
       metaReducers,
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true
       }
-    })],
+    })
+  ],
   providers: [
     StatusBar,
     SplashScreen,

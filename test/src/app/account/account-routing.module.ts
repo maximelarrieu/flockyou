@@ -3,10 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AccountPage } from './account.page';
 
+import { AuthGuard } from '../auth-guard.service';
+
 const routes: Routes = [
   {
     path: '',
-    component: AccountPage
+    component: AccountPage,
+    canActivate: [AuthGuard]
   }
 ];
 
