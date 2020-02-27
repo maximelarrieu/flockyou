@@ -8,60 +8,13 @@
     <h2 class="deepshadow">Nouveautés</h2>
     <div class="mainwrapper index row">
         {% for product in products %}
-            <div class="card">
-                <div class="card-head">
-                    <img src="https://s5.postimg.cc/wy79025cz/nike_Logo_White.png" alt="logo" class="card-logo">
-                    <img src="{{ asset(product.image) }}" alt="Shoe" class="product-img">
-                    <div class="product-detail">
-                        <h3>Maillot football</h3> Support and Nike Zoom Air come together for a more supportive feel
-                        with high-speed
-                        responsiveness
-                    </div>
-                    <span class="back-text">
-                      {{ product.team.slug }}
-                    </span>
-                        </div>
-                        <div class="card-body">
-                            <div class="product-desc">
-                    <span class="product-title">
-                        <a href="{{ path('product', {'id': product.id }) }}" class="global-link">
-                        <b>{{ product.team.name }}</b><br>
-                            {{ product.state.state }}
-                        </a>
-                    </span>
-                    <span class="product-caption">
-                        {{ product.team.league.name }}
-                    </span>
-                    <span class="product-rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </span>
-                            </div>
-                            <div class="product-properties">
-                    <span class="product-size">
-                    <h4>Size</h4>
-                        <ul class="ul-size">
-                            {% for size in sizes %}
-                                <li><a href="#" class="active">{{ size.name }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </span>
-                    </div>
-                    <span class="product-price">
-                        USD<b>50</b>
-                    </span>
-                </div>
-            </div>
+            {{ include('products/cardProduct.html.twig') }}
         {% endfor %}
     </div>
     <h2 class="deepshadow">Promo !</h2>
     <div class="mainwrapper index row">
-        {#        {{ render(controller('App\\Controller\\ProductsController::index', {} )) }}#}
-        {#        {{ render(controller('App\\Controller\\ProductsController::index', {} )) }}#}
-        {#        {{ render(controller('App\\Controller\\ProductsController::index', {} )) }}#}
-        {#        {{ render(controller('App\\Controller\\ProductsController::index', {} )) }}#}
+        {% for product in products %}
+            {{ include('products/cardProduct.html.twig') }}
+        {% endfor %}
     </div>
 {% endblock %}

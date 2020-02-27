@@ -33,12 +33,18 @@ class LivraisonController extends AbstractController
             $manager->persist($livraison);
             $manager->flush();
 
-
-
             return $this->redirectToRoute('account', [
                 'username' => $user->getUsername()
             ]);
         }
+        $this->addFlash(
+            'success',
+            "Les données de livraison ont bien été enregistrées !"
+        );
+        $this->addFlash(
+            'danger',
+            "Une erreur s'est produite !"
+        );
 
         return $this->render('livraison/create.html.twig', [
             'form' => $form->createView()
@@ -53,6 +59,15 @@ class LivraisonController extends AbstractController
         $form = $this->createForm(LivraisonType::class, $livraison);
 
         $form->handleRequest($request);
+
+        $this->addFlash(
+            'success',
+            "Les données bancaires ont bien été mises à jour !"
+        );
+        $this->addFlash(
+            'danger',
+            "Une erreur s'est produite !"
+        );
 
         return $this->render('livraison/edit.html.twig', [
             'form' => $form->createView()

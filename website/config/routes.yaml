@@ -5,7 +5,7 @@ home:
     path: /
     controller: App\Controller\HomeController::index
 ########################################################
-############## FORMULAIRE UTILISATEUR ##################
+############# FORMULAIREs UTILISATEUR ##################
 ########################################################
 #------------ Formulaire d'inscription ---------------#
 register:
@@ -44,7 +44,10 @@ account_bank_create:
 account_bank_edit:
     path: /account/bank/{id}/edit
     controller: App\Controller\BankController:edit
-#---------- Accès du compte utilisateur -------------#
+account_bank_delete:
+    path: /account/bank/{id}/delete
+    controller: App\Controller\BankController:delete
+#---------- Accès au compte utilisateur -------------#
 account:
     path: /account/{username}
     controller: App\Controller\UsersController:index

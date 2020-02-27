@@ -37,7 +37,11 @@ class AdminProductController extends AbstractController
 
         $this->addFlash(
             'success',
-            'Le produit a bien été créée'
+            "Le produit a bien été créée !"
+        );
+        $this->addFlash(
+            'danger',
+            "Une erreur s'est produite !"
         );
 
         return $this->render('admin/products/create.html.twig', [
@@ -51,6 +55,15 @@ class AdminProductController extends AbstractController
         $form = $this->createForm(ProductType::class, $products);
 
         $form->handleRequest($request);
+
+        $this->addFlash(
+            'success',
+            "Le produit a bien été modifié !"
+        );
+        $this->addFlash(
+            'danger',
+            "Une erreur s'est produite !"
+        );
 
             return $this->render('admin/products/edit.html.twig', [
                 'form' => $form->createView()

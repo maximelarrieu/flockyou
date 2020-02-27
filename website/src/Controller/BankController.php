@@ -35,6 +35,14 @@ class BankController extends AbstractController
                'username' => $user->getUsername()
             ]);
         }
+        $this->addFlash(
+            'success',
+            "Les données bancaires ont bien été enregistrées !"
+        );
+        $this->addFlash(
+            'danger',
+            "Une erreur s'est produite !"
+        );
 
         return $this->render('bank/create.html.twig', [
             'form' => $form->createView(),
@@ -49,8 +57,40 @@ class BankController extends AbstractController
 
         $form->handleRequest($request);
 
+        $this->addFlash(
+            'success',
+            "Les données bancaires ont bien été mises à jour !"
+        );
+        $this->addFlash(
+            'danger',
+            "Une erreur s'est produite !"
+        );
+
         return $this->render('bank/edit.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+    /**
+     * @IsGranted("ROLE_USER")
+     */
+    public function delete(Bank $bank, ObjectManager $manager) {
+        $username = $this->getUser()->getUsername();
+
+        $manager->remove($bank);
+        $manager->flush();
+
+        $this->addFlash(
+            'success',
+            "Les données bancaires ont bien été supprimées !"
+        );
+        $this->addFlash(
+            'danger',
+            "Une erreur s'est produite !"
+        );
+
+        return $this->redirectToRoute('account', [
+           'username' => $username
+        ]);
+
     }
 }

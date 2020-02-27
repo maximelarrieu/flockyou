@@ -56,6 +56,10 @@ class AccountController extends AbstractController
                 'success',
                 "Votre compte a bien été créée !"
             );
+            $this->addFlash(
+                'danger',
+                "Une erreur s'est produite !"
+            );
 
             return $this->redirectToRoute('login');
         }
@@ -80,6 +84,10 @@ class AccountController extends AbstractController
             $this->addFlash(
                 'success',
                 "Les données du compte ont été modifiées avec succès."
+            );
+            $this->addFlash(
+                'danger',
+                "Une erreur s'est produite !"
             );
         }
 
@@ -114,6 +122,10 @@ class AccountController extends AbstractController
                 $this->addFlash(
                     'success',
                     "Votre mot de passe a bien été mis à jour"
+                );
+                $this->addFlash(
+                    'danger',
+                    "Une erreur s'est produite !"
                 );
 
                 return $this->redirectToRoute('home');

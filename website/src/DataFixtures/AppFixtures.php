@@ -15,6 +15,9 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 use function GuzzleHttp\_current_time;
 
 class AppFixtures extends Fixture
@@ -64,6 +67,12 @@ class AppFixtures extends Fixture
             $team->setName($cl_teams[$t]);
             $team->setSlug(strtoupper(substr($cl_teams[$t], 0, 3)));
             $team->setImage('build/images/leagues/Ligue des champions/teams/'.$team->getName().'/Logo.png');
+
+            $normalizer = new ObjectNormalizer();
+            $encoder = new JsonEncoder();
+
+            $serializer = new Serializer([$normalizer], [$encoder]);
+            $serializer->serialize($team, 'json', ['ignored_attributes' => ['league_id']]);
 
             $teamsLeague = $faker->randomElements($cl_tab, $faker->numberBetween(1, 1));
             foreach ($teamsLeague as $league) {
@@ -118,6 +127,12 @@ class AppFixtures extends Fixture
             $product = new Product();
             $product->setPrice(49.99);
             $product->setQuantity(10);
+
+            $normalizer = new ObjectNormalizer();
+            $encoder = new JsonEncoder();
+
+            $serializer = new Serializer([$normalizer], [$encoder]);
+            $serializer->serialize($product, 'json', ['ignored_attributes' => ['team_id', 'state_id', 'size_id']]);
 
             $productTeam = $faker->randomElements($all_teams, $faker->numberBetween(1, sizeof($all_teams)));
             foreach ($productTeam as $team) {

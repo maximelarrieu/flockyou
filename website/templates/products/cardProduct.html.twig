@@ -1,25 +1,29 @@
+{% for product in products %}
 <div class="card">
+    {% if product.team.league.name == 'Euro 2020' %}
     <div class="card-head">
+    {% else %}
+    <div class="card-head-cl">
+    {% endif %}
         <img src="https://s5.postimg.cc/wy79025cz/nike_Logo_White.png" alt="logo" class="card-logo">
-        <img src="{{ asset('build/images/teams/Domicile.png') }}" alt="Shoe" class="product-img">
+        <img src="{{ asset(product.image) }}" alt="Shoe" class="product-img">
         <div class="product-detail">
-            <h3>Hartbeespoort</h3> Support and Nike Zoom Air come together for a more supportive feel with high-speed
+            <h3>Maillot football</h3> Support and Nike Zoom Air come together for a more supportive feel with high-speed
             responsiveness
         </div>
         <span class="back-text">
-              FAS
-            </span>
+            {{ product.team.slug }}
+        </span>
     </div>
     <div class="card-body">
         <div class="product-desc">
         <span class="product-title">
-                Maillot <b></b>
-                <span class="badge">
-                  New
-                </span>
+            <b>{{ product.team.name }}</b>
+            <br>
+            {{ product.state.state }}
         </span>
             <span class="product-caption">
-                Basket Ball Collection
+                {{product.team.league.name}}
               </span>
             <span class="product-rating">
                 <i class="fa fa-star"></i>
@@ -33,16 +37,15 @@
         <span class="product-size">
             <h4>Size</h4>
                 <ul class="ul-size">
-                  <li><a href="#">7</a></li>
-                  <li><a href="#">8</a></li>
-                  <li><a href="#">9</a></li>
-                  <li><a href="#" class="active">10</a></li>
-                  <li><a href="#">11</a></li>
+                  {% for size in sizes %}
+                      <li><a href="#" class="active">{{ size.name }}</a></li>
+                  {% endfor %}
                 </ul>
         </span>
             <span class="product-price">
-                USD<b>23,453</b>
+                <b>{{ product.price }}</b>€
             </span>
         </div>
     </div>
 </div>
+{% endfor %}

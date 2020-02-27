@@ -28,6 +28,11 @@
                                     {{ message }}
                                 </div>
                             {% endfor %}
+                            {% for message in app.flashes('danger') %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
                         </div>
                     {% endif %}
                 </div>
@@ -102,7 +107,7 @@
                                 <td><a href="{{ path('account_bank_edit', {'id': bank.id}) }}"
                                        class="btn-sm btn-warning"><i
                                                 class="fas fa-pen"></i></a>
-                                    <a href="{{ path('account_livraison_edit', {'id': livraison.id}) }}"
+                                    <a href="{{ path('account_bank_delete', {'id': bank.id}) }}"
                                        class="btn-sm btn-danger"><i
                                                 class="fas fa-trash"></i></a>
                                 </td>

@@ -13,6 +13,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -35,9 +36,9 @@ class ProductType extends ConfigType
                 'class' => State::class,
                 'choice_label' => 'state'
             ])
-            ->add('image')
-            ->add('price', MoneyType::class)
-            ->add('quantity', NumberType::class)
+            ->add('image', TextType::class, $this->getConfiguration('Image du produit :', 'Sélectionnez un fichier...'))
+            ->add('price', MoneyType::class, $this->getConfiguration('Prix du produit :', 'Renseignez le prix du produit...'))
+            ->add('quantity', NumberType::class, $this->getConfiguration('Stock :', 'Définir un stock du produit...'))
         ;
     }
 
