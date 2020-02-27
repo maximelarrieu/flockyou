@@ -5,16 +5,16 @@
 {% block body %}
     <link rel="stylesheet" href="{{ asset('build/app.css') }}">
     <link rel="stylesheet" href="{{ asset('build/product.css') }}">
-    <div class="product-league" style="background-image: url({{ asset('build/images/leagues/clbanner.jpg') }})">
+    <div class="product-league" style="background-image: url({{ asset('build/images/leagues/clbanner.jpg') }}); height: 300px">
         <div class="container">
-            <h2 class="deepshadow">{{ product.team.league.leagueName }}</h2>
+            <h2 class="deepshadow">{{ product.team.league.name }}</h2>
         </div>
     </div>
     <div class="container">
         <div class="blank">
             <div class="row">
                 <div class="col-md-8 mb-3">
-                    <img src="https://picsum.photos/700/400" alt="produit">
+                    <img src="{{ asset(product.image) }}" alt="produit">
                 </div>
                 <div class="col">
                     <div class="row">
@@ -22,9 +22,9 @@
 {#                            <img src="https://picsum.photos/100/100" alt="">#}
 {#                        </div>#}
                         <div class="col">
-                            <h3>{{ product.team.teamName }}</h3>
+                            <h3>{{ product.team.name }}</h3>
                             <h4>Maillot - {{ product.state.state }}</h4>
-                            <span class="badge badge-pill badge-primary">{{ product.team.league.leagueName }}</span>
+                            <span class="badge badge-pill badge-primary">{{ product.team.league.name }}</span>
                         </div>
                     </div>
                 </div>
