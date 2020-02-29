@@ -1,3 +1,0 @@
-this.http.get<>().subscribe((resp) => {
-    console.log(resp);
-})
