@@ -44,7 +44,8 @@ class ProductsController extends AbstractController
         $product = $products->findOneById($id);
 
         return $this->render('products/index.html.twig', [
-            'product' => $product
+            'product' => $product,
+            'sizes' => $this->sizesRepository->findAll()
         ]);
     }
 

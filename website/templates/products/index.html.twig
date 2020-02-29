@@ -5,26 +5,35 @@
 {% block body %}
     <link rel="stylesheet" href="{{ asset('build/app.css') }}">
     <link rel="stylesheet" href="{{ asset('build/product.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/form.css') }}">
     <div class="product-league" style="background-image: url({{ asset('build/images/leagues/clbanner.jpg') }}); height: 300px">
         <div class="container">
             <h2 class="deepshadow">{{ product.team.league.name }}</h2>
         </div>
     </div>
-    <div class="container">
-        <div class="blank">
+    <div class="container mt-3">
+        <div class="login-form bg-light py-3 px-3">
             <div class="row">
-                <div class="col-md-8 mb-3">
-                    <img src="{{ asset(product.image) }}" alt="produit">
+                <div class="col-md-6 mb-3">
+                    <div class="img-back">
+                        <img class="img-product" src="{{ asset(product.image) }}">
+                    </div>
                 </div>
                 <div class="col">
                     <div class="row">
-{#                        <div class="col-4">#}
-{#                            <img src="https://picsum.photos/100/100" alt="">#}
-{#                        </div>#}
                         <div class="col">
-                            <h3>{{ product.team.name }}</h3>
-                            <h4>Maillot - {{ product.state.state }}</h4>
-                            <span class="badge badge-pill badge-primary">{{ product.team.league.name }}</span>
+                            <h3>{{ product.team.name | upper }}</h3>
+                            <h4>Maillot {{ product.state.state }}</h4>
+                            <span class="badge badge-lg badge-primary mb-3">{{ product.team.league.name }}</span>
+                            <h6>Tailles :</h6>
+                            <select class="browser-default custom-select mb-3">
+                                <option selected>Sélectionnez une taille</option>
+                                {% for size in sizes %}
+                                    <option value="{{ size.name }}">{{ size.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <h6>Flocage :</h6>
+                            
                         </div>
                     </div>
                 </div>

@@ -196,3 +196,23 @@
 .product-price b {
     margin-left: 5px;
 }
+
+.product_link {
+    text-decoration: none;
+    display: inline-block;
+    color: inherit;
+}
+.product_link:hover {
+    text-decoration: none;
+    display: inline-block;
+    color: #2a2a2a;
+}
+li.active {
+    background: #f35e3d;
+    color: #fff;
+    border-radius: 100%;
+    width: 22px;
+    height: 22px;
+    text-align: center;
+    font-size: 14px;
+}

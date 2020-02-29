@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{ asset("build/product_card.css") }}"/>
 {% for product in products %}
 <div class="card">
     {% if product.team.league.name == 'Euro 2020' %}
@@ -15,7 +16,7 @@
             {{ product.team.slug }}
         </span>
     </div>
-{#    <a href="{{ path('product', { 'id': product.id}) }}">#}
+    <a class="product_link" href="{{ path('product', { 'id': product.id}) }}">
     <div class="card-body">
         <div class="product-desc">
         <span class="product-title">
@@ -36,10 +37,10 @@
         </div>
         <div class="product-properties">
         <span class="product-size">
-            <h4>Size</h4>
+            <h4>Tailles</h4>
                 <ul class="ul-size">
                   {% for size in sizes %}
-                      <li><a href="#" class="active">{{ size.name }}</a></li>
+                      <li class="active">{{ size.name }}</li>
                   {% endfor %}
                 </ul>
         </span>
@@ -48,6 +49,6 @@
             </span>
         </div>
     </div>
-{#    </a>#}
+    </a>
 </div>
 {% endfor %}
