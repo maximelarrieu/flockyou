@@ -46,9 +46,15 @@ class Team
      */
     private $products;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Flocage", mappedBy="team")
+     */
+    private $flocages;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->flocages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,6 +135,37 @@ class Team
             // set the owning side to null (unless already changed)
             if ($product->getTeam() === $this) {
                 $product->setTeam(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Flocage[]
+     */
+    public function getFlocages(): Collection
+    {
+        return $this->flocages;
+    }
+
+    public function addFlocage(Flocage $flocage): self
+    {
+        if (!$this->flocages->contains($flocage)) {
+            $this->flocages[] = $flocage;
+            $flocage->setTeam($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFlocage(Flocage $flocage): self
+    {
+        if ($this->flocages->contains($flocage)) {
+            $this->flocages->removeElement($flocage);
+            // set the owning side to null (unless already changed)
+            if ($flocage->getTeam() === $this) {
+                $flocage->setTeam(null);
             }
         }
 

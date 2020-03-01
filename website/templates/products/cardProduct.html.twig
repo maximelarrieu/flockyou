@@ -6,7 +6,7 @@
     {% else %}
     <div class="card-head-cl">
     {% endif %}
-        <img src="https://s5.postimg.cc/wy79025cz/nike_Logo_White.png" alt="logo" class="card-logo">
+        <img src="{{ asset(product.team.image) }}" alt="logo" class="card-logo">
         <img src="{{ asset(product.image) }}" alt="Shoe" class="product-img">
         <div class="product-detail">
             <h3>Maillot football</h3> Support and Nike Zoom Air come together for a more supportive feel with high-speed
@@ -40,7 +40,7 @@
             <h4>Tailles</h4>
                 <ul class="ul-size">
                   {% for size in sizes %}
-                      <li class="active">{{ size.name }}</li>
+                      <li class="actived">{{ size.name }}</li>
                   {% endfor %}
                 </ul>
         </span>

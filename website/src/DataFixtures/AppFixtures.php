@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Bank;
+use App\Entity\Flocage;
 use App\Entity\League;
 use App\Entity\Roles;
 use App\Entity\Team;
@@ -101,6 +102,129 @@ class AppFixtures extends Fixture
         }
         $all_teams = array_merge($cl_teams_tab, $euro_teams_tab);
         /****===================================****/
+        /****============== FLOCAGE ==============****/
+        /****------------- Juventus ------------ ****/
+        $floc_juv = ['7. Ronaldo', '10. Dybala', '16. Cuadrado'];
+        $floc_juv_tab = [];
+        for ($f = 0; $f < sizeof($floc_juv); $f++) {
+            $flocage = new Flocage();
+            $flocage->setFlocage($floc_juv[$f]);
+            $flocage->setTeam($cl_teams_tab[0]);
+
+            $manager->persist($flocage);
+            $floc_juv_tab[] = $floc_juv;
+        }
+        /****------------- Real Madrid ------------ ****/
+        $floc_real = ['9. Benzema', '7. Hazard', '25. Vinicus Jr.'];
+        $floc_real_tab = [];
+        for ($f = 0; $f < sizeof($floc_real); $f++) {
+            $flocage = new Flocage();
+            $flocage->setFlocage($floc_real[$f]);
+            $flocage->setTeam($cl_teams_tab[1]);
+
+            $manager->persist($flocage);
+            $floc_real_tab[] = $floc_real;
+        }
+        /****------------- Manchester United ------------ ****/
+        $floc_mu = ['24. Martial', '22. Rashford', '26. Pogba.'];
+        $floc_mu_tab = [];
+        for ($f = 0; $f < sizeof($floc_mu); $f++) {
+            $flocage = new Flocage();
+            $flocage->setFlocage($floc_mu[$f]);
+            $flocage->setTeam($cl_teams_tab[2]);
+
+            $manager->persist($flocage);
+            $floc_mu_tab[] = $floc_mu;
+        }
+        /****------------- PSG ------------ ****/
+        $floc_psg = ['7. Mbappe', '10. Neymar Jr.', '11. Di Maria.'];
+        $floc_psg_tab = [];
+        for ($f = 0; $f < sizeof($floc_psg); $f++) {
+            $flocage = new Flocage();
+            $flocage->setFlocage($floc_psg[$f]);
+            $flocage->setTeam($cl_teams_tab[3]);
+
+            $manager->persist($flocage);
+            $floc_psg_tab[] = $floc_psg;
+        }
+        /****------------- Liverpool ------------ ****/
+        $floc_liv = ['11. Salah', '10. Mane', '3. Fabinho'];
+        $floc_liv_tab = [];
+        for ($f = 0; $f < sizeof($floc_liv); $f++) {
+            $flocage = new Flocage();
+            $flocage->setFlocage($floc_liv[$f]);
+            $flocage->setTeam($cl_teams_tab[4]);
+
+            $manager->persist($flocage);
+            $floc_liv_tab[] = $floc_liv;
+        }
+        /****------------- Arsenal ------------ ****/
+        $floc_ars = ['9. Aubameyang', '1. ARS', '3. ARS'];
+        $floc_ars_tab = [];
+        for ($f = 0; $f < sizeof($floc_ars); $f++) {
+            $flocage = new Flocage();
+            $flocage->setFlocage($floc_ars[$f]);
+            $flocage->setTeam($cl_teams_tab[5]);
+
+            $manager->persist($flocage);
+            $floc_ars_tab[] = $floc_ars;
+        }
+        /****------------- AC Milan ------------ ****/
+        $floc_milan = ['9. Milan', '1. MIL', '3. MIL'];
+        $floc_milan_tab = [];
+        for ($f = 0; $f < sizeof($floc_milan); $f++) {
+            $flocage = new Flocage();
+            $flocage->setFlocage($floc_milan[$f]);
+            $flocage->setTeam($cl_teams_tab[6]);
+
+            $manager->persist($flocage);
+            $floc_milan_tab[] = $floc_milan;
+        }
+        /****------------- Bayern Munich ------------ ****/
+        $floc_bayern = ['9. Lewandoski', '11. Gnabry', '3. BAYERN'];
+        $floc_bayern_tab = [];
+        for ($f = 0; $f < sizeof($floc_bayern); $f++) {
+            $flocage = new Flocage();
+            $flocage->setFlocage($floc_bayern[$f]);
+            $flocage->setTeam($cl_teams_tab[7]);
+
+            $manager->persist($flocage);
+            $floc_bayern_tab[] = $floc_bayern;
+        }
+        /****------------- Borussia Dortmund ------------ ****/
+        $floc_dort = ['10. Reus', '17. Haaland', '3. DORT'];
+        $floc_dort_tab = [];
+        for ($f = 0; $f < sizeof($floc_dort); $f++) {
+            $flocage = new Flocage();
+            $flocage->setFlocage($floc_dort[$f]);
+            $flocage->setTeam($cl_teams_tab[8]);
+
+            $manager->persist($flocage);
+            $floc_dort_tab[] = $floc_dort;
+        }
+        /****------------- Ajax Amsterdam ------------ ****/
+        $floc_ajax = ['10. AJAX', '17. AJAX', '3. AJAX'];
+        $floc_ajax_tab = [];
+        for ($f = 0; $f < sizeof($floc_ajax); $f++) {
+            $flocage = new Flocage();
+            $flocage->setFlocage($floc_ajax[$f]);
+            $flocage->setTeam($cl_teams_tab[9]);
+
+            $manager->persist($flocage);
+            $floc_ajax_tab[] = $floc_ajax;
+        }
+        /****------------- FC Barcelone ------------ ****/
+        $floc_barca = ['9. Suarez', '17. Griezmann', '10. Messi'];
+        $floc_barca_tab = [];
+        for ($f = 0; $f < sizeof($floc_barca); $f++) {
+            $flocage = new Flocage();
+            $flocage->setFlocage($floc_barca[$f]);
+            $flocage->setTeam($cl_teams_tab[10]);
+
+            $manager->persist($flocage);
+            $floc_barca_tab[] = $floc_barca;
+        }
+        /****=====================================****/
         /****============== SIZES ==============****/
         $sizes = ['XS', 'S', 'M', 'L', 'XL'];
         $sizes_tab = [];

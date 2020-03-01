@@ -6,7 +6,7 @@
 }
 
 table {
-    table-layout: fixed;
+    /*table-layout: fixed;*/
 }
 
 td {
@@ -14,9 +14,12 @@ td {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .img-back {
-    background: url('https://picsum.photos/500/500') no-repeat center;
+    /* background: url('https://picsum.photos/500/500') no-repeat center; */
+    background-image: radial-gradient(circle, rgba(117, 117, 117, 0.867), rgb(165, 165, 165), #ddd);
 }
+
 .img-product {
     display: block;
     margin-left: auto;

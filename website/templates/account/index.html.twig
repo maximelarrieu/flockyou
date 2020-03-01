@@ -62,7 +62,7 @@
                         {% for livraison in user.livraisons %}
                             <tr>
                                 <td>{{ livraison.id }}</td>
-                                <td scope="row">{{ livraison.name }}</td>
+                                <td>{{ livraison.name }}</td>
                                 <td>{{ livraison.phoneNumber }}</td>
                                 <td>{{ livraison.country }}</td>
                                 <td>{{ livraison.city }}</td>
@@ -79,7 +79,7 @@
                         </tbody>
                     </table>
                     <hr/>
-                    <table class="table table-responsive table-striped">
+                    <table class="table table-striped">
                         <strong>Informations bancaires</strong>
                         {% if user is same as(app.user) %}
                             <a href="{{ path('account_bank_create') }}"
@@ -100,7 +100,7 @@
                         {% for bank in user.banks %}
                             <tr>
                                 <td>{{ bank.id }}</td>
-                                <td scope="row">{{ livraison.name }}</td>
+                                <td>{{ livraison.name }}</td>
                                 <td>{{ bank.cartNumber }}</td>
                                 <td>{{ bank.expirationDate|date('M/Y') }}</td>
                                 <td>{{ bank.cartCode }}</td>

@@ -53,8 +53,9 @@
 
 
 .card-logo {
-    width: 55px;
-    margin: 20px;
+    width: 25px;
+    margin-left: 20px;
+    margin-top: 10px;
 }
 
 .product-img {
@@ -207,7 +208,7 @@
     display: inline-block;
     color: #2a2a2a;
 }
-li.active {
+li.actived {
     background: #f35e3d;
     color: #fff;
     border-radius: 100%;
