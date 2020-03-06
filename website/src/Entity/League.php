@@ -37,6 +37,7 @@ class League
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Team", mappedBy="league")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $teams;
 

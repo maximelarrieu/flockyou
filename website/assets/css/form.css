@@ -26,3 +26,11 @@ td {
     margin-right: auto;
     width: 70%;
 }
+
+img {
+    width: 100%;
+}
+
+.rating {
+    color: goldenrod;
+}

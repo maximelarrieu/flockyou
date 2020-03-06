@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="{{ asset("build/product_card.css") }}"/>
-{% for product in products %}
 <div class="card">
     {% if product.team.league.name == 'Euro 2020' %}
     <div class="card-head">
@@ -7,7 +6,7 @@
     <div class="card-head-cl">
     {% endif %}
         <img src="{{ asset(product.team.image) }}" alt="logo" class="card-logo">
-        <img src="{{ asset(product.image) }}" alt="Shoe" class="product-img">
+        <img src="{{ asset(product.image) }}" alt="Jersey" class="product-img">
         <div class="product-detail">
             <h3>Maillot football</h3> Support and Nike Zoom Air come together for a more supportive feel with high-speed
             responsiveness
@@ -16,7 +15,7 @@
             {{ product.team.slug }}
         </span>
     </div>
-    <a class="product_link" href="{{ path('product', { 'id': product.id}) }}">
+    <a class="product_link" href="{{ path('product', { 'id': product.id, 'team': product.team.name }) }}">
     <div class="card-body">
         <div class="product-desc">
         <span class="product-title">
@@ -28,11 +27,11 @@
                 {{product.team.league.name}}
               </span>
             <span class="product-rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
+                {% if product.comments | length > 0 %}
+                    {% include 'products/rating.html.twig' with {'rating': product.getAvgRating} %}
+                {% else %}
+                    (Ce produit n'a pas encoré été noté)
+                {% endif %}
             </span>
         </div>
         <div class="product-properties">
@@ -51,4 +50,3 @@
     </div>
     </a>
 </div>
-{% endfor %}

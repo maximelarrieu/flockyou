@@ -1,0 +1,21 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Ajout d'un flocage{% endblock %}
+
+{% form_theme form _self %}
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('build/form.css') }}">
+
+    <div class="container">
+        <h2 class="deepshadow">Ajout d'un flocage</h2>
+
+        <div class="login-form bg-light py-3 px-3">
+            {{ form_start(form) }}
+
+            {{ form_widget(form) }}
+            <button type="submit" class="btn btn-success">Ajouter un flocage</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

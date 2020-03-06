@@ -29,8 +29,24 @@ class ProductRepository extends ServiceEntityRepository
             ->innerJoin('p.team', 't')
             ->innerJoin('t.league', 'l')
             ->where('l.name = :league')
+            ->andWhere('p.size is null')
             ->setParameters([
                 'league' => $league
+            ])
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @param string $cart
+     * @return mixed
+     */
+    public function getProductFromCart(string $cart) {
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.carts', 'c')
+            ->where('p in :cart')
+            ->setParameters([
+                'cart' => $cart
             ])
             ->getQuery()
             ->getResult();

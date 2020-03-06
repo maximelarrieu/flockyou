@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Team;
 use App\Entity\League;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -17,6 +18,11 @@ class LeagueRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, League::class);
+    }
+
+    public function createAlphabeticalQueryBuilder() {
+        return $data = $this->createQueryBuilder('league')
+            ->orderBy('league.name', 'ASC');
     }
 
     // /**

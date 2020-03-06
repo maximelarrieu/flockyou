@@ -119,3 +119,10 @@ button {
     /*margin-right: auto;*/
     width: 80%;
 }
+.price-precision {
+    font-size: 12px;
+}
+
+.rating {
+    color: goldenrod;
+}

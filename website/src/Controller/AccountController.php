@@ -80,15 +80,6 @@ class AccountController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $manager->persist($user);
             $manager->flush();
-
-            $this->addFlash(
-                'success',
-                "Les données du compte ont été modifiées avec succès."
-            );
-            $this->addFlash(
-                'danger',
-                "Une erreur s'est produite !"
-            );
         }
 
         return $this->render("account/edit.html.twig", [
@@ -118,15 +109,6 @@ class AccountController extends AbstractController
 
                 $manager->persist($user);
                 $manager->flush();
-
-                $this->addFlash(
-                    'success',
-                    "Votre mot de passe a bien été mis à jour"
-                );
-                $this->addFlash(
-                    'danger',
-                    "Une erreur s'est produite !"
-                );
 
                 return $this->redirectToRoute('home');
             }

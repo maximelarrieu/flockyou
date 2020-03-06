@@ -42,12 +42,12 @@ class Team
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="team")
+     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="team", cascade={"remove"})
      */
     private $products;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Flocage", mappedBy="team")
+     * @ORM\OneToMany(targetEntity="App\Entity\Flocage", mappedBy="team", cascade={"remove"})
      */
     private $flocages;
 

@@ -35,54 +35,35 @@ class AdminProductController extends AbstractController
             return $this->redirectToRoute('admin_products');
         }
 
-        $this->addFlash(
-            'success',
-            "Le produit a bien été créée !"
-        );
-        $this->addFlash(
-            'danger',
-            "Une erreur s'est produite !"
-        );
-
         return $this->render('admin/products/create.html.twig', [
             'product' => $product,
             'form' => $form->createView()
         ]);
     }
 
-    public function edit(Request $request, Product $products) {
+    public function edit(Request $request, Product $products, ObjectManager $manager) {
 
         $form = $this->createForm(ProductType::class, $products);
 
         $form->handleRequest($request);
 
-        $this->addFlash(
-            'success',
-            "Le produit a bien été modifié !"
-        );
-        $this->addFlash(
-            'danger',
-            "Une erreur s'est produite !"
-        );
+        if($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($products);
+            $manager->flush();
 
-            return $this->render('admin/products/edit.html.twig', [
-                'form' => $form->createView()
-            ]);
+            return $this->redirectToRoute('admin_products');
+        }
+
+        return $this->render('admin/products/edit.html.twig', [
+            'form' => $form->createView(),
+            'product' => $products
+        ]);
     }
 
     public function destroy(Product $products, ObjectManager $manager) {
 
         $manager->remove($products);
         $manager->flush();
-
-        $this->addFlash(
-            'success',
-            "Le produit a bien été supprimé !"
-        );
-        $this->addFlash(
-            'danger',
-            "Une erreur s'est produite !"
-        );
 
         return $this->redirectToRoute('admin_products');
     }

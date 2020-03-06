@@ -24,32 +24,22 @@ class TeamRepository extends ServiceEntityRepository
                     ->orderBy('team.name', 'ASC');
     }
 
-    // /**
-    //  * @return Team[] Returns an array of Team objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
+    public function getTeamFromLeague(string $league_name) {
+        return $this->createQueryBuilder('team')
+            ->innerJoin('team.league', 'league')
+            ->where('league.name = :league_name')
+            ->setParameters([
+                'league_name' => $league_name
+            ])
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Team
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+//    public function getTeam() {
+//        return $data = $this->createQueryBuilder('team')
+//                    ->innerJoin('team.flocages', 'flocage')
+//                    ->where('team.name = flocage.team')
+//                    ->getQuery()
+//                    ->getResult();
+//    }
 }

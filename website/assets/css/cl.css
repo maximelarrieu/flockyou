@@ -1,7 +1,7 @@
 .sidenav {
     color: white;
     height: 100%; /* Full-height: remove this if you want "auto" height */
-    width: 10%; /* Set the width of the sidebar */
+    width: 15%; /* Set the width of the sidebar */
     position: relative; /* Fixed Sidebar (stay in place on scroll) */
     /*z-index: 1; !* Stay on top *!*/
     top: 0; /* Stay at the top */
@@ -33,6 +33,15 @@
     /*margin-right: auto;*/
 }
 
+.sidenav h4 {
+    margin-left: 4%;
+}
+
 .dropdown-menu  {
-    width: 40%;
+    width: 100%;
+}
+
+.product-league {
+    height: 300px;
+    background-size: cover;
 }

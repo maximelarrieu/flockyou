@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProductsController!{% endblock %}
+{% block title %}Maillot {{ product.team.name }} {{ product.state.state }} - Flockyou{% endblock %}
 
 {% block body %}
     <link rel="stylesheet" href="{{ asset('build/app.css') }}">
     <link rel="stylesheet" href="{{ asset('build/product.css') }}">
     <link rel="stylesheet" href="{{ asset('build/form.css') }}">
-    <div class="product-league" style="background-image: url({{ asset('build/images/leagues/clbanner.jpg') }}); height: 300px">
+    <div class="product-league"
+         style="background-image: url({{ asset('build/images/leagues/clbanner.jpg') }}); height: 300px">
         <div class="container">
             <h2 class="deepshadow">{{ product.team.league.name }}</h2>
         </div>
@@ -23,24 +24,118 @@
                     <div class="row">
                         <div class="col">
                             <h3>{{ product.team.name | upper }}</h3>
-                            <h4>Maillot {{ product.state.state }}</h4>
-                            <span class="badge badge-lg badge-primary mb-3">{{ product.team.league.name }}</span>
-                            <h6>Tailles :</h6>
-                            <select class="browser-default custom-select mb-3">
-                                <option selected>Sélectionnez une taille</option>
-                                {% for size in sizes %}
-                                    <option value="{{ size.name }}">{{ size.name }}</option>
-                                {% endfor %}
-                            </select>
-                            <h6>Flocage :</h6>
-                            <select class="browser-default custom-select mb-3">
-                                <option selected>Sélectionnez un flocage</option>
-
-                            </select>
+                            <h4 class="mb-4">Maillot {{ product.state.state }}</h4>
+                            {{ form_start(formP) }}
+                            {{ form_widget(formP) }}
+                            <div class="row">
+                                <div class="col-md-6">
+{#                                    {% if product in service.nbProducts %}#}
+{#                                        <a class="btn btn-secondary" type="submit">#}
+{#                                            <i class="fas fa-heart"></i><br>#}
+{#                                            Ajouter aux favoris#}
+{#                                        </a>#}
+{#                                    {% else %}#}
+                                        <a href="{{ path('favorites_product_add', {'id': product.id}) }}" class="btn btn-danger" type="submit">
+                                            <i class="fas fa-heart"></i><br>
+                                            Ajouter aux favoris
+                                        </a>
+{#                                    {% endif %}#}
+                                </div>
+                                <div class="col">
+                                    {% if app.user %}
+                                        <button type="submit" class="btn btn-success">
+                                            <i class="fas fa-shopping-cart"></i><br>
+                                            Ajouter au panier
+                                        </button>
+                                    {% else %}
+                                        <div class="btn btn-secondary">
+                                            <i class="fas fa-shopping-cart"></i><br>
+                                            Ajouter au panier
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {{ form_end(formP) }}
                         </div>
                     </div>
                 </div>
             </div>
+
+            <hr>
+
+            {% if product.comments|length > 0 %}
+                <h3 class="mb-3">Commentaires de nos utilisateurs :</h3>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading text-center">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                Note moyenne du produit<br>
+                            </div>
+                            <div class="col">
+                                {% include 'products/rating.html.twig' with {'rating': product.getAvgRating} %}<br>
+                                {% if product.comments | length == 1 %}
+                                    <small>(Moyenne calculée sur le seul avis donné)</small>
+                                {% else %}
+                                    <small>(Moyenne calculée sur {{ product.comments | length }} avis des
+                                        utilisateurs)</small>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </h4>
+                </div>
+                <div class="alert border-warning">
+                    {% if app.user %}
+                        {% set comment = product.getCommentFromAuthor(app.user) %}
+                        {% if comment is not null %}
+                            <h3 class="alert-heading">Votre avis sur ce produit :</h3>
+                            <blockquote>
+                                {{ comment.content }}
+                            </blockquote>
+                            <strong>Note attribuée : </strong>
+                            {% include 'products/rating.html.twig' with {'rating': comment.rating} %}
+                        {% else %}
+                            <h3 class="alert-heading">Donnez votre avis sur ce produit :</h3>
+                            {{ form_start(form) }}
+                            {{ form_widget(form) }}
+                            <button type="submit" class="btn btn-success">Envoyer le commentaire</button>
+                            {{ form_end(form) }}
+                        {% endif %}
+                    {% else %}
+                        <div class="alert alert-warning">
+                            <p><a href="{{ path('login') }}">Connectez-vous </a>pour donner votre avis !</p>
+                        </div>
+                    {% endif %}
+                </div>
+                {% for comment in product.comments %}
+                    <div class="alert bg-light border-dark rounded mb-3 py-3 px-3">
+                        <strong>{{ comment.author.username }}</strong> dit :
+                        {% if is_granted('ROLE_ADMIN') or comment.author is same as(app.user) %}
+                            <a href="{{ path('comment_delete', {'id': product.id, 'team': product.team.name, 'cid': comment.id}) }}"
+                               class="btn btn-danger float-right"><i class="fas fa-trash"></i></a>
+                        {% endif %}
+                        <blockquote>
+                            {{ comment.content }}
+                        </blockquote>
+                        <strong>Note attribuée : </strong>
+                        {% include 'products/rating.html.twig' with {'rating': comment.rating} %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="alert border-warning">
+                    {% if app.user %}
+                        <h3 class="alert-heading">Soyez le premier à donner un avis sur ce produit :</h3>
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        <button type="submit" class="btn btn-success">Envoyer le commentaire</button>
+                        {{ form_end(form) }}
+                    {% else %}
+                        <div class="alert alert-warning">
+                            <p><a href="{{ path('login') }}">Connectez-vous </a>pour donner votre avis !</p>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

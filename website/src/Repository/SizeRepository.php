@@ -19,6 +19,11 @@ class SizeRepository extends ServiceEntityRepository
         parent::__construct($registry, Size::class);
     }
 
+    public function createAlphabeticalQueryBuilder() {
+        return $data = $this->createQueryBuilder('team')
+            ->orderBy('team.name', 'ASC');
+    }
+
     // /**
     //  * @return Size[] Returns an array of Size objects
     //  */

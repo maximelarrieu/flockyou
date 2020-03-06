@@ -5,50 +5,39 @@
 {% block body %}
     <link rel="stylesheet" href="{{ asset("build/cl.css") }}"/>
     {% if league_name == 'Ligue des champions' %}
-        <div class="product-league" style="background-image: url({{ asset('build/images/leagues/clbanner.jpg') }}); height: 300px">
+        <div class="product-league" style="background-image: url({{ asset('build/images/leagues/clbanner.jpg') }});">
             <div class="container">
                 <h2 class="deepshadow">{{ league_name }}</h2>
             </div>
         </div>
     {% else %}
-        <div class="product-league" style="background-image: url({{ asset('build/images/leagues/eurobanner.png') }}); height: 300px">
+        <div class="product-league" style="background-image: url({{ asset('build/images/leagues/eurobanner.jpg') }});">
             <div class="container">
                 <h2 class="deepshadow">{{ league_name }}</h2>
             </div>
         </div>
     {% endif %}
     <div class="sidenav">
-        <li class="nav-item dropright">
+        <h4>Affiner recherche :</h4>
+        {% for state in states %}
+            <a href="#">
+                <input type="checkbox" id="state" name="state" checked>
+                <label for="scales">{{state.state}}</label>
+            </a>
+        {% endfor %}
+        <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Equipes :
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item">
-                    <input type="checkbox" id="psg" name="psg" checked>
-                    <label for="scales">Paris-Saint-Germain</label>
-                </a>
-                <a class="dropdown-item">
-                    <input type="checkbox" id="psg" name="psg" checked>
-                    <label for="scales">FC Barcelone</label>
-                </a>
+                {% for team in teams %}
+                    <a class="dropdown-item">
+                        <input type="checkbox" id="team" name="team" checked>
+                        <label for="scales">{{team.name}}</label>
+                    </a>
+                {% endfor %}
             </div>
         </li>
-        <a href="#">
-            <input type="checkbox" id="psg" name="psg" checked>
-            <label for="scales">Domicile</label>
-        </a>
-        <a href="#">
-            <input type="checkbox" id="psg" name="psg" checked>
-            <label for="scales">Extérieur</label>
-        </a>
-        <a href="#">
-            <input type="checkbox" id="psg" name="psg" checked>
-            <label for="scales">Third</label>
-        </a>
-        <a href="#">Contact</a>
-        <a href="#">Contact</a>
-        <a href="#">Contact</a>
-        <a href="#">Contact</a>
     </div>
     <div class="main">
         <h3></h3>

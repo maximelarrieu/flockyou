@@ -28,17 +28,9 @@ class AdminUsersController extends AbstractController
 
         $form->handleRequest($request);
 
-        $this->addFlash(
-            'success',
-            "L'utilisateur a bien été modifié"
-        );
-        $this->addFlash(
-            'danger',
-            "Une erreur s'est produite !"
-        );
-
         return $this->render('admin/users/edit.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'user' => $users
         ]);
     }
 
@@ -46,15 +38,6 @@ class AdminUsersController extends AbstractController
 
         $manager->remove($users);
         $manager->flush();
-
-        $this->addFlash(
-            'success',
-            "L'utilisateur a bien été supprimé !"
-        );
-        $this->addFlash(
-            'danger',
-            "Une erreur s'est produite !"
-        );
 
         return $this->redirectToRoute('admin_users');
     }

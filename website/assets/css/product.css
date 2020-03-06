@@ -1,3 +1,14 @@
 .blank {
     background-color: white;
 }
+
+small {
+    font-size: 12px;
+}
+
+blockquote {
+    font-size: 14px;
+}
+span.rating {
+    color: goldenrod;
+}

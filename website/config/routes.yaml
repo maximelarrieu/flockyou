@@ -5,7 +5,7 @@ home:
     path: /
     controller: App\Controller\HomeController::index
 ########################################################
-############# FORMULAIREs UTILISATEUR ##################
+############# FORMULAIRES UTILISATEUR ##################
 ########################################################
 #------------ Formulaire d'inscription ---------------#
 register:
@@ -47,10 +47,6 @@ account_bank_edit:
 account_bank_delete:
     path: /account/bank/{id}/delete
     controller: App\Controller\BankController:delete
-#---------- Accès au compte utilisateur -------------#
-account:
-    path: /account/{username}
-    controller: App\Controller\UsersController:index
 #######################################################
 ################## ADMINISTRATION #####################
 #######################################################
@@ -66,13 +62,47 @@ admin_logout:
 admin_dashboard:
     path: /admin/
     controller: App\Controller\AdminDashboardController:index
+#++++++++++++++ Gestion des équipes +++++++++++++++++#
+admin_teams:
+    path: /admin/teams/{page<\d+>?1}
+    controller: App\Controller\AdminTeamsController:index
+
+admin_team_add:
+    path: /admin/team/create
+    controller: App\Controller\AdminTeamsController:create
+
+admin_team_edit:
+    path: /admin/team/{name}/edit
+    controller: App\Controller\AdminTeamsController:edit
+
+admin_team_destroy:
+    path: /admin/team/{name}/destroy
+    controller: App\Controller\AdminTeamsController:destroy
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++#
+##++++++++++++++ Gestion des flocages +++++++++++++++++#
+admin_flocages:
+    path: /admin/flocages/{team}
+    controller: App\Controller\AdminFlocageController:index
+
+admin_flocage_add:
+    path: /admin/flocage/{team}/create
+    controller: App\Controller\AdminFlocageController:create
+
+admin_flocage_edit:
+    path: /admin/flocage/{team}/{id}/edit
+    controller: App\Controller\AdminFlocageController:edit
+
+admin_flocage_destroy:
+    path: /admin/flocage/{team}/{id}/destroy
+    controller: App\Controller\AdminFlocageController:destroy
+##+++++++++++++++++++++++++++++++++++++++++++++++++++++#
 #++++++++++++++ Gestion des produits +++++++++++++++++#
 admin_products:
     path: /admin/products/{page<\d+>?1}
     controller: App\Controller\AdminProductController:index
 
 admin_product_add:
-    path: admin/product/create
+    path: /admin/product/create
     controller: App\Controller\AdminProductController:create
 
 admin_product_edit:
@@ -97,20 +127,51 @@ admin_user_delete:
     controller: App\Controller\AdminUsersController:destroy
 #-----------------------------------------------------#
 #######################################################
-##################### PRODUITS ########################
-#######################################################
-product:
-    path: /product/{id}
-    controller: App\Controller\ProductsController:index
-
-###########################################################
 ##################### UTILISATEURS ########################
-
+#---------- Accès au compte utilisateur -------------#
+account:
+    path: /account/{username}
+    controller: App\Controller\UsersController:index
 ###########################################################
 league:
     path: /league/{league_name}
     controller: App\Controller\LeaguesController:index
 
+###########################################################
+##################### PANIER ########################
 cart:
     path: /cart
     controller: App\Controller\CartController::index
+
+cart_add:
+    path: /cart/add/{id}
+    controller: App\Controller\CartController:add
+
+cart_destroy:
+    path: /cart/destroy/{id}
+    controller: App\Controller\CartController:destroy
+###########################################################
+##################### FAVORIS ########################
+favorites:
+    path: /favoris
+    controller: App\Controller\FavoritesController::index
+
+favorites_product_add:
+    path: /favoris/add/{id}
+    controller: App\Controller\FavoritesController:add
+
+favorites_product_destroy:
+    path: /favorites/destroy/{id}
+    controller: App\Controller\FavoritesController:destroy
+###########################################################
+##################### PRODUITS ########################
+#######################################################
+product:
+    path: /product/{id}/{team}
+    controller: App\Controller\ProductsController:index
+
+comment_delete:
+    path: /product/{id}/{team}/comment/{cid}/destroy
+    controller: App\Controller\ProductsController:deleteComment
+
+###########################################################

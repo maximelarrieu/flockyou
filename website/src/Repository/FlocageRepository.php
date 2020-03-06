@@ -19,6 +19,29 @@ class FlocageRepository extends ServiceEntityRepository
         parent::__construct($registry, Flocage::class);
     }
 
+    public function getFlocageFromTeam($team) {
+        return $this->createQueryBuilder('flocage')
+            ->innerJoin('flocage.team', 'team')
+            ->where('team.name = :team')
+            ->setParameters([
+                'team' => $team
+            ])
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getFlocageProduct($team) {
+         $this->createQueryBuilder('flocage')
+            ->innerJoin('flocage.products', 'products')
+//            ->innerJoin('products.team', 'team')
+            ->where('products.team = :team')
+             ->setParameters([
+                 'team' => $team
+             ]);
+//            ->getQuery()
+//            ->getResult();
+    }
+
     // /**
     //  * @return Flocage[] Returns an array of Flocage objects
     //  */

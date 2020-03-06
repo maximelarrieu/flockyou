@@ -1,0 +1,46 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des équipes{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('build/form.css') }}">
+
+    <div class="container">
+        <h2 class="deepshadow">Gestion des équipes</h2>
+        <div class="login-form bg-light py-3 px-3">
+            <table class="table table-hover">
+                <h5 class="float-left">Liste des équipes</h5>
+                <a href="{{ path('admin_team_add') }}" class="btn btn-success float-right mb-2"><i class="fas fa-plus mr-2"></i>Ajouter une équipe</a>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Équipe</th>
+                    <th>Slug</th>
+                    <th>Ligue</th>
+                    <th>Flocages</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for team in pagination.data %}
+                    <tr class="">
+                        <td>{{ team.id }}</td>
+                        <td><img src="{{ asset(team.image) }}" class="avatar mr-3" alt="img" style="min-width: 30px;max-width: 31px;min-height: 35px;max-height: 36px">{{ team.name }}</td>
+                        <td>{{ team.slug }}</td>
+                        <td>{{ team.league.name }}</td>
+                        <td class="text-center">{{ team.flocages|length }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="{{ path('admin_team_edit', {'name': team.name })  }}" class="btn btn-primary m-1"><i class=" fas fa-pen"></i></a>
+                                <a href="{{ path('admin_team_destroy', {'name': team.name }) }}" class="btn btn-danger m-1"><i class=" fas fa-trash"></i></a>
+                                <a href="{{ path('admin_flocages', {'team': team.name}) }}" class="btn btn-warning m-1" alt="flocage"><i class="fas fa-tshirt"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {{ pagination.display() }}
+        </div>
+    </div>
+{% endblock %}

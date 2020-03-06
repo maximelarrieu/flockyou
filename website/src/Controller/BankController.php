@@ -24,7 +24,6 @@ class BankController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            /** @var Bank $bank */
             $user = $this->getUser();
 
             $bank->setUser($user);
@@ -35,15 +34,6 @@ class BankController extends AbstractController
                'username' => $user->getUsername()
             ]);
         }
-        $this->addFlash(
-            'success',
-            "Les données bancaires ont bien été enregistrées !"
-        );
-        $this->addFlash(
-            'danger',
-            "Une erreur s'est produite !"
-        );
-
         return $this->render('bank/create.html.twig', [
             'form' => $form->createView(),
         ]);
@@ -52,19 +42,20 @@ class BankController extends AbstractController
     /**
      * @IsGranted("ROLE_USER")
      */
-    public function edit(Request $request, Bank $bank) {
+    public function edit(Request $request, Bank $bank, ObjectManager $manager) {
         $form = $this->createForm(BankType::class, $bank);
 
         $form->handleRequest($request);
 
-        $this->addFlash(
-            'success',
-            "Les données bancaires ont bien été mises à jour !"
-        );
-        $this->addFlash(
-            'danger',
-            "Une erreur s'est produite !"
-        );
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $manager->persist($bank);
+            $manager->flush();
+
+            return $this->redirectToRoute('account', [
+                'username' => $bank->getUser()->getUsername()
+            ]);
+        }
 
         return $this->render('bank/edit.html.twig', [
             'form' => $form->createView()

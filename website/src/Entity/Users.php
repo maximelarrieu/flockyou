@@ -62,12 +62,24 @@ class Users implements UserInterface
      */
     private $banks;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="author", orphanRemoval=true)
+     */
+    private $comments;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Cart", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $cart;
+
     public function __construct()
     {
         $this->userRoles = new ArrayCollection();
         $this->livraisons = new ArrayCollection();
         $this->livraison = new ArrayCollection();
         $this->banks = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->purchases = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -225,6 +237,55 @@ class Users implements UserInterface
             if ($bank->getUser() === $this) {
                 $bank->setUser(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getAuthor() === $this) {
+                $comment->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCart(): ?Cart
+    {
+        return $this->cart;
+    }
+
+    public function setCart(?Cart $cart): self
+    {
+        $this->cart = $cart;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newUser = null === $cart ? null : $this;
+        if ($cart->getUser() !== $newUser) {
+            $cart->setUser($newUser);
         }
 
         return $this;

@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Repository\CartRepository;
 use App\Repository\ProductRepository;
 use App\Repository\LeagueRepository;
 
 use App\Repository\SizeRepository;
+use App\Service\Favorites;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,6 +29,10 @@ class HomeController extends AbstractController
      * @var SizeRepository
      */
     private $sizesRepository;
+    /**
+     * @var CartRepository
+     */
+    private $cartRepository;
 
     /**
      * HomeController constructor.
@@ -34,12 +40,14 @@ class HomeController extends AbstractController
      * @param LeagueRepository $leaguesRepository
      * @param ProductRepository $productsRepository
      * @param SizeRepository $sizesRepository
+     * @param CartRepository $cartRepository
      */
-    public function __construct(LeagueRepository $leaguesRepository, ProductRepository $productsRepository, SizeRepository $sizesRepository)
+    public function __construct(LeagueRepository $leaguesRepository, ProductRepository $productsRepository, SizeRepository $sizesRepository, CartRepository $cartRepository)
     {
         $this->productsRepository =  $productsRepository;
         $this->leaguesRepository = $leaguesRepository;
         $this->sizesRepository = $sizesRepository;
+        $this->cartRepository = $cartRepository;
     }
 
     public function index()
@@ -50,9 +58,11 @@ class HomeController extends AbstractController
         ]);
     }
 
-    public function navbar() {
+    public function navbar(Favorites $service) {
         return $this->render('header.html.twig', [
-            'leagues' => $this->leaguesRepository->findAll()
+            'cart' => $this->cartRepository->findAll(),
+            'leagues' => $this->leaguesRepository->findAll(),
+            'nbProducts' => $service->nbProducts()
         ]);
     }
 

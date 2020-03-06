@@ -33,6 +33,7 @@ class Size
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->purchases = new ArrayCollection();
     }
 
     public function getId(): ?int

@@ -53,9 +53,13 @@
 
 
 .card-logo {
-    width: 25px;
+    min-width: 35px;
+    max-width: 36px;
+    min-height: 40px;
+    max-height: 41px;
     margin-left: 20px;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .product-img {
@@ -133,8 +137,8 @@
     font-size: 11px;
 }
 
-.product-rating i.grey {
-    color: #acacab;
+.product-rating {
+    color: goldenrod;
 }
 
 .product-size h4 {
@@ -216,4 +220,8 @@ li.actived {
     height: 22px;
     text-align: center;
     font-size: 14px;
+}
+
+span .rating {
+    color: goldenrod;
 }
