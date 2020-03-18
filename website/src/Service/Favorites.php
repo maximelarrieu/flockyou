@@ -51,16 +51,16 @@ class Favorites {
 
         return $favoritesWithData;
     }
-//
-//    public function getTotal() : float {
-//        $total = 0;
-//
-//        foreach ($this->getCart() as $product) {
-//            $total += $product['product']->getPrice() * $product['quantity'];
-//        }
-//
-//        return $total;
-//    }
+
+    public function getTotal() : float {
+        $total = 0;
+
+        foreach ($this->getCart() as $product) {
+            $total += $product['product']->getPrice() * $product['quantity'];
+        }
+
+        return $total;
+    }
 
     public function nbProducts() : int {
         $nbProducts = 0;

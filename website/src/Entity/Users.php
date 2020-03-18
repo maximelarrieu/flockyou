@@ -68,9 +68,9 @@ class Users implements UserInterface
     private $comments;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Cart", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\Column(type="float", nullable=true)
      */
-    private $cart;
+    private $budget;
 
     public function __construct()
     {
@@ -80,6 +80,8 @@ class Users implements UserInterface
         $this->banks = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->purchases = new ArrayCollection();
+        $this->carts = new ArrayCollection();
+        $this->commands = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -273,20 +275,14 @@ class Users implements UserInterface
         return $this;
     }
 
-    public function getCart(): ?Cart
+    public function getBudget(): ?float
     {
-        return $this->cart;
+        return $this->budget;
     }
 
-    public function setCart(?Cart $cart): self
+    public function setBudget(?float $budget): self
     {
-        $this->cart = $cart;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newUser = null === $cart ? null : $this;
-        if ($cart->getUser() !== $newUser) {
-            $cart->setUser($newUser);
-        }
+        $this->budget = $budget;
 
         return $this;
     }

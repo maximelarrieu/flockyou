@@ -34,6 +34,7 @@ class Size
     {
         $this->products = new ArrayCollection();
         $this->purchases = new ArrayCollection();
+        $this->carts = new ArrayCollection();
     }
 
     public function getId(): ?int

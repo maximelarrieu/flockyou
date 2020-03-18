@@ -29,13 +29,18 @@
                             {{ form_widget(formP) }}
                             <div class="row">
                                 <div class="col-md-6">
-{#                                    {% if product in service.nbProducts %}#}
+                                    {#                                    {% for products in service.cart %}#}
+{#                                    {% if product in service.cart %}#}
+{#                                        {{ dump(service.cart) }}#}
 {#                                        <a class="btn btn-secondary" type="submit">#}
 {#                                            <i class="fas fa-heart"></i><br>#}
 {#                                            Ajouter aux favoris#}
 {#                                        </a>#}
 {#                                    {% else %}#}
-                                        <a href="{{ path('favorites_product_add', {'id': product.id}) }}" class="btn btn-danger" type="submit">
+                                    {#                                    {% endfor %}#}
+{#                                    {% if product not in service.cart %}#}
+                                        <a href="{{ path('favorites_product_add', {'id': product.id}) }}"
+                                           class="btn btn-danger" type="submit">
                                             <i class="fas fa-heart"></i><br>
                                             Ajouter aux favoris
                                         </a>
@@ -64,8 +69,6 @@
             <hr>
 
             {% if product.comments|length > 0 %}
-                <h3 class="mb-3">Commentaires de nos utilisateurs :</h3>
-
                 <div class="alert alert-info">
                     <h4 class="alert-heading text-center">
                         <div class="row align-items-center">
@@ -95,11 +98,15 @@
                             <strong>Note attribuée : </strong>
                             {% include 'products/rating.html.twig' with {'rating': comment.rating} %}
                         {% else %}
+                            {#                            {% if product in app.user.commands %}#}
                             <h3 class="alert-heading">Donnez votre avis sur ce produit :</h3>
                             {{ form_start(form) }}
                             {{ form_widget(form) }}
                             <button type="submit" class="btn btn-success">Envoyer le commentaire</button>
                             {{ form_end(form) }}
+                            {#                            {% else %}#}
+                            {#                                <p>Vous pourrez donner votre avis lorsque vous aurez acheté le produit.</p>#}
+                            {#                            {% endif %}#}
                         {% endif %}
                     {% else %}
                         <div class="alert alert-warning">
@@ -107,6 +114,11 @@
                         </div>
                     {% endif %}
                 </div>
+                {% if product.comments|length > 1 %}
+                    <h3 class="mb-3">Commentaires de nos utilisateurs :</h3>
+                {% elseif product.comments|length == 1 %}
+                    <h3 class="mb-3">Commentaire de notre utilisateur :</h3>
+                {% endif %}
                 {% for comment in product.comments %}
                     <div class="alert bg-light border-dark rounded mb-3 py-3 px-3">
                         <strong>{{ comment.author.username }}</strong> dit :

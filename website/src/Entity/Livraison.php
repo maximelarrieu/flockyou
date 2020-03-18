@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -46,6 +48,11 @@ class Livraison
      * @ORM\ManyToOne(targetEntity="App\Entity\Users", inversedBy="livraisons")
      */
     private $user;
+
+    public function __construct()
+    {
+//        $this->commands = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {

@@ -30,5 +30,9 @@ services:
     App\Service\Pagination:
         arguments:
             $templatePath: 'admin/pagination.html.twig'
+    App\Service\LeaguePagination:
+        arguments:
+            $templatePath: 'pagination.html.twig'
+            $league: 'league_name'
 
     Doctrine\Persistence\ObjectManager: '@doctrine.orm.default_entity_manager'

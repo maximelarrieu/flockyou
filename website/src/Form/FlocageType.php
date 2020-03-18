@@ -29,15 +29,15 @@ class FlocageType extends ConfigType
 
         $builder
             ->add('flocage', TextType::class, $this->getConfiguration("Flocage :", "Renseignez un flocage..."))
-            ->add('team', EntityType::class, [
-                'label' => 'Équipe :',
-                'placeholder' => 'Équipe associée...',
-                'class' => Team::class,
-                'choice_label' => 'name',
-//                'query_builder' => function(TeamRepository $repo) use ($team) {
-//                    return $repo->getTeamFromRoute($team);
-//                },
-            ])
+//            ->add('team', EntityType::class, [
+//                'label' => 'Équipe :',
+//                'placeholder' => 'Équipe associée...',
+//                'class' => Team::class,
+//                'choice_label' => 'name',
+////                'query_builder' => function(TeamRepository $repo) use ($team) {
+////                    return $repo->getTeam($team);
+////                }
+//            ])
         ;
     }
 

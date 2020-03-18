@@ -12,7 +12,15 @@
                 <div class="col-3 text-center">
                     <img src="https://avatars.io/platform/userId" class="avatar mb-2" alt="avatar">
                     <br>
-                    <span class="badge badge-primary">3 commandes</span>
+                    {% if command in user.commands %}
+                        {% if user.commands.count > 1 %}
+                            <span class="badge badge-primary">{{ user.commands.count }} commandes passées</span>
+                        {% else %}
+                            <span class="badge badge-primary">{{ user.commands.count }} commande passée</span>
+                        {% endif %}
+                    {% else %}
+                        <span class="badge badge-primary">Aucune commande</span>
+                    {% endif %}
                     {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('admin_dashboard') }}" class="btn btn-danger mt-2">Administration</a>
                     {% endif %}
@@ -25,6 +33,18 @@
                             <a href="{{ path('account_password_edit') }}" class="btn btn-dark mb-2">Modifier mon mot de
                                 passe</a>
                         </div>
+                    {% endif %}
+                    {% if command in user.commands %}
+                        {% for command in user.commands %}
+                        <div>
+                            {{ command.cart.product.count }}
+                            {% for product in command.cart.product %}
+                                {{ product.team.name }} - {{ product.flocage.flocage }} - {{ product.size.name }}
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div></div>
                     {% endif %}
                 </div>
             </div>

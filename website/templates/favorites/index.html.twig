@@ -12,7 +12,7 @@
             {% for product in products %}
                 <div class="fav row">
                     <div class="image col-2">
-                        <a href="{{ path('product', {'id': product.product.id, 'team': product.product.team.name}) }}"><img
+                        <a href="{{ path('product', {'id': product.product.id, 'name': product.product.team.name}) }}"><img
                                     src="{{ asset(product.product.image) }}"></a>
                     </div>
                     <div class="info col-8">

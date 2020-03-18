@@ -6,6 +6,7 @@ use App\Entity\Flocage;
 use App\Entity\Team;
 use App\Form\FlocageType;
 use App\Repository\FlocageRepository;
+use App\Repository\ProductRepository;
 use App\Repository\TeamRepository;
 use App\Service\Pagination;
 use Doctrine\Persistence\ObjectManager;
@@ -19,30 +20,35 @@ class AdminFlocageController extends AbstractController
      * AdminFlocageController constructor.
      * @var TeamRepository
      * @var FlocageRepository
+     * @var ProductRepository
      */
     private $teamRepository;
     private $flocageRepository;
+    private $productRepository;
 
     /**
      * AdminFlocageController constructor.
      * @param TeamRepository $teamRepository
      * @param FlocageRepository $flocageRepository
+     * @param ProductRepository $productRepository
      */
 
-    public function __construct(TeamRepository $teamRepository, FlocageRepository $flocageRepository)
+    public function __construct(TeamRepository $teamRepository, FlocageRepository $flocageRepository, ProductRepository $productRepository)
     {
         $this->teamRepository = $teamRepository;
         $this->flocageRepository = $flocageRepository;
+        $this->productRepository = $productRepository;
     }
 
     public function index($team) {
         return $this->render('admin/flocages/index.html.twig', [
             'team' => $team,
             'flocages' => $this->flocageRepository->getFlocageFromTeam($team),
+            'products' => $this->productRepository->getProductFromTeam($team)
         ]);
     }
 
-    public function create(Request $request, ObjectManager $manager, $team) {
+    public function create(Team $team, Request $request, ObjectManager $manager) {
         $flocage = new Flocage();
 
         $form = $this->createForm(FlocageType::class, $flocage);
@@ -57,7 +63,7 @@ class AdminFlocageController extends AbstractController
             $manager->flush();
 
             return $this->redirectToRoute('admin_flocages', [
-                'team' => $team
+                'team' => $team->getName()
             ]);
         }
 
@@ -100,5 +106,9 @@ class AdminFlocageController extends AbstractController
         return $this->redirectToRoute('admin_flocages', [
             'team' => $team
         ]);
+    }
+
+    public function back() {
+        return $this->redirectToRoute('admin_teams');
     }
 }

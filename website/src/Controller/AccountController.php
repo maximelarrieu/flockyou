@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Cart;
 use App\Entity\Livraison;
 use App\Entity\PasswordEdit;
 use App\Entity\Users;
@@ -39,6 +40,8 @@ class AccountController extends AbstractController
     }
 
     public function register(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder) {
+        $cart = new Cart();
+
         $user = new Users();
 
         $form = $this->createForm(RegistrationType::class, $user);
@@ -48,18 +51,10 @@ class AccountController extends AbstractController
 
             $password = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
-
+            $user->setBudget(200);
+            $user->setCart($cart);
             $manager->persist($user);
             $manager->flush();
-
-            $this->addFlash(
-                'success',
-                "Votre compte a bien été créée !"
-            );
-            $this->addFlash(
-                'danger',
-                "Une erreur s'est produite !"
-            );
 
             return $this->redirectToRoute('login');
         }

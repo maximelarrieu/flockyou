@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Entity\Team;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use App\Service\Pagination;
@@ -21,7 +22,7 @@ class AdminProductController extends AbstractController
         ]);
     }
 
-    public function create(Request $request, ObjectManager $manager) {
+    public function create(Team $team, Request $request, ObjectManager $manager) {
         $product = new Product();
 
         $form = $this->createForm(ProductType::class, $product);
@@ -29,10 +30,13 @@ class AdminProductController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+            $product->setTeam($team);
             $manager->persist($product);
             $manager->flush();
 
-            return $this->redirectToRoute('admin_products');
+            return $this->redirectToRoute('admin_flocages', [
+                'team' => $product->getTeam()->getName()
+            ]);
         }
 
         return $this->render('admin/products/create.html.twig', [
@@ -51,7 +55,9 @@ class AdminProductController extends AbstractController
             $manager->persist($products);
             $manager->flush();
 
-            return $this->redirectToRoute('admin_products');
+            return $this->redirectToRoute('admin_flocages', [
+                'team' => $products->getTeam()->getName()
+            ]);
         }
 
         return $this->render('admin/products/edit.html.twig', [
@@ -65,6 +71,8 @@ class AdminProductController extends AbstractController
         $manager->remove($products);
         $manager->flush();
 
-        return $this->redirectToRoute('admin_products');
+        return $this->redirectToRoute('admin_flocages', [
+            'team' => $products->getTeam()->getName()
+        ]);
     }
 }

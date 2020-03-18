@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Bank;
+use App\Entity\Cart;
 use App\Entity\Comment;
 use App\Entity\Flocage;
 use App\Entity\League;
@@ -382,6 +382,7 @@ class AppFixtures extends Fixture
         }
         /****====================================****/
         /****============== USERS ===============****/
+//        $cart = new Cart();
         $adminRole = new Roles();
         $adminRole->setTitle('ROLE_ADMIN');
         $manager->persist($adminRole);
@@ -390,7 +391,10 @@ class AppFixtures extends Fixture
         $adminUser->setUsername('maximelarrieu')
             ->setEmail('maxime.larrieu@ynov.com')
             ->setPassword($this->encoder->encodePassword($adminUser, 'password'))
-            ->addUserRole($adminRole);
+            ->addUserRole($adminRole)
+            ->setBudget(300);
+//            ->setCart($cart);
+
         $manager->persist($adminUser);
 
         $users = [];
@@ -399,9 +403,10 @@ class AppFixtures extends Fixture
 
             $password = $this->encoder->encodePassword($user, 'password');
 
-            $user->setUsername($faker->userName);
-            $user->setEmail($faker->freeEmail);
-            $user->setPassword($password);
+            $user->setUsername($faker->userName)
+                ->setEmail($faker->freeEmail)
+                ->setPassword($password)
+                ->setBudget(200);
             $manager->persist($user);
         }
         $users[] = $user;
@@ -433,13 +438,13 @@ class AppFixtures extends Fixture
             $products[] = $product;
 
             /***======== RATING ======***/
-//            $comment = new Comment();
-//            $comment->setContent($faker->paragraph())
-//                    ->setRating(mt_rand(1, 5))
-//                    ->setProduct($product)
-//                    ->setAuthor($user);
-//
-//            $manager->persist($comment);
+            $comment = new Comment();
+            $comment->setContent($faker->paragraph())
+                    ->setRating(mt_rand(1, 5))
+                    ->setProduct($product)
+                    ->setAuthor($user);
+
+            $manager->persist($comment);
 
         }
         /****====================================****/

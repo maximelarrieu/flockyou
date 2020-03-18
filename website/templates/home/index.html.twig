@@ -3,13 +3,14 @@
 {% block title %}Bienvenue ! - Flockyou{% endblock %}
 {% block body %}
     {{ render(controller('App\\Controller\\HomeController::caroussel', {} )) }}
-    <h2 class="deepshadow">Nouveautés</h2>
+    <h2 class="deepshadow">Maillots populaires</h2>
+{#    {{ dump(bestProducts) }}#}
     <div class="mainwrapper index row">
-        {% for product in products %}
-            {{ include('products/cardProduct.html.twig') }}
-        {% endfor %}
+    {% for product in bestProducts %}
+        {% include 'products/cardProduct.html.twig' with {'product': product.products} %}
+    {% endfor %}
     </div>
-    <h2 class="deepshadow">Promo !</h2>
+    <h2 class="deepshadow">Nouveautés</h2>
     <div class="mainwrapper index row">
         {% for product in products %}
             {{ include('products/cardProduct.html.twig') }}

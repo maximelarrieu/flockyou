@@ -50,6 +50,9 @@ account_bank_delete:
 #######################################################
 ################## ADMINISTRATION #####################
 #######################################################
+back:
+    path: admin/back
+    controller: App\Controller\AdminFlocageController:back
 #-------------- Formulaire connexion -----------------#
 admin_login:
     path: /admin/login
@@ -85,7 +88,7 @@ admin_flocages:
     controller: App\Controller\AdminFlocageController:index
 
 admin_flocage_add:
-    path: /admin/flocage/{team}/create
+    path: /admin/flocage/{name}/create
     controller: App\Controller\AdminFlocageController:create
 
 admin_flocage_edit:
@@ -98,11 +101,11 @@ admin_flocage_destroy:
 ##+++++++++++++++++++++++++++++++++++++++++++++++++++++#
 #++++++++++++++ Gestion des produits +++++++++++++++++#
 admin_products:
-    path: /admin/products/{page<\d+>?1}
+    path: /admin/products/{team}/{page<\d+>?1}
     controller: App\Controller\AdminProductController:index
 
 admin_product_add:
-    path: /admin/product/create
+    path: /admin/product/{name}/create
     controller: App\Controller\AdminProductController:create
 
 admin_product_edit:
@@ -134,22 +137,22 @@ account:
     controller: App\Controller\UsersController:index
 ###########################################################
 league:
-    path: /league/{league_name}
+    path: /league/{league_name}/{page<\d+>?1}
     controller: App\Controller\LeaguesController:index
 
 ###########################################################
 ##################### PANIER ########################
 cart:
-    path: /cart
+    path: /cart/{id}
     controller: App\Controller\CartController::index
 
 cart_add:
-    path: /cart/add/{id}
+    path: /cart/{id}/add/{pid}
     controller: App\Controller\CartController:add
 
 cart_destroy:
-    path: /cart/destroy/{id}
-    controller: App\Controller\CartController:destroy
+    path: /cart/{cid}/product/{id}/destroy
+    controller: App\Controller\ProductsController:deleteProductInCart
 ###########################################################
 ##################### FAVORIS ########################
 favorites:
@@ -167,7 +170,7 @@ favorites_product_destroy:
 ##################### PRODUITS ########################
 #######################################################
 product:
-    path: /product/{id}/{team}
+    path: /product/{id}/{name}
     controller: App\Controller\ProductsController:index
 
 comment_delete:

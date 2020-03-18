@@ -2,26 +2,19 @@
 
 namespace App\Controller;
 
-use App\Entity\Cart;
 use App\Entity\Comment;
 use App\Entity\Product;
-
 use App\Entity\Team;
+
 use App\Form\BuyProductType;
 use App\Form\CommentType;
-use App\Form\ProductType;
 use App\Repository\FlocageRepository;
-use App\Repository\LeagueRepository;
 use App\Repository\ProductRepository;
 use App\Repository\SizeRepository;
 use App\Service\Favorites;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 
 class ProductsController extends AbstractController
 {
@@ -37,10 +30,9 @@ class ProductsController extends AbstractController
 
     /**
      * LeaguesController constructor.
-     *
      * @param ProductRepository $productsRepository
      * @param SizeRepository $sizesRepository
-     * //     * @param FlocageRepository $flocageRepository
+     * @param FlocageRepository $flocageRepository
      */
     public function __construct(ProductRepository $productsRepository, SizeRepository $sizesRepository, FlocageRepository $flocageRepository)
     {
@@ -49,62 +41,35 @@ class ProductsController extends AbstractController
         $this->flocageRepository = $flocageRepository;
     }
 
-    public function index(Favorites $service, Product $product, Request $request, ObjectManager $manager, $team, $id)
+    public function index(Product $product, Request $request, ObjectManager $manager, Favorites $service, Team $team, $id)
     {
-        $buyProduct = new Product();
+        $buyProduct = $product;
+//        $buyProduct = new Cart();
+//        $cart = $this->getUser()->getCart();
+
         $formP = $this->createForm(BuyProductType::class, $buyProduct);
         $formP->handleRequest($request);
 
+//        $product->setImage($product->getImage());
+
         if ($formP->isSubmitted() && $formP->isValid()) {
-            $buyProduct->setImage($product->getImage());
-            $buyProduct->setTeam($product->getTeam());
-            $buyProduct->setPrice($product->getPrice());
-            $buyProduct->setState($product->getState());
-            $buyProduct->setQuantity($product->getQuantity());
+
+//            $cart->setFlocage($product->getFlocage());
+//            $buyProduct->setImage($product->getImage());
+//            $buyProduct->setTeam($product->getTeam());
+//            $buyProduct->setPrice($product->getPrice());
+//            $buyProduct->setState($product->getState());
+//            $buyProduct->setQuantity(1);
+//            $buyProduct->getFlocage();
+
+//            $cart->addProduct($buyProduct);
 
             $manager->persist($buyProduct);
-            dd($buyProduct);
             $manager->flush();
 
-            $cart = new Cart();
-            if($cart->getUser() === null) {
-                dump($cart->getUser());
-                $cart->setUser($this->getUser());
-                $cart->addProduct($buyProduct);
-                dump($cart);
-            }
-            else {
-                $cart->addProduct($buyProduct);
-            }
-            dump($cart->getUser());
-            dump($this->getUser());
-//            else ($cart->getUser() === $this->getUser()) {
-////                $manager->merge($cart->getUser());
-//                $cart->addProduct($buyProduct);
-//            }
-////            if($cart->getUser() !== $this->getUser()) {
-////                dump($cart->getUser());
-////                $cart->setUser($this->getUser());
-////                dump($cart->getUser());
-////                $cart->addProduct($buyProduct);
-////                dump($cart->getProduct());
-////                $manager->persist($cart);
-////                dump($cart->getUser()->getId());
-////                $manager->flush();
-////            }
-////            elseif($cart->getUser()->getId() === $this->getUser()) {
-////                dd($cart->getUser());
-//////                $cart->setUser($this->getUser());
-////                $cart->addProduct($buyProduct);
-////                dd($cart->getUser($this->getUser()));
-////                $manager->persist($cart);
-////                $manager->flush();
-////            }
-//
-            $manager->persist($cart);
-//            $manager->merge($cart);
-//            dd($cart);
-            $manager->flush();
+            return $this->redirectToRoute('cart', [
+                'id' => $cart->getId()
+            ]);
         }
 
         $comment = new Comment();
@@ -128,9 +93,9 @@ class ProductsController extends AbstractController
             'team' => $team,
             'product' => $product,
             'sizes' => $this->sizesRepository->findAll(),
-            'flocages' => $this->flocageRepository->getFlocageProduct($team),
             'form' => $form->createView(),
-            'formP' => $formP->createView()
+            'formP' => $formP->createView(),
+            'service' => $service
         ]);
     }
 
@@ -143,7 +108,17 @@ class ProductsController extends AbstractController
         ]);
     }
 
-    public function deleteComment($id, $team, $cid, ObjectManager $manager, Comment $comment)
+    public function deleteProductInCart($cid, Product $product, ObjectManager $manager)
+    {
+        $manager->remove($product);
+        $manager->flush();
+
+        return $this->redirectToRoute('cart', [
+            'id' => $cid
+        ]);
+    }
+
+    public function deleteComment($id, $team, ObjectManager $manager, Comment $comment)
     {
         $manager->remove($comment);
         $manager->flush();

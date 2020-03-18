@@ -18,26 +18,21 @@
         </div>
     {% endif %}
     <div class="sidenav">
-        <h4>Affiner recherche :</h4>
+        <h4 class="mb-4">Affiner recherche :</h4>
+        <h5>Statut :</h5>
         {% for state in states %}
             <a href="#">
                 <input type="checkbox" id="state" name="state" checked>
                 <label for="scales">{{state.state}}</label>
             </a>
         {% endfor %}
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Equipes :
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                {% for team in teams %}
-                    <a class="dropdown-item">
-                        <input type="checkbox" id="team" name="team" checked>
-                        <label for="scales">{{team.name}}</label>
-                    </a>
-                {% endfor %}
-            </div>
-        </li>
+        <h5 class="mt-4">Équipes :</h5>
+        {% for team in teams %}
+        <a href="#">
+            <input type="checkbox" id="team" name="team" checked>
+            <label for="scales">{{ team.name }}</label>
+        </a>
+        {% endfor %}
     </div>
     <div class="main">
         <h3></h3>
@@ -45,6 +40,7 @@
             {% for product in products %}
                 {{ include('products/cardProduct.html.twig') }}
             {% endfor %}
+{#            {{ pagination.display() }}#}
         </div>
     </div>
 {% endblock %}

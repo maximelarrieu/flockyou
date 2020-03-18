@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +37,11 @@ class Bank
      * @ORM\ManyToOne(targetEntity="App\Entity\Users", inversedBy="banks")
      */
     private $user;
+
+    public function __construct()
+    {
+//        $this->commands = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {

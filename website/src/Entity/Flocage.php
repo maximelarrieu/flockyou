@@ -19,7 +19,7 @@ class Flocage
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Team", inversedBy="flocages")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Team", inversedBy="flocages", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $team;
@@ -37,6 +37,7 @@ class Flocage
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->carts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -98,5 +99,4 @@ class Flocage
 
         return $this;
     }
-
 }

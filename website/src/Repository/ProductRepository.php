@@ -41,10 +41,10 @@ class ProductRepository extends ServiceEntityRepository
      * @param string $cart
      * @return mixed
      */
-    public function getProductFromCart(string $cart) {
+    public function getProductFromCart($cart) {
         return $this->createQueryBuilder('p')
             ->innerJoin('p.carts', 'c')
-            ->where('p in :cart')
+            ->where('c = :cart')
             ->setParameters([
                 'cart' => $cart
             ])
@@ -52,32 +52,26 @@ class ProductRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    // /**
-    //  * @return Product[] Returns an array of Product objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
+    public function getProductFromTeam($team) {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+            ->innerJoin('p.team', 't')
+            ->where('t.name = :team')
+            ->setParameters([
+                'team' => $team
+            ])
+            ->orderBy('p.state')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Product
-    {
+    public function findBestProducts($limit) {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+                    ->join('p.comments', 'c')
+                    ->select('p as products, AVG(c.rating) as avgRatings')
+                    ->groupBy('p')
+                    ->orderBy('avgRatings', 'DESC')
+                    ->setMaxResults($limit)
+                    ->getQuery()
+                    ->getResult();
     }
-    */
 }

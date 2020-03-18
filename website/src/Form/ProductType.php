@@ -22,16 +22,6 @@ class ProductType extends ConfigType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('team', EntityType::class, [
-                'label' => 'Équipe :',
-                'placeholder' => 'Équipe correspondante...',
-                'class' => Team::class,
-                'choice_label' => 'name',
-                'group_by' => 'league.name',
-                'query_builder' => function(TeamRepository $repo) {
-                    return $repo->createAlphabeticalQueryBuilder();
-                }
-            ])
             ->add('state', EntityType::class, [
                 'class' => State::class,
                 'choice_label' => 'state'

@@ -53,13 +53,9 @@ class Product
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="product", orphanRemoval=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $comments;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Cart", mappedBy="product")
-     */
-    private $carts;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Flocage", inversedBy="products")
@@ -70,7 +66,7 @@ class Product
     {
         $this->comments = new ArrayCollection();
         $this->carts = new ArrayCollection();
-        $this->flocage = new ArrayCollection();
+//        $this->flocage = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -201,35 +197,7 @@ class Product
         return null;
     }
 
-    /**
-     * @return Collection|Cart[]
-     */
-    public function getCarts(): Collection
-    {
-        return $this->carts;
-    }
-
-    public function addCart(Cart $cart): self
-    {
-        if (!$this->carts->contains($cart)) {
-            $this->carts[] = $cart;
-            $cart->addProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCart(Cart $cart): self
-    {
-        if ($this->carts->contains($cart)) {
-            $this->carts->removeElement($cart);
-            $cart->removeProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function getFlocage(): ArrayCollection
+    public function getFlocage(): ?Flocage
     {
         return $this->flocage;
     }

@@ -9,6 +9,8 @@ use App\Repository\ProductRepository;
 use App\Repository\SizeRepository;
 use App\Repository\StateRepository;
 use App\Repository\TeamRepository;
+use App\Service\LeaguePagination;
+use App\Service\Pagination;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -42,14 +44,18 @@ class LeaguesController extends AbstractController
         $this->teamRepository = $teamRepository;
     }
 
-    public function index($league_name)
+    public function index($league_name, LeaguePagination $lpagination, $page)
     {
+        $lpagination->setEntityClass(Product::class)
+                    ->setPage($page);
+
         return $this->render('leagues/index.html.twig', [
             'league_name' => $league_name,
             'states' => $this->stateRepository->findAll(),
             'products' => $this->productsRepository->getProductFromLeague($league_name),
             'sizes' => $this->sizesRepository->findAll(),
-            'teams' => $this->teamRepository->getTeamFromLeague($league_name)
+            'teams' => $this->teamRepository->getTeamFromLeague($league_name),
+            'pagination' => $lpagination
         ]);
     }
 }

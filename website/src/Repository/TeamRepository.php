@@ -35,11 +35,14 @@ class TeamRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-//    public function getTeam() {
-//        return $data = $this->createQueryBuilder('team')
+    public function getTeam($team) {
+        return $data = $this->createQueryBuilder('team')
 //                    ->innerJoin('team.flocages', 'flocage')
-//                    ->where('team.name = flocage.team')
-//                    ->getQuery()
-//                    ->getResult();
-//    }
+                    ->where('team.name = :team')
+                    ->setParameters([
+                        'team' => $team
+                    ])
+                    ->getQuery()
+                    ->getResult();
+    }
 }

@@ -2,52 +2,44 @@
 
 namespace App\Form;
 
+use App\Entity\Cart;
 use App\Entity\Flocage;
 use App\Entity\Product;
 use App\Entity\Size;
-use App\Entity\Team;
 use App\Repository\FlocageRepository;
-use App\Repository\SizeRepository;
-use App\Repository\TeamRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BuyProductType extends AbstractType
 {
-    private $team;
+    private $repo;
+    private $request;
 
-    public function __construct()
+    public function __construct(FlocageRepository $repo, RequestStack $request)
     {
-        $team = $this->team;
+        $this->repo = $repo;
+        $this->request = $request;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $team = $this->team;
-
-        $builder
-//            ->add('image')
-//            ->add('quantity')
-//            ->add('price')
-//            ->add('team')
-//            ->add('state')
+          $builder
             ->add('size', EntityType::class, [
                 'label' => 'Taille :',
                 'placeholder' => 'Sélectionnez votre taille',
                 'class' => Size::class,
                 'choice_label' => 'name'
             ])
+
             ->add('flocage', EntityType::class, [
                 'label' => 'Flocage :',
-
                 'placeholder' => 'Sélectionnez votre flocage',
                 'class' => Flocage::class,
                 'choice_label' => 'flocage',
-                'query_builder' => function(FlocageRepository $repo) use ($team) {
-                    return $repo->getFlocageProduct($team);
-                }
+                'choices' => $this->repo->getFlocageProduct($this->request->getMasterRequest()->attributes->get('name'))
             ])
         ;
     }

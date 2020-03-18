@@ -12,6 +12,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method Flocage[]    findAll()
  * @method Flocage[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+
 class FlocageRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -30,44 +31,16 @@ class FlocageRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function getFlocageProduct($team) {
-         $this->createQueryBuilder('flocage')
-            ->innerJoin('flocage.products', 'products')
-//            ->innerJoin('products.team', 'team')
-            ->where('products.team = :team')
-             ->setParameters([
-                 'team' => $team
-             ]);
-//            ->getQuery()
-//            ->getResult();
-    }
-
-    // /**
-    //  * @return Flocage[] Returns an array of Flocage objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
+    public function getFlocageProduct(string $teamName) {
+         return $this->createQueryBuilder('f')
+            ->innerJoin('f.team', 't')
+            ->innerJoin('t.products', 'p')
+            ->where('t.name = :team')
+            ->setParameters([
+                'team' => $teamName
+            ])
             ->getQuery()
-            ->getResult()
-        ;
+             ->getResult()
+         ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Flocage
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
