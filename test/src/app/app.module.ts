@@ -1,3 +1,4 @@
+import { HomeService } from './home/home.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -16,6 +17,8 @@ import { LoginComponent } from './login.component';
 import { LoginRoutingModule } from './login-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
+import { LeaguesService } from './leagues/leagues.service';
+
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
@@ -38,6 +41,8 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     StatusBar,
     SplashScreen,
+    LeaguesService,
+    HomeService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

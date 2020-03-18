@@ -8,6 +8,7 @@ import { LeaguesPageRoutingModule } from './leagues-routing.module';
 
 import { LeaguesPage } from './leagues.page';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -17,4 +18,6 @@ import { LeaguesPage } from './leagues.page';
   ],
   declarations: [LeaguesPage]
 })
+
 export class LeaguesPageModule {}
+

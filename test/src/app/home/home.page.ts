@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { HomeService, Size } from './home.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,15 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  public sizes: Size[];
+
+  constructor(private data: HomeService) { }
+
+  ngOnInit() {
+    this.data.getSizes().subscribe(
+      sizes => this.sizes = sizes
+    );
+    // console.log(this.leagues);
+  }
 
 }

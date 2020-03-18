@@ -2,20 +2,12 @@
     <ion-toolbar>
         <ion-title>Championnats</ion-title>
     </ion-toolbar>
-  <!-- ============================= LEAGUES ============================ -->
-  <div class="cards-list">
-        <div class="card">
-            <div class="card_image"><img src="assets/leagues/championsleague.jpg"/></div>
+    <!-- ============================= LEAGUES ============================ -->
+    <div class="cards-list">
+        <div *ngFor="let league of leagues" class="card">
+            <div class="card_image"><img src="assets/leagues/championsleague.jpg" /></div>
             <div class="card_title title-white">
-                <p></p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card_image">
-                <img src="assets/leagues/euro.jpg"/>
-            </div>
-            <div class="card_title title-white">
-                <p></p>
+                <h3>{{ league.name }}</h3>
             </div>
         </div>
     </div>
