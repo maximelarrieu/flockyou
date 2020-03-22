@@ -6,9 +6,10 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(normalizationContext={"groups"={"products"}})
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  */
 class Product
@@ -23,17 +24,20 @@ class Product
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Team", inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"products"})
      */
     private $team;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\State", inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"products"})
      */
     private $state;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"products"})
      */
     private $image;
     /**
@@ -48,6 +52,7 @@ class Product
 
     /**
      * @ORM\Column(type="float")
+     * @Groups({"products"})
      */
     private $price;
 

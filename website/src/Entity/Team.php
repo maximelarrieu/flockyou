@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource()
@@ -23,21 +24,25 @@ class Team
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\League", inversedBy="teams")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"products"})
      */
     private $league;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"products"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"products"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="string", length=3)
+     * @Groups({"products"})
      */
     private $slug;
 
