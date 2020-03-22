@@ -1,4 +1,4 @@
-import { HomeService, Size } from './home.service';
+import { HomeService, Product, Size } from './home.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,14 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage {
 
+  public products: Product[];
   public sizes: Size[];
 
   constructor(private data: HomeService) { }
 
   ngOnInit() {
+    this.data.getProducts().subscribe(
+      products => this.products = products
+    );
     this.data.getSizes().subscribe(
       sizes => this.sizes = sizes
-    );
+    )
     // console.log(this.leagues);
   }
 

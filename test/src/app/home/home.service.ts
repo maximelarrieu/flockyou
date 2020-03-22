@@ -4,15 +4,25 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable()
-export class Size {
+export class Product {
 
-  public static fromJson(json: Object): Size {
+  public static fromJson(json: Object): Product {
+    return new Product();
+  }
+
+  constructor() {
+  }
+}
+
+@Injectable()
+export class Size {
+  public static fromJson(json:Object): Size {
     return new Size(
       json['name']
     );
   }
-
   constructor(public size: string) {
+
   }
 }
 
@@ -21,14 +31,24 @@ export class HomeService {
 
 constructor(protected http: HttpClient) {}
   
-  private sizesUrl = 'https://localhost:8000/api/sizes?page=1';  // URL to web api
+  private productsUrl = 'https://localhost:8000/api/products?page=1';  // URL to web api
   
-  public getSizes(): Observable<Size[]> {
-    return this.http.get<Size[]>(this.sizesUrl).pipe(
+  public getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.productsUrl).pipe(
       map(
         (data => data['hydra:member'])
       )
     );
   }
+
+  private sizeUrl = 'https://localhost:8000/api/sizes?page=1';
+
+  public getSizes(): Observable<Size[]> {
+    return this.http.get<Size[]>(this.sizeUrl).pipe(
+      map(
+        (data => data['hydra:member'])
+      )
+    )
+  } 
 
 }
