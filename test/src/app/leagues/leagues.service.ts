@@ -28,6 +28,7 @@ export class LeaguesService {
     return this.http.get<League[]>(this.leaguesUrl).pipe(
       map(
         (data => data['hydra:member'])
+        
       )
     );
   }
