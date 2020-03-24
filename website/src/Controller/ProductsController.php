@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\CartProduct;
+use App\Entity\Command;
 use App\Entity\Comment;
 use App\Entity\Product;
 use App\Entity\Team;
@@ -45,7 +46,6 @@ class ProductsController extends AbstractController
     public function index(Product $product, Request $request, ObjectManager $manager, Favorites $service, Team $team, $id)
     {
         $buyProduct = new CartProduct();
-        $cart = $this->getUser()->getCart();
         $quantity = 1;
 
         $formP = $this->createForm(BuyProductType::class, $buyProduct);
@@ -54,8 +54,9 @@ class ProductsController extends AbstractController
         if ($formP->isSubmitted() && $formP->isValid()) {
 
             $buyProduct->setProduct($product);
-            $buyProduct->setCart($cart);
+            $buyProduct->setCart($this->getUser()->getCart());
             $buyProduct->setQuantity($quantity);
+            $buyProduct->setUsers($this->getUser());
 //            $product->setQuantity($product->getQuantity() - $quantity);
 //            $cartProduct->setFlocage($product->getFlocage());
 //            $buyProduct->setImage($product->getImage());
@@ -71,7 +72,7 @@ class ProductsController extends AbstractController
             $manager->flush();
 
             return $this->redirectToRoute('cart', [
-                'id' => $cart->getId()
+                'id' => $this->getUser()->getCart()->getId()
             ]);
         }
 
