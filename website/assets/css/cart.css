@@ -11,11 +11,14 @@ h3 {
     font-weight: bold;
 }
 
-ul {
-    list-style: none;
+li {
+    list-style-type: none;
 }
 
 /*****------ZONE PRODUITS-------******/
+h4 {
+    font-size: 20px;
+}
 .one {
     width: 45%;
 }
