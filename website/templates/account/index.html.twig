@@ -33,13 +33,13 @@
                             <a href="{{ path('account_password_edit') }}" class="btn btn-dark mb-2">Modifier mon mot de passe</a>
                         </div>
                     {% endif %}
-                    {{ dump(app.user.cart) }}
+{#                    {{ dump(app.user.commands) }}#}
 {#                    {% if command in user.commands %}#}
 {#                        {% for command in user.commands %}#}
 {#                        <div>#}
-{#                            {{ command.cart.product.count }}#}
-{#                            {% for product in command.cart.product %}#}
-{#                                {{ product.team.name }} - {{ product.flocage.flocage }} - {{ product.size.name }}#}
+{#                            {{ dump(command.cartProduct) }}#}
+{#                            {% for product in command.cartProduct %}#}
+{#                                {{ product.product.team.name }} - {{ product.flocage.flocage }} - {{ product.size.name }}#}
 {#                            {% endfor %}#}
 {#                        </div>#}
 {#                        {% endfor %}#}
