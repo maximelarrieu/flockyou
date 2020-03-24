@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Cart;
+use App\Entity\CartProduct;
 use App\Entity\Flocage;
 use App\Entity\Product;
 use App\Entity\Size;
@@ -47,7 +48,7 @@ class BuyProductType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Product::class
+            'data_class' => CartProduct::class
         ]);
     }
 }
