@@ -37,11 +37,8 @@
             </div>
         </form>
         {% if app.user %}
-{#            {% if app.user != app.user.cart %}#}
-{#            {% else %}#}
-{#            <a href="{{ path('cart', {'id': app.user.cart.id}) }}" class="mr-3"><i class="fas fa-shopping-cart" style="color: white"></i><span class="badge badge-primary"></span></a>#}
-{#            {% endif %}#}
-                    <a href="{{ path('account', {'username' : app.user.username}) }}"><i class="fas fa-user m-3" style="color: white"></i></a>
+            <a href="{{ path('cart', {'id': app.user.cart.id}) }}" class="mr-3"><i class="fas fa-shopping-cart" style="color: white"></i><span class="badge badge-primary"></span></a>
+            <a href="{{ path('account', {'username' : app.user.username}) }}"><i class="fas fa-user m-3" style="color: white"></i></a>
             <li class="nav-item">
                 <a href="{{ path('logout') }}" class="nav-link"><i class="fas fa-sign-out-alt" style="color: white"></i></a>
             </li>
