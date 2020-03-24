@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\CartProduct;
 use App\Entity\Comment;
 use App\Entity\Product;
 use App\Entity\Team;
@@ -43,18 +44,20 @@ class ProductsController extends AbstractController
 
     public function index(Product $product, Request $request, ObjectManager $manager, Favorites $service, Team $team, $id)
     {
-        $buyProduct = $product;
-//        $buyProduct = new Cart();
-//        $cart = $this->getUser()->getCart();
+        $buyProduct = new CartProduct();
+        $cart = $this->getUser()->getCart();
+        $quantity = 1;
 
         $formP = $this->createForm(BuyProductType::class, $buyProduct);
         $formP->handleRequest($request);
 
-//        $product->setImage($product->getImage());
-
         if ($formP->isSubmitted() && $formP->isValid()) {
 
-//            $cart->setFlocage($product->getFlocage());
+            $buyProduct->setProduct($product);
+            $buyProduct->setCart($cart);
+            $buyProduct->setQuantity($quantity);
+//            $product->setQuantity($product->getQuantity() - $quantity);
+//            $cartProduct->setFlocage($product->getFlocage());
 //            $buyProduct->setImage($product->getImage());
 //            $buyProduct->setTeam($product->getTeam());
 //            $buyProduct->setPrice($product->getPrice());
@@ -108,7 +111,7 @@ class ProductsController extends AbstractController
         ]);
     }
 
-    public function deleteProductInCart($cid, Product $product, ObjectManager $manager)
+    public function deleteProductInCart($cid, CartProduct $product, ObjectManager $manager)
     {
         $manager->remove($product);
         $manager->flush();
