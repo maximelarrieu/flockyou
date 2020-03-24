@@ -79,6 +79,21 @@ class Users implements UserInterface
      */
     private $cart;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CartProduct", mappedBy="users")
+     */
+    private $cartProduct;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Cart", mappedBy="user")
+     */
+    private $carts;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Command", mappedBy="user")
+     */
+    private $commands;
+
     public function __construct()
     {
         $this->userRoles = new ArrayCollection();
@@ -89,6 +104,7 @@ class Users implements UserInterface
         $this->purchases = new ArrayCollection();
         $this->carts = new ArrayCollection();
         $this->commands = new ArrayCollection();
+        $this->cartProduct = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -302,6 +318,99 @@ class Users implements UserInterface
     public function setCart(?Cart $cart): self
     {
         $this->cart = $cart;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CartProduct[]
+     */
+    public function getCartProduct(): Collection
+    {
+        return $this->cartProduct;
+    }
+
+    public function addCartProduct(CartProduct $cartProduct): self
+    {
+        if (!$this->cartProduct->contains($cartProduct)) {
+            $this->cartProduct[] = $cartProduct;
+            $cartProduct->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCartProduct(CartProduct $cartProduct): self
+    {
+        if ($this->cartProduct->contains($cartProduct)) {
+            $this->cartProduct->removeElement($cartProduct);
+            // set the owning side to null (unless already changed)
+            if ($cartProduct->getUsers() === $this) {
+                $cartProduct->setUsers(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Cart[]
+     */
+    public function getCarts(): Collection
+    {
+        return $this->carts;
+    }
+
+    public function addCart(Cart $cart): self
+    {
+        if (!$this->carts->contains($cart)) {
+            $this->carts[] = $cart;
+            $cart->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCart(Cart $cart): self
+    {
+        if ($this->carts->contains($cart)) {
+            $this->carts->removeElement($cart);
+            // set the owning side to null (unless already changed)
+            if ($cart->getUser() === $this) {
+                $cart->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Command[]
+     */
+    public function getCommands(): Collection
+    {
+        return $this->commands;
+    }
+
+    public function addCommand(Command $command): self
+    {
+        if (!$this->commands->contains($command)) {
+            $this->commands[] = $command;
+            $command->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommand(Command $command): self
+    {
+        if ($this->commands->contains($command)) {
+            $this->commands->removeElement($command);
+            // set the owning side to null (unless already changed)
+            if ($command->getUser() === $this) {
+                $command->setUser(null);
+            }
+        }
 
         return $this;
     }

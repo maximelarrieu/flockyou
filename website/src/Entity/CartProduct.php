@@ -41,6 +41,16 @@ class CartProduct
      */
     private $quantity;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Users", inversedBy="cartProduct")
+     */
+    private $users;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Command", inversedBy="cartProduct", cascade={"persist"})
+     */
+    private $command;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,6 +112,30 @@ class CartProduct
     public function setQuantity(?int $quantity): self
     {
         $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function getUsers(): ?Users
+    {
+        return $this->users;
+    }
+
+    public function setUsers(?Users $users): self
+    {
+        $this->users = $users;
+
+        return $this;
+    }
+
+    public function getCommand(): ?Command
+    {
+        return $this->command;
+    }
+
+    public function setCommand(?Command $command): self
+    {
+        $this->command = $command;
 
         return $this;
     }

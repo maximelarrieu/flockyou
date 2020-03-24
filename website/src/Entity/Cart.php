@@ -23,6 +23,11 @@ class Cart
      */
     private $cartproduct;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Users", inversedBy="carts")
+     */
+    private $user;
+
     public function __construct()
     {
         $this->cartproduct = new ArrayCollection();
@@ -60,6 +65,18 @@ class Cart
                 $cartproduct->setCart(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?Users
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Users $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
