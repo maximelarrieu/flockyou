@@ -382,7 +382,7 @@ class AppFixtures extends Fixture
         }
         /****====================================****/
         /****============== USERS ===============****/
-//        $cart = new Cart();
+        $cart = new Cart();
         $adminRole = new Roles();
         $adminRole->setTitle('ROLE_ADMIN');
         $manager->persist($adminRole);
@@ -392,8 +392,8 @@ class AppFixtures extends Fixture
             ->setEmail('maxime.larrieu@ynov.com')
             ->setPassword($this->encoder->encodePassword($adminUser, 'password'))
             ->addUserRole($adminRole)
-            ->setBudget(300);
-//            ->setCart($cart);
+            ->setBudget(300)
+            ->setCart($cart);
 
         $manager->persist($adminUser);
 
