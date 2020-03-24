@@ -74,6 +74,11 @@ class Users implements UserInterface
      */
     private $budget;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Cart", cascade={"persist", "remove"})
+     */
+    private $cart;
+
     public function __construct()
     {
         $this->userRoles = new ArrayCollection();
@@ -285,6 +290,18 @@ class Users implements UserInterface
     public function setBudget(?float $budget): self
     {
         $this->budget = $budget;
+
+        return $this;
+    }
+
+    public function getCart(): ?Cart
+    {
+        return $this->cart;
+    }
+
+    public function setCart(?Cart $cart): self
+    {
+        $this->cart = $cart;
 
         return $this;
     }

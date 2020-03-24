@@ -34,10 +34,16 @@ class Flocage
      */
     private $products;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CartProduct", mappedBy="flocage")
+     */
+    private $cartProducts;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
         $this->carts = new ArrayCollection();
+        $this->cartProducts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -94,6 +100,37 @@ class Flocage
             // set the owning side to null (unless already changed)
             if ($product->getFlocage() === $this) {
                 $product->setFlocage(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CartProduct[]
+     */
+    public function getCartProducts(): Collection
+    {
+        return $this->cartProducts;
+    }
+
+    public function addCartProduct(CartProduct $cartProduct): self
+    {
+        if (!$this->cartProducts->contains($cartProduct)) {
+            $this->cartProducts[] = $cartProduct;
+            $cartProduct->setFlocage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCartProduct(CartProduct $cartProduct): self
+    {
+        if ($this->cartProducts->contains($cartProduct)) {
+            $this->cartProducts->removeElement($cartProduct);
+            // set the owning side to null (unless already changed)
+            if ($cartProduct->getFlocage() === $this) {
+                $cartProduct->setFlocage(null);
             }
         }
 
