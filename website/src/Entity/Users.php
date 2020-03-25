@@ -90,6 +90,11 @@ class Users implements UserInterface
     private $carts;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CartProduct", mappedBy="user")
+     */
+    private $cartProducts;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Command", mappedBy="user")
      */
     private $commands;
@@ -105,6 +110,7 @@ class Users implements UserInterface
         $this->carts = new ArrayCollection();
         $this->commands = new ArrayCollection();
         $this->cartProduct = new ArrayCollection();
+        $this->cartProducts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -365,7 +371,7 @@ class Users implements UserInterface
     {
         if (!$this->carts->contains($cart)) {
             $this->carts[] = $cart;
-            $cart->setUser($this);
+//            $cart->setUser($this);
         }
 
         return $this;
@@ -376,12 +382,20 @@ class Users implements UserInterface
         if ($this->carts->contains($cart)) {
             $this->carts->removeElement($cart);
             // set the owning side to null (unless already changed)
-            if ($cart->getUser() === $this) {
-                $cart->setUser(null);
-            }
+//            if ($cart->getUser() === $this) {
+//                $cart->setUser(null);
+//            }
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|CartProduct[]
+     */
+    public function getCartProducts(): Collection
+    {
+        return $this->cartProducts;
     }
 
     /**
