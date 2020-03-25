@@ -24,4 +24,9 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+
+  AddFav = function(product): void {
+    this.favorisService.add(product)
+  }
+  
 }

@@ -70,12 +70,9 @@
                           <h4>Tailles :</h4>
                               <ul class="ul-size" *ngFor="let size of sizes">
                                 <li><a class="active">{{ size.name }}</a></li>
-                                <!-- <li><a href="#">8</a></li>
-                                <li><a href="#">9</a></li>
-                                <li><a href="#" class="active">10</a></li>
-                                <li><a href="#">11</a></li> -->
                               </ul>
                       </span>
+                      <button class="btn-danger" (click)="AddFav(product)">Favoris</button>
                     <span class="product-price">
                               € <b>{{ product.price }}</b>
                           </span>
