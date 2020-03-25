@@ -9,7 +9,11 @@
         <div class="d-flex bd-highlight">
             <div class="one p-2 flex-md-fill bd-highlight m-1">
                 <h3 class="mb-3">VOS PRODUITS</h3>
-                {#                {{ dump(cart) }}#}
+                {% for message in app.flashes('warning') %}
+                    <div class="alert alert-warning">
+                        {{ message }}
+                    </div>
+                {% endfor %}
                 <a href="{{ path('home') }}" style="color: #001b44"><p>Continuer mes achats <i
                                 class="fas fa-arrow-right ml-2"></i></p></a>
                 <div class="total">
@@ -19,44 +23,46 @@
 
                 {% if cart.cartproduct | length > 0 %}
                     <ul>
-                        {% for product in cart.cartproduct %}
-                            {#                            {{ dump(product.quantity) }}#}
-                            <li>
-                                <a href="{{ path('product', {'id': product.product.id, 'name': product.product.team.name }) }}">
-                                    <div class="image">
-                                        <img src="{{ asset(product.product.image) }}" class="mr-3">
-                                    </div>
-                                </a>
-                                <div class="info pl-5">
-                                    <a href="{{ path('cart_destroy', {'cid': app.user.cart.id ,'id': product.id}) }}"
-                                       style="color: red"><i class="suppr far fa-times-circle pull-right"></i></a>
-                                    <h4>{{ product.product.team.name | upper }}
-                                        - {{ product.product.state.state | upper }}</h4>
-                                    {% if product.product.comments | length > 0 %}
-                                        {% include 'products/rating.html.twig' with {'rating': product.product.getAvgRating} %}
-                                    {% else %}
-                                        (Ce produit n'a pas encoré été noté)
-                                    {% endif %}
-                                    <h5 class="mt-2">Taille : {{ product.size.name }} </h5>
-                                    <h5>Flocage : {{ product.flocage.flocage }}</h5>
-                                    {% if product.product.quantity > 1 %}
-                                        <p class="price-precision">({{ product.quantity }}
-                                            x {{ product.product.price }}€)</p>
-                                    {% endif %}
-                                    <h5>Quantité : <input type="number" id="quantity" name="quantity"
-                                                          value="{{ product.quantity }}" style="width: 15%">
-                                    </h5>
-
-                                    <h5 class="price">{{ product.product.price * product.quantity }} €</h5>
+                    {% for product in cart.cartproduct %}
+                        {#                            {{ dump(product.quantity) }}#}
+                        <li>
+                            <a href="{{ path('product', {'id': product.product.id, 'name': product.product.team.name }) }}">
+                                <div class="image">
+                                    <img src="{{ asset(product.product.image) }}" class="mr-3">
                                 </div>
-                            </li>
-                            <hr>
-                        {% endfor %}
-                    </ul>
+                            </a>
+                            <div class="info pl-5">
+                                <a href="{{ path('cart_destroy', {'cid': app.user.cart.id ,'id': product.id}) }}"
+                                   style="color: red"><i class="suppr far fa-times-circle pull-right"></i></a>
+                                <h4>{{ product.product.team.name | upper }}
+                                    - {{ product.product.state.state | upper }}</h4>
+                                {% if product.product.comments | length > 0 %}
+                                    {% include 'products/rating.html.twig' with {'rating': product.product.getAvgRating} %}
+                                {% else %}
+                                    (Ce produit n'a pas encoré été noté)
+                                {% endif %}
+                                <h5 class="mt-2">Taille : {{ product.size.name }} </h5>
+                                <h5>Flocage : {{ product.flocage.flocage }}</h5>
+                                {% if product.product.quantity > 1 %}
+                                    <p class="price-precision">({{ product.quantity }}
+                                        x {{ product.product.price }}€)</p>
+                                {% endif %}
+                                <h5>Quantité : <input type="number" id="quantity" name="quantity"
+                                                      value="{{ product.quantity }}" style="width: 15%">
+                                </h5>
+
+                                <h5 class="price">{{ product.product.price * product.quantity }} €</h5>
+                            </div>
+                        </li>
+                        <hr>
+                    {% endfor %}
                 {% else %}
-                    <div class="alert alert-danger">
-                        Aucun produit dans votre panier...
-                    </div>
+                    <li>
+                        <div class="alert alert-danger">
+                            Aucun produit dans votre panier...
+                        </div>
+                    </li>
+                    </ul>
                 {% endif %}
             </div>
             <div class="two p-2 flex-md-fill bd-highlight m-3">
@@ -136,10 +142,10 @@
                         </div>
                     {% endfor %}
                 </div>
-                                {{ form_start(form) }}
-                                {{ form_widget(form) }}
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
                 <button type="submit" class="btn btn-primary btn-lg m-5">Valider le panier</button>
-                                {{ form_end(form) }}
+                {{ form_end(form) }}
             </div>
         </div>
     </div>

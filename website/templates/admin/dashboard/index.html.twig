@@ -31,11 +31,11 @@
                                 <i class="fas fa-hotel fa-3x"></i>
                             </div>
                             <div class="col-8">
-{#                                {% if stats.products > 1 %}#}
-{#                                <h3 class="card-title">{{ stats.products }} produits achetés</h3>#}
-{#                                {% else %}#}
-{#                                <h3 class="card-title">{{ stats.products }} produit acheté</h3>#}
-{#                                {% endif %}#}
+                                {% if stats.products > 1 %}
+                                <h3 class="card-title">{{ stats.products }} produits achetés</h3>
+                                {% else %}
+                                <h3 class="card-title">{{ stats.products }} produit acheté</h3>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -49,11 +49,11 @@
                                 <i class="fas fa-folder fa-3x"></i>
                             </div>
                             <div class="col-8">
-{#                                {% if stats.commands > 1 %}#}
-{#                                <h3 class="card-title">{{ stats.commands }} commandes</h3>#}
-{#                                {% else %}#}
-{#                                <h3 class="card-title">{{ stats.commands }} commande</h3>#}
-{#                                {% endif %}#}
+                                {% if stats.commands > 1 %}
+                                <h3 class="card-title">{{ stats.commands }} commandes</h3>
+                                {% else %}
+                                <h3 class="card-title">{{ stats.commands }} commande</h3>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -67,11 +67,11 @@
                                 <i class="fas fa-comments fa-3x"></i>
                             </div>
                             <div class="col-8">
-{#                                {% if stats.comments > 1 %}#}
-{#                                    <h3 class="card-title">{{ stats.comments }} avis laissés</h3>#}
-{#                                {% else %}#}
-{#                                    <h3 class="card-title">{{ stats.products }} avis laissé</h3>#}
-{#                                {% endif %}#}
+                                {% if stats.comments > 1 %}
+                                    <h3 class="card-title">{{ stats.comments }} avis laissés</h3>
+                                {% else %}
+                                    <h3 class="card-title">{{ stats.comments }} avis laissé</h3>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -83,19 +83,19 @@
             <div class="col text-center">
                 <div class="card bg-info py-3 px-3">
                     <h5 class="alert-heading">Ventes 7 derniers jours</h5>
-{#                    <strong>{{ stats.recentsCommands }}</strong>#}
+                    <strong>{{ stats.recentsCommands }}</strong>
                 </div>
             </div>
             <div class="col text-center">
                 <div class="card bg-info py-3 px-3">
                     <h5 class="alert-heading">Revenus 7 derniers jours</h5>
-{#                    <strong>{{ stats.recentsTotaux }} €</strong>#}
+                    <strong>{{ stats.recentsTotaux }} €</strong>
                 </div>
             </div>
             <div class="col text-center">
                 <div class="card bg-info py-3 px-3">
                     <h5 class="alert-heading">Revenus totaux</h5>
-{#                    <strong>{{ stats.totaux }} €</strong>#}
+                    <strong>{{ stats.totaux }} €</strong>
                 </div>
             </div>
         </div>

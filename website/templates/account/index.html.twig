@@ -12,15 +12,15 @@
                 <div class="col-3 text-center">
                     <img src="https://avatars.io/platform/userId" class="avatar mb-2" alt="avatar">
                     <br>
-{#                    {% if command in user.commands %}#}
-{#                        {% if user.commands.count > 1 %}#}
-{#                            <span class="badge badge-primary">{{ user.commands.count }} commandes passées</span>#}
-{#                        {% else %}#}
-{#                            <span class="badge badge-primary">{{ user.commands.count }} commande passée</span>#}
-{#                        {% endif %}#}
-{#                    {% else %}#}
-{#                        <span class="badge badge-primary">Aucune commande</span>#}
-{#                    {% endif %}#}
+                    {% if command in user.commands %}
+                        {% if user.commands.count > 1 %}
+                            <span class="badge badge-primary">{{ user.commands.count }} commandes passées</span>
+                        {% else %}
+                            <span class="badge badge-primary">{{ user.commands.count }} commande passée</span>
+                        {% endif %}
+                    {% else %}
+                        <span class="badge badge-primary">Aucune commande</span>
+                    {% endif %}
                     {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('admin_dashboard') }}" class="btn btn-danger mt-2">Administration</a>
                     {% endif %}
@@ -34,18 +34,21 @@
                         </div>
                     {% endif %}
 {#                    {{ dump(app.user.commands) }}#}
-{#                    {% if command in user.commands %}#}
-{#                        {% for command in user.commands %}#}
-{#                        <div>#}
-{#                            {{ dump(command.cartProduct) }}#}
-{#                            {% for product in command.cartProduct %}#}
-{#                                {{ product.product.team.name }} - {{ product.flocage.flocage }} - {{ product.size.name }}#}
-{#                            {% endfor %}#}
-{#                        </div>#}
-{#                        {% endfor %}#}
-{#                    {% else %}#}
-{#                        <div></div>#}
-{#                    {% endif %}#}
+                    {% if command in user.commands %}
+                        {% for command in user.commands %}
+                        <div>
+                            {{ command.nbCommand }}
+{#                            {{ dump(command) }}#}
+                            {% for product in command.commandProducts %}
+{#                                {{ dump(command.commandProducts.current) }}#}
+                                {{ product.cartProduct.product.team.name }} - {{ product.cartProduct.product.state.state }} - {{ product.cartProduct.flocage.flocage }} - {{ product.cartProduct.size.name }}
+{#                                {{ product }} - {{ product.flocage.flocage }} - {{ product.size.name }}#}
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div></div>
+                    {% endif %}
                 </div>
             </div>
             <div class="row align-items-center">
