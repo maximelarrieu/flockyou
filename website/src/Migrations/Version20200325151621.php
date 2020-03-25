@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200324091725 extends AbstractMigration
+final class Version20200325151621 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,12 +22,15 @@ final class Version20200324091725 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE cart (id INT AUTO_INCREMENT NOT NULL, PRIMARY KEY(id), users_id INT DEFAULT NULL) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('ALTER TABLE cart_product ADD cart_id INT DEFAULT NULL, CHANGE product_id product_id INT DEFAULT NULL, CHANGE flocage_id flocage_id INT DEFAULT NULL, CHANGE size_id size_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE cart_product ADD CONSTRAINT FK_2890CCAA1AD5CDBF FOREIGN KEY (cart_id) REFERENCES cart (id)');
-        $this->addSql('CREATE INDEX IDX_2890CCAA1AD5CDBF ON cart_product (cart_id)');
+        $this->addSql('ALTER TABLE cart_product DROP FOREIGN KEY FK_2890CCAA691D8352');
+        $this->addSql('DROP INDEX IDX_2890CCAA691D8352 ON cart_product');
+        $this->addSql('ALTER TABLE cart_product DROP command_products_id, CHANGE product_id product_id INT DEFAULT NULL, CHANGE flocage_id flocage_id INT DEFAULT NULL, CHANGE size_id size_id INT DEFAULT NULL, CHANGE cart_id cart_id INT DEFAULT NULL, CHANGE user_id user_id INT DEFAULT NULL, CHANGE quantity quantity INT DEFAULT NULL');
         $this->addSql('ALTER TABLE livraison CHANGE user_id user_id INT DEFAULT NULL, CHANGE name name VARCHAR(255) DEFAULT NULL, CHANGE phone_number phone_number VARCHAR(255) DEFAULT NULL, CHANGE country country VARCHAR(255) DEFAULT NULL, CHANGE city city VARCHAR(255) DEFAULT NULL, CHANGE address address VARCHAR(255) DEFAULT NULL');
-        $this->addSql('ALTER TABLE users CHANGE budget budget DOUBLE PRECISION DEFAULT NULL');
+        $this->addSql('ALTER TABLE command_product ADD cart_product_id INT DEFAULT NULL, CHANGE command_id command_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE command_product ADD CONSTRAINT FK_3C20574E25EE16A8 FOREIGN KEY (cart_product_id) REFERENCES cart_product (id)');
+        $this->addSql('CREATE INDEX IDX_3C20574E25EE16A8 ON command_product (cart_product_id)');
+        $this->addSql('ALTER TABLE users CHANGE cart_id cart_id INT DEFAULT NULL, CHANGE budget budget DOUBLE PRECISION DEFAULT NULL');
+        $this->addSql('ALTER TABLE command CHANGE nb_command nb_command INT DEFAULT NULL, CHANGE created_at created_at DATETIME DEFAULT NULL');
         $this->addSql('ALTER TABLE product CHANGE size_id size_id INT DEFAULT NULL, CHANGE flocage_id flocage_id INT DEFAULT NULL, CHANGE quantity quantity INT DEFAULT NULL');
         $this->addSql('ALTER TABLE bank CHANGE user_id user_id INT DEFAULT NULL, CHANGE cart_number cart_number VARCHAR(255) DEFAULT NULL, CHANGE expiration_date expiration_date DATE DEFAULT NULL, CHANGE cart_code cart_code INT DEFAULT NULL');
     }
@@ -37,13 +40,16 @@ final class Version20200324091725 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE cart_product DROP FOREIGN KEY FK_2890CCAA1AD5CDBF');
-        $this->addSql('DROP TABLE cart');
         $this->addSql('ALTER TABLE bank CHANGE user_id user_id INT DEFAULT NULL, CHANGE cart_number cart_number VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE expiration_date expiration_date DATE DEFAULT \'NULL\', CHANGE cart_code cart_code INT DEFAULT NULL');
-        $this->addSql('DROP INDEX IDX_2890CCAA1AD5CDBF ON cart_product');
-        $this->addSql('ALTER TABLE cart_product DROP cart_id, CHANGE product_id product_id INT DEFAULT NULL, CHANGE flocage_id flocage_id INT DEFAULT NULL, CHANGE size_id size_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE cart_product ADD command_products_id INT DEFAULT NULL, CHANGE product_id product_id INT DEFAULT NULL, CHANGE flocage_id flocage_id INT DEFAULT NULL, CHANGE size_id size_id INT DEFAULT NULL, CHANGE cart_id cart_id INT DEFAULT NULL, CHANGE user_id user_id INT DEFAULT NULL, CHANGE quantity quantity INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE cart_product ADD CONSTRAINT FK_2890CCAA691D8352 FOREIGN KEY (command_products_id) REFERENCES command_product (id)');
+        $this->addSql('CREATE INDEX IDX_2890CCAA691D8352 ON cart_product (command_products_id)');
+        $this->addSql('ALTER TABLE command CHANGE nb_command nb_command INT DEFAULT NULL, CHANGE created_at created_at DATETIME DEFAULT \'NULL\'');
+        $this->addSql('ALTER TABLE command_product DROP FOREIGN KEY FK_3C20574E25EE16A8');
+        $this->addSql('DROP INDEX IDX_3C20574E25EE16A8 ON command_product');
+        $this->addSql('ALTER TABLE command_product DROP cart_product_id, CHANGE command_id command_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE livraison CHANGE user_id user_id INT DEFAULT NULL, CHANGE name name VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE phone_number phone_number VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE country country VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE city city VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE address address VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`');
         $this->addSql('ALTER TABLE product CHANGE size_id size_id INT DEFAULT NULL, CHANGE flocage_id flocage_id INT DEFAULT NULL, CHANGE quantity quantity INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE users CHANGE budget budget DOUBLE PRECISION DEFAULT \'NULL\'');
+        $this->addSql('ALTER TABLE users CHANGE cart_id cart_id INT DEFAULT NULL, CHANGE budget budget DOUBLE PRECISION DEFAULT \'NULL\'');
     }
 }
