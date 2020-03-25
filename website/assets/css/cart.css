@@ -1,5 +1,5 @@
 .cart {
-    max-width: 80%;
+    max-width: 90%;
     background-color: white;
     border-radius: 3px;
     margin-left: auto;
@@ -19,8 +19,12 @@ li {
 h4 {
     font-size: 20px;
 }
+.one, .two, .three {
+    vertical-align: top;
+}
+
 .one {
-    width: 45%;
+    width: 40%;
 }
 .two, .three {
     /*margin-top: 30px;*/
