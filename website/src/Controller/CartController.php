@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Bank;
 use App\Entity\Cart;
 use App\Entity\Command;
+use App\Entity\CommandProduct;
 use App\Entity\Livraison;
 use App\Form\CommandType;
 use Doctrine\Persistence\ObjectManager;
@@ -25,34 +26,55 @@ class CartController extends AbstractController
         $user = $this->getUser();
         $total = 0;
 
-        foreach ($this->getUser()->getCart()->getCartProduct() as $product) {
+        foreach ($user->getCart()->getCartproduct() as $product) {
             $total += $product->getProduct()->getPrice() * $product->getQuantity();
         }
 
+        $commandProducts = new CommandProduct();
         $command = new Command();
 
-        $form = $this->createForm(CommandType::class, $command);
+        $form = $this->createForm(CommandType::class, $commandProducts);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-//            $command->setCart($user->getCart());
-            foreach ($user->getCartProduct() as $product) {
-                $command->setUser($user);
-                $command->addCartProduct($product);
-                $command->setNbCommand(rand(2000, 8000));
-                $command->setCreatedAt(new \DateTime());
+            if($user->getBudget() > $total) {
+                foreach ($user->getCartProducts() as $product) {
+//                $command->setUser($user);
+                    $commandProducts->setCommand($command);
+                    $commandProducts->addCartProduct($product);
+                    $command->setNbCommand(rand(2000, 8000));
+                    $command->setCreatedAt(new \DateTime());
+                    $command->setUser($user);
+                    $command->setTotal($total);
+                }
+                $user->setBudget($user->getBudget() - $total);
+
+                $newCart = new Cart();
+                $user->setCart($newCart);
+
+                $manager->persist($command);
+                $manager->flush();
+
+                return $this->redirectToRoute('account', [
+                    'username' => $this->getUser()->getUsername()
+                ]);
             }
-            $user->setBudget($user->getBudget() - $total);
+            else {
 
-            $newCart = new Cart();
-            $user->setCart($newCart);
+                $this->addFlash(
+                    'warning',
+                    'Désolé, votre solde est insuffisant..'
+                );
 
-            $manager->persist($command);
-            $manager->flush();
-
-            return $this->redirectToRoute('account', [
-               'username' => $this->getUser()->getUsername()
-            ]);
+                return $this->render('cart/index.html.twig', [
+                    'bank' => $bank,
+                    'livraison' => $livraison,
+                    'cart' => $cart,
+                    'user' => $user,
+                    'total' => $total,
+                    'form' => $form->createView()
+                ]);
+            }
         }
 
         return $this->render('cart/index.html.twig', [

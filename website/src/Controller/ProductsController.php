@@ -56,7 +56,7 @@ class ProductsController extends AbstractController
             $buyProduct->setProduct($product);
             $buyProduct->setCart($this->getUser()->getCart());
             $buyProduct->setQuantity($quantity);
-            $buyProduct->setUsers($this->getUser());
+            $buyProduct->setUser($this->getUser());
 //            $product->setQuantity($product->getQuantity() - $quantity);
 //            $cartProduct->setFlocage($product->getFlocage());
 //            $buyProduct->setImage($product->getImage());
