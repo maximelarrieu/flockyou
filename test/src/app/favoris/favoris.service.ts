@@ -20,15 +20,9 @@ export class Favoris {
     this.favproducts.push(product);
   }
 
-  getFavProducts(): Observable<Favoris[]> {
-    return this.getFavProducts.pipe(
-      map
-    )
+  getFavProducts() {
+    return this.favproducts
   }
-
-  // getFavProducts() {
-  //   return this.favproducts
-  // }
 
   constructor() {}
 }

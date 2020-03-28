@@ -13,7 +13,7 @@ export class FavorisPage implements OnInit {
   constructor(private datafavoris: Favoris) { }
 
   ngOnInit() {
-    this.datafavoris.getFavProducts(
+    this.favoris = this.datafavoris.getFavProducts(
       // favoris => this.favoris = favoris
     );
   }
