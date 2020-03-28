@@ -11,23 +11,23 @@ export class HomeComponent implements OnInit {
 
   constructor(private favorisService : FavorisService, private livesoccerService : LivesoccerService) { }
 
-  livescores: any = [];
+  // livescores: any = [];
 
-  AddFav = function(product): void {
-    this.favorisService.add(product)
-  }
+  // AddFav = function(product): void {
+  //   this.favorisService.add(product)
+  // }
 
-  getLiveScore() {
-    this.livesoccerService.getLiveScores()
-    .subscribe(data => {
-      for (const d of (data as any)) {
-        this.livescores.push({
-          goalsHomeTeam: d.goalsHomeTeam
-        })
-      }
-      console.log(this.livescores);
-    });
-  }
+  // getLiveScore() {
+  //   this.livesoccerService.getLiveScores()
+  //   .subscribe(data => {
+  //     for (const d of (data as any)) {
+  //       this.livescores.push({
+  //         goalsHomeTeam: d.goalsHomeTeam
+  //       })
+  //     }
+  //     console.log(this.livescores);
+  //   });
+  // }
 
   ngOnInit() {
 

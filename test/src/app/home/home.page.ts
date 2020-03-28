@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { HomeComponent } from './home.component';
 import { FavorisComponent } from '../favoris/favoris.component';
 import { FavorisService } from '../favoris/favoris.service';
-import { LivesoccerService, LiveScore } from '../api/livesoccer.service';
 
 @Component({
   selector: 'app-home',
@@ -14,9 +13,8 @@ export class HomePage {
 
   public products: Product[];
   public sizes: Size[];
-  public livescores: LiveScore[];
 
-  constructor(private data: HomeService, private favorisService : FavorisService, private livescore : LivesoccerService) { }
+  constructor(private data: HomeService, private favorisService : FavorisService) { }
 
   AddFav = function(product): void {
     this.favorisService.add(product)
@@ -28,11 +26,7 @@ export class HomePage {
     );
     this.data.getSizes().subscribe(
       sizes => this.sizes = sizes
-    )
-    this.livescore.getLiveScores().subscribe(
-      livescores => this.livescores = console.log(livescores)
-    )
-    // console.log(this.leagues);
+    );
   }
 
 }
