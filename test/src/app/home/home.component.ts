@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FavorisService } from '../favoris/favoris.service';
-import { LivesoccerService } from '../api/livesoccer.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +8,7 @@ import { LivesoccerService } from '../api/livesoccer.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private favorisService : FavorisService, private livesoccerService : LivesoccerService) { }
+  constructor(private favorisService : FavorisService) { }
 
   // livescores: any = [];
 

@@ -2,7 +2,7 @@ import { HomeService, Product, Size } from './home.service';
 import { Component, OnInit } from '@angular/core';
 import { HomeComponent } from './home.component';
 import { FavorisComponent } from '../favoris/favoris.component';
-import { FavorisService } from '../favoris/favoris.service';
+import { FavorisService, Favoris } from '../favoris/favoris.service';
 
 @Component({
   selector: 'app-home',
@@ -14,10 +14,10 @@ export class HomePage {
   public products: Product[];
   public sizes: Size[];
 
-  constructor(private data: HomeService, private favorisService : FavorisService) { }
+  constructor(private data: HomeService, private favoris : Favoris) { }
 
   AddFav = function(product): void {
-    this.favorisService.add(product)
+    this.favoris.add(product)
   }
 
   ngOnInit() {
@@ -26,7 +26,7 @@ export class HomePage {
     );
     this.data.getSizes().subscribe(
       sizes => this.sizes = sizes
-    );
+    )
   }
 
 }

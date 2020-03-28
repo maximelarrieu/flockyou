@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Favoris } from './favoris.service';
 
 @Component({
   selector: 'app-favoris',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./favoris.page.scss'],
 })
 export class FavorisPage implements OnInit {
-
-  constructor() { }
+  
+  public favoris: Favoris[];
+  
+  constructor(private datafavoris: Favoris) { }
 
   ngOnInit() {
+    this.datafavoris.getFavProducts(
+      // favoris => this.favoris = favoris
+    );
   }
 
 }

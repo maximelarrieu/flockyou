@@ -5,17 +5,14 @@
     <!-- ============================= PRODUCTS ============================ -->
     <ion-grid>
         <ion-row>
-            <ion-col>
-                <div src="../product/product.page.html"></div>
-            </ion-col>
-            <ion-col>
+            <ion-col *ngFor="let favproduct of datafavoris">
                 <div class="product-card">
                     <div class="badge">New</div>
                     <div class="product-tumb">
                         <img src="assets/teams/RealMadrid_dom.png" alt="">
                     </div>
                     <div class="product-details">
-                        <span class="product-catagory">Real Madrid</span>
+                        <span class="product-catagory"></span>
                         <h6><a href="">Maillot Domicile 2019/2020</a></h6>
                         <div class="product-bottom-details">
                             <div class="product-price"><small>$96.00</small>$55.99</div>
