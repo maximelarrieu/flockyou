@@ -49,14 +49,21 @@
                                 </div>
                                 <div class="col">
                                     {% if app.user %}
-                                        <button type="submit" class="btn btn-success">
-                                            <i class="fas fa-shopping-cart"></i><br>
-                                            Ajouter au panier
-                                        </button>
+                                        {% if product.quantity > 0 %}
+                                            <button type="submit" class="btn btn-success">
+                                                <i class="fas fa-shopping-cart"></i><br>
+                                                Ajouter au panier
+                                            </button>
+                                        {% else %}
+                                            <div class="btn btn-warning">
+                                                <i class="fas fa-exclamation-triangle"></i><br>
+                                                Produit indisponible
+                                            </div>
+                                        {% endif %}
                                     {% else %}
                                         <div class="btn btn-secondary">
                                             <i class="fas fa-shopping-cart"></i><br>
-                                            Ajouter au panier
+                                            Connectez-vous
                                         </div>
                                     {% endif %}
                                 </div>

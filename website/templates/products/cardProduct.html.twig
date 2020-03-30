@@ -48,9 +48,14 @@
                 <span class="stock">
                     <i class="fas fa-exclamation-circle mr-2"></i>Seulement {{ product.quantity }} restants
                 </span>
-                {% else %}
+                {% elseif product.quantity > 0 %}
                 <span class="stock">
                     <i class="fas fa-exclamation-triangle mr-2"></i>Seulement {{ product.quantity }} restant
+                </span>
+                {% endif %}
+                {% if product.quantity == 0 %}
+                <span class="stock">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>Produit indisponible
                 </span>
                 {% endif %}
             {% endif %}
