@@ -68,7 +68,7 @@ class Product
     private $flocage;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CartProduct", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="App\Entity\CartProduct", mappedBy="product", cascade={"persist", "remove"})
      */
     private $cartProducts;
 

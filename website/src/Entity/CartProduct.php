@@ -19,7 +19,7 @@ class CartProduct
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="cartProducts", cascade={"remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="cartProducts", cascade={"persist"})
      */
     private $product;
 
