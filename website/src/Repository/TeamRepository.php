@@ -28,6 +28,7 @@ class TeamRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('team')
             ->innerJoin('team.league', 'league')
             ->where('league.name = :league_name')
+            ->orderBy('team.name', 'ASC')
             ->setParameters([
                 'league_name' => $league_name
             ])

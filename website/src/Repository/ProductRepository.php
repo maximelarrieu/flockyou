@@ -29,7 +29,7 @@ class ProductRepository extends ServiceEntityRepository
             ->innerJoin('p.team', 't')
             ->innerJoin('t.league', 'l')
             ->where('l.name = :league')
-            ->andWhere('p.size is null')
+            ->orderBy('t.name', 'ASC')
             ->setParameters([
                 'league' => $league
             ])
