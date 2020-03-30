@@ -17,10 +17,14 @@ class UsersController extends AbstractController
     /**
      * @param Users $user
      * @param Livraison $livraison ;
+     * @param Bank|null $bank
+     * @param Command $command
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(Users $user, Livraison $livraison = null, Bank $bank = null, Command $command)
+    public function index(Users $user, Livraison $livraison = null, Bank $bank = null)
     {
+        $command = $user->getCommands();
+
         return $this->render('account/index.html.twig', [
             'command' => $command,
             'user' => $user,
