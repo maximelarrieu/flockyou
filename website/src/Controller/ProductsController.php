@@ -43,8 +43,10 @@ class ProductsController extends AbstractController
         $this->flocageRepository = $flocageRepository;
     }
 
-    public function index(Product $product, Request $request, ObjectManager $manager, Favorites $service, Team $team, $id)
+    public function index(Product $product, Request $request, ObjectManager $manager, Favorites $service, $id)
     {
+        $team = $product->getTeam()->getName();
+
         $buyProduct = new CartProduct();
         $quantity = 1;
 
@@ -57,16 +59,6 @@ class ProductsController extends AbstractController
             $buyProduct->setCart($this->getUser()->getCart());
             $buyProduct->setQuantity($quantity);
             $buyProduct->setUser($this->getUser());
-//            $product->setQuantity($product->getQuantity() - $quantity);
-//            $cartProduct->setFlocage($product->getFlocage());
-//            $buyProduct->setImage($product->getImage());
-//            $buyProduct->setTeam($product->getTeam());
-//            $buyProduct->setPrice($product->getPrice());
-//            $buyProduct->setState($product->getState());
-//            $buyProduct->setQuantity(1);
-//            $buyProduct->getFlocage();
-
-//            $cart->addProduct($buyProduct);
 
             $manager->persist($buyProduct);
             $manager->flush();
@@ -88,7 +80,7 @@ class ProductsController extends AbstractController
             $manager->flush();
 
             return $this->redirectToRoute('product', [
-                'team' => $team,
+                'name' => $team,
                 'id' => $id
             ]);
         }
@@ -122,14 +114,16 @@ class ProductsController extends AbstractController
         ]);
     }
 
-    public function deleteComment($id, $team, ObjectManager $manager, Comment $comment)
+    public function deleteComment(Comment $cid, Product $product, ObjectManager $manager)
     {
-        $manager->remove($comment);
+        $team = $product->getTeam()->getName();
+
+        $manager->remove($cid);
         $manager->flush();
 
         return $this->redirectToRoute('product', [
-            'team' => $team,
-            'id' => $id
+            'id' => $product->getId(),
+            'name' => $team
         ]);
     }
 }
