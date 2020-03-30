@@ -176,5 +176,4 @@ product:
 comment_delete:
     path: /product/{id}/{team}/comment/{cid}/destroy
     controller: App\Controller\ProductsController:deleteComment
-
 ###########################################################
