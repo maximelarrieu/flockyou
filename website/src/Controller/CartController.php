@@ -17,9 +17,13 @@ class CartController extends AbstractController
 {
     /**
      * @Route("/cart", name="cart")
+     * @param Cart $cart
      * @param Bank|null $bank
      * @param Livraison|null $livraison
+     * @param Request $request
+     * @param ObjectManager $manager
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function index(Cart $cart, Bank $bank = null, Livraison $livraison = null, Request $request, ObjectManager $manager)
     {
@@ -46,6 +50,7 @@ class CartController extends AbstractController
                     $command->setCreatedAt(new \DateTime());
                     $command->setUser($user);
                     $command->setTotal($total);
+                    $product->getProduct()->setQuantity($product->getProduct()->getQuantity() - $product->getQuantity());
                 }
                 $user->setBudget($user->getBudget() - $total);
 
@@ -60,7 +65,6 @@ class CartController extends AbstractController
                 ]);
             }
             else {
-
                 $this->addFlash(
                     'warning',
                     'Désolé, votre solde est insuffisant..'
