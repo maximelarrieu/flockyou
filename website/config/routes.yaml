@@ -115,6 +115,7 @@ admin_product_edit:
 admin_product_delete:
     path: /admin/product/{id}/destroy
     controller: App\Controller\AdminProductController:destroy
+##+++++++++++++++++++++++++++++++++++++++++++++++++++++#
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++#
 #++++++++++ Gestion des utilisateurs +++++++++++++++++#
 admin_users:
