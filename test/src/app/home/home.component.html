@@ -72,10 +72,12 @@
                                 <li><a class="active">{{ size.name }}</a></li>
                               </ul>
                       </span>
-                      <button class="btn-danger" (click)="AddFav(product)">Favoris</button>
+                      <span class="product-fav">
+                        <button class="btn-danger" (click)="AddFav(product)"><i class="fas fa-heart"></i></button>
+                      </span>
                     <span class="product-price">
-                              € <b>{{ product.price }}</b>
-                          </span>
+                        <b>{{ product.price }} €</b>
+                    </span>
                   </div>
                 </div>
               </div>
