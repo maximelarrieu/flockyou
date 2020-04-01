@@ -1,0 +1,75 @@
+<ion-content class="ion-padding">
+    <ion-toolbar>
+        <ion-title>Account</ion-title>
+    </ion-toolbar>
+    <!-- =============== PROFIL CARD =============== -->
+    <div class="card border-secondary mb-3">
+        <div class="card-header">Mon profil</div>
+        <div>
+            <table class="table table-responsive table-striped">
+                <tbody>
+                <tr>
+                    <th scope="row">Prénom</th>
+                    <td>Mark</td>
+                </tr>
+                <tr>
+                    <th scope="row">Nom</th>
+                    <td>Jacob</td>
+                </tr>
+                <tr>
+                    <th scope="row">Email</th>
+                    <td>randomemail@raaaaaaaaaaaaaaaaaaaaaaandom.com</td>
+                </tr>
+                <tr>
+                    <th scope="row">Phone number</th>
+                    <td>0672345691</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- =============== LIVRAISON CARD =============== -->
+    <div class="card border-secondary mb-3">
+        <div class="card-header">Adresse de livraison
+        <!-- Bouton permettant de supprimer une livraison-->
+        <a (click)="deleteLivraison(livraison.id)">
+            <div class="btn btn-danger float-right"><i class="fas fa-trash"></i></div>
+        </a>
+        <!-- Bouton permettant d'accéder au formulaire d'édition/création -->
+        <a (click)="goEdit(livraison)">
+            <div class="btn btn-success float-right mr-2"><i class="fas fa-plus"></i></div>
+        </a>
+    </div>
+        <div>
+            <!-- Condition ngFor pour chaque itération récupérée dans livraison -->
+            <table class="table table-striped" *ngFor="let livraison of livraisons">
+                <tbody>
+                    <tr>
+                        <td>{{livraison.id}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Nom complet</th>
+                        <td>{{ livraison.name }}</td>
+                    </tr>
+                <tr>
+                    <th scope="row">Adresse</th>
+                    <td>{{ livraison.address }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Ville</th>
+                    <td>{{ livraison.city }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Téléphone</th>
+                    <td>{{ livraison.phoneNumber }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Pays</th>
+                    <td>{{ livraison.country }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</ion-content>

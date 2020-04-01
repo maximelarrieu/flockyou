@@ -1,0 +1,74 @@
+<div class="container">
+    <form *ngIf="livraison" (ngSubmit)="onSubmit()" #livraisonFrom="ngForm">
+        <div class="form-group">
+            <label for="name">Nom complet</label>
+            <input type="text" class="form-control" id="name"
+                    required
+                    pattern="^[a-zA-Zàéèç]{1,40}$"
+                    [(ngModel)]="livraison.name" name="name"
+                    #name="ngModel">
+            <div [hidden]="name.valid || name.pristine"
+                 class="alert alert-danger">
+                 Votre nom complet est requis (1-40 caractères).
+            </div>        
+        </div>
+
+        <div class="form-group">
+            <label for="address">Adresse</label>
+            <input type="text" class="form-control" id="address"
+                    required
+                    pattern="^[a-zA-Zàéèç]{1,255}$"
+                    [(ngModel)]="livraison.address" name="address"
+                    #address="ngModel">
+            <div [hidden]="address.valid || address.pristine"
+                 class="alert alert-danger">
+                 Votre adresse est requise (1-255 caractères).
+            </div>          
+        </div>
+
+        <div class="form-group">
+            <label for="city">Ville</label>
+            <input type="text" class="form-control" id="city"
+                    required
+                    pattern="^[a-zA-Zàéèç]{1,40}$"
+                    [(ngModel)]="livraison.city" name="city"
+                    #city="ngModel">
+            <div [hidden]="address.valid || address.pristine"
+                 class="alert alert-danger">
+                 Votre ville est requise (1-40 caractères).
+            </div>        
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Téléphone</label>
+            <input type="number" class="form-control" id="phone"
+                    required
+                    pattern="^[0-9]{1,10}$"
+                    [(ngModel)]="livraison.phoneNumber" name="phone"
+                    #phone="ngModel">
+            <div [hidden]="address.valid || address.pristine"
+                 class="alert alert-danger">
+                 Votre numéro de téléphone est requis (10 caractères).
+            </div>        
+        </div>
+
+        <div class="form-group">
+            <label for="country">Pays</label>
+            <input type="text" class="form-control" id="country"
+                    required
+                    pattern="^[a-zA-Zàéèç]{1,40}$"
+                    [(ngModel)]="livraison.country" name="country"
+                    #country="ngModel">
+            <div [hidden]="address.valid || address.pristine"
+                 class="alert alert-danger">
+                 Votre pays est requis (1-40 caractères).
+            </div>        
+        </div>
+
+        <div class="section center">
+            <button type="submit"
+                    class="btn btn-primary"
+                    [disabled]="!livraisonForm.form.valid">Valider</button>
+        </div>
+    </form>
+</div>

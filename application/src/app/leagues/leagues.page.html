@@ -1,0 +1,15 @@
+<ion-content class="ion-color-medium">
+    <ion-toolbar>
+        <ion-title>Championnats</ion-title>
+    </ion-toolbar>
+    <!-- ============================= LEAGUES ============================ -->
+    <div class="cards-list">
+        <!-- Condition ngFor pour récupérer les valeurs retournées dans le tableau que l'on parcourt-->
+        <div *ngFor="let league of leagues" class="card">
+            <div class="card_image"><img src="{{ league.image }}" /></div>
+            <div class="card_title title-white">
+                <h3>{{ league.name }}</h3>
+            </div>
+        </div>
+    </div>
+</ion-content>
