@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { HomeComponent } from './home.component';
 import { FavorisComponent } from '../favoris/favoris.component';
 import { FavorisService, Favoris } from '../favoris/favoris.service';
+import { ApifootballService, Foot } from '../api/apifootball.service';
 
 @Component({
   selector: 'app-home',
@@ -14,8 +15,9 @@ export class HomePage {
   // Initialisation des tableaux d'objets que l'on souhaite récupérer
   public products: Product[];
   public sizes: Size[];
+  public foots: Foot[];
 
-  constructor(private data: HomeService, private favoris : Favoris) { }
+  constructor(private data: HomeService, private favoris : Favoris, private foot: ApifootballService) { }
 
   // Fonction d'ajout de produit aux favoris
   AddFav = function(product): void {
@@ -33,6 +35,12 @@ export class HomePage {
     this.data.getSizes().subscribe(
       sizes => this.sizes = sizes
     )
+    
+    // Initialisation de la page avec la fonction récupération du service API & assignation d'une variable aux données
+    // this.foot.getFoot().subscribe(
+    //   foots => this.foots = console.log(foots)
+    // )
+
   }
 
 }

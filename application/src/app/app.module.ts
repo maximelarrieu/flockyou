@@ -19,6 +19,7 @@ import { LoginRoutingModule } from './login-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LeaguesService } from './leagues/leagues.service';
 import { AccountService } from './account/account.service';
+import { ApifootballService } from './api/apifootball.service';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { AccountService } from './account/account.service';
     LeaguesService,
     HomeService,
     AccountService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    ApifootballService,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy, useValue: "dummy"}
   ],
   bootstrap: [AppComponent]
 })
