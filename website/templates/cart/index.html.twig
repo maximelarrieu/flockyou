@@ -55,6 +55,10 @@
                                 <h5>Quantité : <input type="number" id="quantity" name="quantity"
                                                       value="{{ product.quantity }}" style="width: 15%">
                                 </h5>
+{#                                {{ form_start(formq) }}#}
+{#                                {{ form_widget(formq) }}#}
+{#                                <button type="submit" class="btn btn-primary btn-sm m-1 quantity">V</button>#}
+{#                                {{ form_end(formq) }}#}
 
                                 <h5 class="price">{{ product.product.price * product.quantity }} €</h5>
                             </div>
