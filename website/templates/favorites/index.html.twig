@@ -4,33 +4,50 @@
 
 {% block body %}
     <link rel="stylesheet" href="{{ asset('build/form.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/favorites.css') }}">
 
     <div class="container">
         <h2 class="deepshadow">Vos favoris</h2>
         <div class="login-form bg-light py-3 px-3">
             {% if products | length > 0 %}
-            {% for product in products %}
-                <div class="fav row">
-                    <div class="image col-2">
-                        <a href="{{ path('product', {'id': product.product.id, 'name': product.product.team.name}) }}"><img
-                                    src="{{ asset(product.product.image) }}"></a>
+                {% for product in products %}
+                    <div class="fav row">
+                        <div class="image col-2">
+                            <a href="{{ path('product', {'id': product.product.id, 'name': product.product.team.name}) }}"><img
+                                        src="{{ asset(product.product.image) }}"></a>
+                        </div>
+                        <div class="info col-8">
+                            <h4>{{ product.product.team.name | upper }} - {{ product.product.state.state | upper }}</h4>
+                            {% if product.product.comments | length > 0 %}
+                                {% include 'products/rating.html.twig' with {'rating': product.product.getAvgRating} %}
+                            {% else %}
+                                (Ce produit n'a pas encoré été noté)
+                            {% endif %}
+                            <h5 class="price mt-2">{{ product.product.price }} €</h5>
+                            {% if product.quantity < 6 %}
+                                {% if product.quantity > 1 %}
+                                    <span class="stock mt-2">
+                                        <i class="fas fa-exclamation-circle mr-2"></i>Seulement {{ product.quantity }} restants
+                                    </span>
+                                {% elseif product.quantity > 0 %}
+                                    <span class="stock mt-2">
+                                        <i class="fas fa-exclamation-triangle mr-2"></i>Seulement {{ product.quantity }} restant
+                                    </span>
+                                {% endif %}
+                                {% if product.quantity == 0 %}
+                                    <span class="stock mt-2">
+                                        <i class="fas fa-exclamation-triangle mr-2"></i>Produit indisponible
+                                    </span>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                        <div class="action col-2">
+                            <a href="{{ path('favorites_product_destroy', {'id': product.product.id}) }}"
+                               style="color: red"><i class="suppr far fa-times-circle pull-right"></i></a>
+                        </div>
                     </div>
-                    <div class="info col-8">
-                        <h4>{{ product.product.team.name | upper }} - {{ product.product.state.state | upper }}</h4>
-                        {% if product.product.comments | length > 0 %}
-                            {% include 'products/rating.html.twig' with {'rating': product.product.getAvgRating} %}
-                        {% else %}
-                            (Ce produit n'a pas encoré été noté)
-                        {% endif %}
-                        <h5 class="price mt-4">{{ product.product.price }} €</h5>
-                    </div>
-                    <div class="action col-2">
-                        <a href="{{ path('favorites_product_destroy', {'id': product.product.id}) }}"
-                           style="color: red"><i class="suppr far fa-times-circle pull-right"></i></a>
-                    </div>
-                </div>
-                <hr>
-            {% endfor %}
+                    <hr>
+                {% endfor %}
             {% else %}
                 <div class="alert alert-danger">
                     Vous n'avez aucun favoris...

@@ -2,18 +2,26 @@
 
 {% block title %}Bienvenue ! - Flockyou{% endblock %}
 {% block body %}
+    <link rel="stylesheet" href="{{ asset('build/home.css') }}">
     {{ render(controller('App\\Controller\\HomeController::caroussel', {} )) }}
-    <h2 class="deepshadow">Maillots populaires</h2>
-{#    {{ dump(bestProducts) }}#}
+    <div class="row menu">
+        <div class="col-6">
+            <a href="#best">Maillots populaires</a>
+        </div>
+        <div class="col-6">
+            <a href="#news">Nouveautés</a>
+        </div>
+    </div>
+    <h2 class="deepshadow" id="best">Maillots populaires</h2>
     <div class="mainwrapper index row">
     {% for product in bestProducts %}
         {% include 'products/cardProduct.html.twig' with {'product': product.products} %}
     {% endfor %}
     </div>
-    <h2 class="deepshadow">Nouveautés</h2>
+    <h2 class="deepshadow" id="news">Nouveautés</h2>
     <div class="mainwrapper index row">
-        {% for product in products %}
-            {{ include('products/cardProduct.html.twig') }}
+        {% for product in recentsProducts %}
+            {% include 'products/cardProduct.html.twig' with {'product': product.products} %}
         {% endfor %}
     </div>
 {% endblock %}
