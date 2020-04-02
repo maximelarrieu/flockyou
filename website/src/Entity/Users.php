@@ -80,7 +80,7 @@ class Users implements UserInterface
     private $cart;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CartProduct", mappedBy="users")
+     * @ORM\OneToMany(targetEntity="App\Entity\CartProduct", mappedBy="user")
      */
     private $cartProduct;
 
