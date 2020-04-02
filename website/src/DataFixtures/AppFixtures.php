@@ -554,7 +554,8 @@ class AppFixtures extends Fixture
         for ($p = 0; $p <= 25; $p++) {
             $product = new Product();
             $product->setPrice(49.99);
-            $product->setQuantity(10);
+            $product->setQuantity(mt_rand(0,10));
+            $product->setCreatedAt(new \DateTime());
 
             $normalizer = new ObjectNormalizer();
             $encoder = new JsonEncoder();
