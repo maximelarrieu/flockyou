@@ -9,6 +9,9 @@ use App\Entity\CommandProduct;
 use App\Entity\Livraison;
 use App\Form\CommandType;
 use Doctrine\Persistence\ObjectManager;
+use phpDocumentor\Reflection\DocBlock\Tags\Formatter;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,7 +28,7 @@ class CartController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function index(Cart $cart, Bank $bank = null, Livraison $livraison = null, Request $request, ObjectManager $manager)
+    public function index(Cart $cart, Bank $bank = null, Livraison $livraison = null, Request $request, ObjectManager $manager, \Swift_Mailer $mailer)
     {
         $user = $this->getUser();
         $total = 0;
@@ -40,8 +43,8 @@ class CartController extends AbstractController
         $form = $this->createForm(CommandType::class, $commandProducts);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
-            if($user->getBudget() > $total) {
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($user->getBudget() > $total) {
                 foreach ($user->getCartProducts() as $product) {
 //                $command->setUser($user);
                     $commandProducts->setCommand($command);
@@ -54,17 +57,48 @@ class CartController extends AbstractController
                 }
                 $user->setBudget($user->getBudget() - $total);
 
+//                $pdfOptions = new Options();
+//                $pdfOptions->set('defaultFont', 'Arial');
+//
+//                $dompdf = new Dompdf($pdfOptions);
+//
+//                $html = $this->render('pdf/command.html.twig', [
+//                    'name' => $user->getUsername()
+//                ]);
+//                $dompdf->loadHtml($html->getContent());
+//                $dompdf->setPaper('A4', 'portrait');
+//                $dompdf->render();
+//                $dompdf->stream("command.pdf", [
+//                    'Attachment' => false
+//                ]);
+                $logo = \Swift_Image::fromPath('assets/images/ressources/flockyou.png');
+                $mail = (new \Swift_Message("Merci pour votre commande !"))
+                    ->setFrom('flockyou@support.store')
+                    ->setTo($user->getEmail());
+
+                $mail->setBody(
+                    $this->renderView(
+                        'mails/command.html.twig',
+                        ['name' => $user->getUsername(),
+                        'logo' => $logo ]
+                    ),
+                    'text/html'
+                )
+//                 ->attach(\Swift_Attachment::fromPath($dompdf));
+                ;
+                $mailer->send($mail);
+
                 $newCart = new Cart();
                 $user->setCart($newCart);
 
+                $manager->persist($commandProducts);
                 $manager->persist($command);
                 $manager->flush();
 
                 return $this->redirectToRoute('account', [
                     'username' => $this->getUser()->getUsername()
                 ]);
-            }
-            else {
+            } else {
                 $this->addFlash(
                     'warning',
                     'Désolé, votre solde est insuffisant..'

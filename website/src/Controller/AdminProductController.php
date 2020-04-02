@@ -31,6 +31,7 @@ class AdminProductController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
             $product->setTeam($team);
+            $product->setCreatedAt(new \DateTime());
             $manager->persist($product);
             $manager->flush();
 

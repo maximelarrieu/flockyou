@@ -74,4 +74,14 @@ class ProductRepository extends ServiceEntityRepository
                     ->getQuery()
                     ->getResult();
     }
+
+    public function findRecentsProducts($limit) {
+        return $this->createQueryBuilder('p')
+                    ->select('p as products')
+                    ->groupBy('p')
+                    ->orderBy('p.createdAt', 'DESC')
+                    ->setMaxResults($limit)
+                    ->getQuery()
+                    ->getResult();
+    }
 }
