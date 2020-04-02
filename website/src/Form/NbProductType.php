@@ -14,7 +14,7 @@ class NbProductType extends ConfigType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('quantity', IntegerType::class, $this->getConfiguration('Quantité souahitée :', 'Indiquez la quantité voulue', [
+            ->add('quantity', IntegerType::class, $this->getConfiguration('Quantité :', 'Indiquez la quantité voulue', [
                 'attr' => [
                     'min' => 1,
                     'max' => 10,
@@ -27,7 +27,7 @@ class NbProductType extends ConfigType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => CartProduct::class,
+            'data_class' => CartProduct::class
         ]);
     }
 }
