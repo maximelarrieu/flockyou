@@ -8,7 +8,9 @@ use App\Entity\Command;
 use App\Entity\CommandProduct;
 use App\Entity\Livraison;
 use App\Form\CommandType;
+use App\Form\NbProductType;
 use Doctrine\Persistence\ObjectManager;
+use Dompdf\Renderer\Image;
 use phpDocumentor\Reflection\DocBlock\Tags\Formatter;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -32,10 +34,19 @@ class CartController extends AbstractController
     {
         $user = $this->getUser();
         $total = 0;
+        $product = [];
+        $cartProductQuantity = [];
+
+        foreach ($user->getCart()->getCartproduct() as $product) {
+            $cartProductQuantity = $product->getQuantity();
+        }
 
         foreach ($user->getCart()->getCartproduct() as $product) {
             $total += $product->getProduct()->getPrice() * $product->getQuantity();
         }
+
+        $formq = $this->createForm(NbProductType::class, $product);
+        $formq->handleRequest($request);
 
         $commandProducts = new CommandProduct();
         $command = new Command();
@@ -44,18 +55,20 @@ class CartController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+//            {{dd($product->getProduct()->getQuantity());}}
             if ($user->getBudget() > $total) {
-                foreach ($user->getCartProducts() as $product) {
+                if ($product->getProduct()->getQuantity() >= $cartProductQuantity) {
+                    foreach ($user->getCart()->getCartProduct() as $product) {
 //                $command->setUser($user);
-                    $commandProducts->setCommand($command);
-                    $commandProducts->addCartProduct($product);
-                    $command->setNbCommand(rand(2000, 8000));
-                    $command->setCreatedAt(new \DateTime());
-                    $command->setUser($user);
-                    $command->setTotal($total);
-                    $product->getProduct()->setQuantity($product->getProduct()->getQuantity() - $product->getQuantity());
-                }
-                $user->setBudget($user->getBudget() - $total);
+                        $commandProducts->setCommand($command);
+                        $commandProducts->addCartProduct($product);
+                        $command->setNbCommand(rand(2000, 8000));
+                        $command->setCreatedAt(new \DateTime());
+                        $command->setUser($user);
+                        $command->setTotal($total);
+                        $product->getProduct()->setQuantity($product->getProduct()->getQuantity() - $product->getQuantity());
+                    }
+                    $user->setBudget($user->getBudget() - $total);
 
 //                $pdfOptions = new Options();
 //                $pdfOptions->set('defaultFont', 'Arial');
@@ -71,33 +84,54 @@ class CartController extends AbstractController
 //                $dompdf->stream("command.pdf", [
 //                    'Attachment' => false
 //                ]);
-                $logo = \Swift_Image::fromPath('assets/images/ressources/flockyou.png');
-                $mail = (new \Swift_Message("Merci pour votre commande !"))
-                    ->setFrom('flockyou@support.store')
-                    ->setTo($user->getEmail());
-
-                $mail->setBody(
-                    $this->renderView(
-                        'mails/command.html.twig',
-                        ['name' => $user->getUsername(),
-                        'logo' => $logo ]
-                    ),
-                    'text/html'
-                )
+//                $logo = './assets/images/ressources/flockyou.png';
+                    $mail = (new \Swift_Message("Merci pour votre commande !"));
+//                    $mail->embed(new \Swift_Image(Image::class, $logo, 'image.jpeg'));
+                    $mail->setFrom('flockyou@support.store')
+                        ->setTo($user->getEmail())
+                        ->setBody(
+                            $this->renderView(
+                                'mails/command.html.twig',
+                                ['name' => $user->getUsername()]
+//                            ,'logo' => $logo]
+                            ),
+                            'text/html'
+                        )
 //                 ->attach(\Swift_Attachment::fromPath($dompdf));
-                ;
-                $mailer->send($mail);
+                    ;
+                    $mailer->send($mail);
 
-                $newCart = new Cart();
-                $user->setCart($newCart);
+                    $newCart = new Cart();
+                    $user->setCart($newCart);
 
-                $manager->persist($commandProducts);
-                $manager->persist($command);
-                $manager->flush();
+                    $manager->persist($commandProducts);
+                    $manager->persist($command);
+                    $manager->flush();
 
-                return $this->redirectToRoute('account', [
-                    'username' => $this->getUser()->getUsername()
-                ]);
+                    return $this->redirectToRoute('account', [
+                        'username' => $this->getUser()->getUsername()
+                    ]);
+                }
+                else {
+                    $this->addFlash(
+                        'stockless',
+                        'Désolé, la quantité du produit ' .
+                        $product->getProduct()->getTeam()->getName() . ' - ' . $product->getProduct()->getState()->getState().
+                        ' est insuffisante..'
+                    );
+
+                    return $this->render('cart/index.html.twig', [
+                        'bank' => $bank,
+                        'livraison' => $livraison,
+                        'cart' => $cart,
+                        'productquantity' => $cartProductQuantity,
+                        'user' => $user,
+                        'total' => $total,
+                        'form' => $form->createView(),
+                        'formq' => $formq->createView()
+                    ]);
+                }
+
             } else {
                 $this->addFlash(
                     'warning',
@@ -108,9 +142,11 @@ class CartController extends AbstractController
                     'bank' => $bank,
                     'livraison' => $livraison,
                     'cart' => $cart,
+                    'productquantity' => $cartProductQuantity,
                     'user' => $user,
                     'total' => $total,
-                    'form' => $form->createView()
+                    'form' => $form->createView(),
+                    'formq' => $formq->createView()
                 ]);
             }
         }
@@ -119,9 +155,11 @@ class CartController extends AbstractController
             'bank' => $bank,
             'livraison' => $livraison,
             'cart' => $cart,
+            'productquantity' => $cartProductQuantity,
             'user' => $user,
             'total' => $total,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'formq' => $formq->createView()
         ]);
     }
 }
