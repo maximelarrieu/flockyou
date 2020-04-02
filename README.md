@@ -6,7 +6,7 @@ Flockyou permettra aux utilisateurs d'acheter en ligne, des maillots de football
 
 Après avoir créé son compte, un utilisateur aura accès à ses informations personnelles (Adresse de livraison, coordonnées bancaires) mais aussi à sa liste des articles favoris qu'il pourra modifier à sa guise.
 
-Si un article plaît à l'utilisateur, il pourra choisir la taille du maillot qu'il désire, ainsi quepri qu'ilhaite.
+Si un article plaît à l'utilisateur, il pourra choisir la taille qu'il désire, ainsi que le flocage prédéfini selon l'équipe appartenant auquel il appartient.
 
 Ainsi, comme tous site e-Commerce, il est possible d'ajouter des articles choisis dans son panier qui mènera jusqu'à l'achat du ou des produit(s).
 
