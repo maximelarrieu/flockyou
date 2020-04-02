@@ -79,6 +79,9 @@ p {
     float: right;
 }
 
+.quantity {
+    width: 5%;
+}
 /*****------------------*****/
 /*****---ADRESSE LIVRAION---*****/
 label {
