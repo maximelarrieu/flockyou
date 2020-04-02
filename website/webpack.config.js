@@ -31,6 +31,8 @@ Encore
     .addEntry('footer', './assets/css/footer.css')
     .addEntry('product', './assets/css/product.css')
     .addEntry('form', './assets/css/form.css')
+    .addEntry('home', './assets/css/home.css')
+    .addEntry('favorites', './assets/css/favorites.css')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
