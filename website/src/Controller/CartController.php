@@ -55,14 +55,12 @@ class CartController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-//            {{dd($product->getProduct()->getQuantity());}}
             if ($user->getBudget() > $total) {
                 if ($product->getProduct()->getQuantity() >= $cartProductQuantity) {
                     foreach ($user->getCart()->getCartProduct() as $product) {
-//                $command->setUser($user);
                         $commandProducts->setCommand($command);
                         $commandProducts->addCartProduct($product);
-                        $command->setNbCommand(rand(2000, 8000));
+                        $command->setNbCommand(rand(10000, 30000));
                         $command->setCreatedAt(new \DateTime());
                         $command->setUser($user);
                         $command->setTotal($total);
