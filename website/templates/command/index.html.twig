@@ -1,20 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CommandController!{% endblock %}
+{% block title %}Mes commandes{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <link rel="stylesheet" href="{{ asset('build/form.css') }}">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/sheguey/Ynov/Annee02/flockyou/website/src/Controller/CommandController.php'|file_link(0) }}">src/Controller/CommandController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/sheguey/Ynov/Annee02/flockyou/website/templates/command/index.html.twig'|file_link(0) }}">templates/command/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="container">
+        <h2 class="deepshadow">Mes commandes</h2>
+        <div class="login-form bg-light py-3 px-3">
+            {% for command in user.commands %}
+                <div class="card mb-3">
+                    <div class="card-head p-2">
+                        <div class="float-left">
+                            <b>Numéro de commande :</b> {{ command.nbCommand }}<br />
+                            <b>Date de la commande :</b> {{ command.createdAt | date('d/m/Y') }}<br/>
+                        </div>
+                        <div class="float-right">
+                            <a href="{{ path('show_command', {'id': command.id}) }}" class="btn btn-primary mt-1">Voir la commande</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="float-right"><b>Montant total :</b> {{ command.total }} €</div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
