@@ -18,6 +18,7 @@
                         {% else %}
                             <span class="badge badge-primary">{{ user.commands.count }} commande passée</span>
                         {% endif %}
+                        <a href="{{ path('command') }}" class="btn btn-secondary mt-2">Mes commandes</a>
                     {% else %}
                         <span class="badge badge-primary">Aucune commande</span>
                     {% endif %}
@@ -30,22 +31,33 @@
                     {% if user is same as(app.user) %}
                         <div class="mt-3">
                             <a href="{{ path('account_edit') }}" class="btn btn-primary mr-2 mb-2">Éditer mon compte</a>
-                            <a href="{{ path('account_password_edit') }}" class="btn btn-dark mb-2">Modifier mon mot de passe</a>
+                            <a href="{{ path('account_password_edit') }}" class="btn btn-dark mb-2 mr-2">Modifier mon mot de passe</a>
+                            <a href="{{ path('account_delete', {'id': user.id}) }}" class="btn btn-danger mb-2">Supprimer</a>
                         </div>
                     {% endif %}
-{#                    {{ dump(app.user.commands) }}#}
                     {% if command in user.commands %}
-                        {% for command in user.commands %}
-                        <div>
-                            {{ command.nbCommand }}
-{#                            {{ dump(command) }}#}
-                            {% for product in command.commandProducts %}
-{#                                {{ dump(command.commandProducts.current) }}#}
-                                {{ product.cartProduct.product.team.name }} - {{ product.cartProduct.product.state.state }} - {{ product.cartProduct.flocage.flocage }} - {{ product.cartProduct.size.name }}
-{#                                {{ product }} - {{ product.flocage.flocage }} - {{ product.size.name }}#}
-                            {% endfor %}
+                        <div class="lastCommand card mt-2">
+                            <div class="card-head p-2">
+                                <h4>Dernière commande passée</h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-1">
+                                    <i class="fas fa-clipboard-list fa-5x p-2"></i>
+                                </div>
+                                <div class="col-11">
+                                    <div class="p-2 ml-4">
+                                        {% for command in lastCommand %}
+                                            <b>Numéro de commande :</b>
+                                            {{ command.nbCommand }}<br />
+                                            <b>Date de la commande :</b>
+                                            {{ command.createdAt | date("d/m/Y") }}<br />
+                                            <b>Montant total :</b>
+                                            {{ command.total }} €
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        {% endfor %}
                     {% else %}
                         <div></div>
                     {% endif %}
