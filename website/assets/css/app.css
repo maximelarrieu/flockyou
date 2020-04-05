@@ -72,3 +72,7 @@ span.rating i {
 strong {
     font-size: 20px;
 }
+
+.card-head {
+    background-color: rgba(167, 167, 167, 0.5);
+}
