@@ -17,10 +17,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Serializer\Extractor\ObjectPropertyListExtractor;
 
 class AccountController extends AbstractController
 {
@@ -111,5 +113,17 @@ class AccountController extends AbstractController
         return $this->render('account/editPassword.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    public function deleteAccount(Users $user, ObjectManager $manager) {
+
+        $manager->remove($user);
+        $manager->flush();
+
+        $session = $this->get('session');
+        $session = new Session();
+        $session->invalidate();
+
+        return $this->redirectToRoute('home');
     }
 }
