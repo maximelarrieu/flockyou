@@ -19,6 +19,18 @@ class CommandRepository extends ServiceEntityRepository
         parent::__construct($registry, Command::class);
     }
 
+    public function findLastUserCommand($user, $limit) {
+        return $this->createQueryBuilder('command')
+                    ->innerJoin('command.user', 'user')
+                    ->where('command.user = :user')
+                    ->orderBy('command.createdAt', 'DESC')
+                    ->setParameters([
+                        'user' => $user
+                    ])
+                    ->setMaxResults($limit)
+                    ->getQuery()
+                    ->getResult();
+    }
     // /**
     //  * @return Command[] Returns an array of Command objects
     //  */
