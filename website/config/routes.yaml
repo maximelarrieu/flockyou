@@ -47,6 +47,10 @@ account_bank_edit:
 account_bank_delete:
     path: /account/bank/{id}/delete
     controller: App\Controller\BankController:delete
+#-------------- Suppression du compte -----------------#
+account_delete:
+    path: /account/{id}/delete
+    controller: App\Controller\AccountController:deleteAccount
 #######################################################
 ################## ADMINISTRATION #####################
 #######################################################
@@ -136,11 +140,17 @@ admin_user_delete:
 account:
     path: /account/{username}
     controller: App\Controller\UsersController:index
+#---------- Accès aux commandes utilisateur -------------#
+command:
+    path: /command
+    controller: App\Controller\CommandController:index
+show_command:
+    path: /command/{id}
+    controller: App\Controller\CommandController:showCommand
 ###########################################################
 league:
     path: /league/{league_name}/{page<\d+>?1}
     controller: App\Controller\LeaguesController:index
-
 ###########################################################
 ##################### PANIER ########################
 cart:
