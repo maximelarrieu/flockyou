@@ -50,59 +50,14 @@ class CartProduct
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CommandProduct", mappedBy="cartProduct", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\Command", mappedBy="cartProduct")
      */
-    private $commandProducts;
-
-//    /**
-//     * @ORM\ManyToOne(targetEntity="App\Entity\CommandProduct", inversedBy="cartProducts", cascade={"persist"})
-//     */
-//    private $commandProducts;
-
-//    /**
-//     * @ORM\OneToMany(targetEntity="App\Entity\CommandProduct", mappedBy="cartProducts")
-//     */
-//    private $commandProducts;
-
-//    /**
-//     * @ORM\OneToMany(targetEntity="App\Entity\CommandProduct", mappedBy="cartProduct", cascade={"persist"})
-//     */
-//    private $commandProducts;
-//
-//    /**
-//     * @ORM\ManyToOne(targetEntity="App\Entity\CommandProduct", inversedBy="cartProducts", cascade={"persist"})
-//     */
-//    private $commandProduct;
-
-//    /**
-//     * @ORM\OneToMany(targetEntity="App\Entity\CommandProduct", mappedBy="cartProducts")
-//     */
-//    private $commandProducts;
-
-//    /**
-//     * @ORM\OneToMany(targetEntity="App\Entity\CommandProduct", mappedBy="cartProduct")
-//     */
-//    private $cartProducts;
-
-//    /**
-//     * @ORM\ManyToOne(targetEntity="App\Entity\CommandProduct", inversedBy="cartProducts")
-//     */
-//    private $commandProduct;
-//
-//    /**
-//     * @ORM\OneToMany(targetEntity="App\Entity\CommandProduct", mappedBy="cartProducts")
-//     */
-//    private $commandProducts;
+    private $commands;
 
     public function __construct()
     {
-//        $this->commandProducts = new ArrayCollection();
+        $this->commands = new ArrayCollection();
     }
-
-//    /**
-//     * @ORM\ManyToOne(targetEntity="App\Entity\Users", inversedBy="cartProduct")
-//     */
-//    private $users;
 
     public function getId(): ?int
     {
@@ -182,236 +137,30 @@ class CartProduct
     }
 
     /**
-     * @return Collection|CommandProduct[]
+     * @return Collection|Command[]
      */
-    public function getCommandProducts(): Collection
+    public function getCommands(): Collection
     {
-        return $this->commandProducts;
+        return $this->commands;
     }
 
-    public function addCommandProduct(CommandProduct $commandProduct): self
+    public function addCommand(Command $command): self
     {
-        if (!$this->commandProducts->contains($commandProduct)) {
-            $this->commandProducts[] = $commandProduct;
-            $commandProduct->setCartProduct($this);
+        if (!$this->commands->contains($command)) {
+            $this->commands[] = $command;
+            $command->addCartProduct($this);
         }
 
         return $this;
     }
 
-    public function removeCommandProduct(CommandProduct $commandProduct): self
+    public function removeCommand(Command $command): self
     {
-        if ($this->commandProducts->contains($commandProduct)) {
-            $this->commandProducts->removeElement($commandProduct);
-            // set the owning side to null (unless already changed)
-            if ($commandProduct->getCartProduct() === $this) {
-                $commandProduct->setCartProduct(null);
-            }
+        if ($this->commands->contains($command)) {
+            $this->commands->removeElement($command);
+            $command->removeCartProduct($this);
         }
 
         return $this;
     }
-//
-//    public function getCommandProducts(): ?CommandProduct
-//    {
-//        return $this->commandProducts;
-//    }
-//
-//    public function setCommandProducts(?CommandProduct $commandProducts): self
-//    {
-//        $this->commandProducts = $commandProducts;
-//
-//        return $this;
-//    }
-
-//    /**
-//     * @return Collection|CommandProduct[]
-//     */
-//    public function getCommandProducts(): Collection
-//    {
-//        return $this->commandProducts;
-//    }
-//
-//    public function addCommandProduct(CommandProduct $commandProduct): self
-//    {
-//        if (!$this->commandProducts->contains($commandProduct)) {
-//            $this->commandProducts[] = $commandProduct;
-//            $commandProduct->setCartProducts($this);
-//        }
-//
-//        return $this;
-//    }
-//
-//    public function removeCommandProduct(CommandProduct $commandProduct): self
-//    {
-//        if ($this->commandProducts->contains($commandProduct)) {
-//            $this->commandProducts->removeElement($commandProduct);
-//            // set the owning side to null (unless already changed)
-//            if ($commandProduct->getCartProducts() === $this) {
-//                $commandProduct->setCartProducts(null);
-//            }
-//        }
-//
-//        return $this;
-//    }
-
-//    /**
-//     * @return Collection|CommandProduct[]
-//     */
-//    public function getCommandProducts(): Collection
-//    {
-//        return $this->commandProducts;
-//    }
-//
-//    public function addCommandProduct(CommandProduct $commandProduct): self
-//    {
-//        if (!$this->commandProducts->contains($commandProduct)) {
-//            $this->commandProducts[] = $commandProduct;
-//            $commandProduct->setCartProduct($this);
-//        }
-//
-//        return $this;
-//    }
-//
-//    public function removeCommandProduct(CommandProduct $commandProduct): self
-//    {
-//        if ($this->commandProducts->contains($commandProduct)) {
-//            $this->commandProducts->removeElement($commandProduct);
-//            // set the owning side to null (unless already changed)
-//            if ($commandProduct->getCartProduct() === $this) {
-//                $commandProduct->setCartProduct(null);
-//            }
-//        }
-//
-//        return $this;
-//    }
-//
-//    public function getCommandProduct(): ?CommandProduct
-//    {
-//        return $this->commandProduct;
-//    }
-//
-//    public function setCommandProduct(?CommandProduct $commandProduct): self
-//    {
-//        $this->commandProduct = $commandProduct;
-//
-//        return $this;
-//    }
-////
-//    /**
-//     * @return Collection|CommandProduct[]
-//     */
-//    public function getCommandProducts(): Collection
-//    {
-//        return $this->commandProducts;
-//    }
-//
-//    public function addCommandProduct(CommandProduct $commandProduct): self
-//    {
-//        if (!$this->commandProducts->contains($commandProduct)) {
-//            $this->commandProducts[] = $commandProduct;
-//            $commandProduct->setCartProducts($this);
-//        }
-//
-//        return $this;
-//    }
-//
-//    public function removeCommandProduct(CommandProduct $commandProduct): self
-//    {
-//        if ($this->commandProducts->contains($commandProduct)) {
-//            $this->commandProducts->removeElement($commandProduct);
-//            // set the owning side to null (unless already changed)
-//            if ($commandProduct->getCartProducts() === $this) {
-//                $commandProduct->setCartProducts(null);
-//            }
-//        }
-//
-//        return $this;
-//    }
-
-//    /**
-//     * @return Collection|CommandProduct[]
-//     */
-//    public function getCartProducts(): Collection
-//    {
-//        return $this->cartProducts;
-//    }
-//
-//    public function addCartProduct(CommandProduct $cartProduct): self
-//    {
-//        if (!$this->cartProducts->contains($cartProduct)) {
-//            $this->cartProducts[] = $cartProduct;
-//            $cartProduct->setCartProduct($this);
-//        }
-//
-//        return $this;
-//    }
-//
-//    public function removeCartProduct(CommandProduct $cartProduct): self
-//    {
-//        if ($this->cartProducts->contains($cartProduct)) {
-//            $this->cartProducts->removeElement($cartProduct);
-//            // set the owning side to null (unless already changed)
-//            if ($cartProduct->getCartProduct() === $this) {
-//                $cartProduct->setCartProduct(null);
-//            }
-//        }
-//
-//        return $this;
-//    }
-
-//    public function getCommandProduct(): ?CommandProduct
-//    {
-//        return $this->commandProduct;
-//    }
-//
-//    public function setCommandProduct(?CommandProduct $commandProduct): self
-//    {
-//        $this->commandProduct = $commandProduct;
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * @return Collection|CommandProduct[]
-//     */
-//    public function getCommandProducts(): Collection
-//    {
-//        return $this->commandProducts;
-//    }
-//
-//    public function addCommandProduct(CommandProduct $commandProduct): self
-//    {
-//        if (!$this->commandProducts->contains($commandProduct)) {
-//            $this->commandProducts[] = $commandProduct;
-//            $commandProduct->setCartProducts($this);
-//        }
-//
-//        return $this;
-//    }
-//
-//    public function removeCommandProduct(CommandProduct $commandProduct): self
-//    {
-//        if ($this->commandProducts->contains($commandProduct)) {
-//            $this->commandProducts->removeElement($commandProduct);
-//            // set the owning side to null (unless already changed)
-//            if ($commandProduct->getCartProducts() === $this) {
-//                $commandProduct->setCartProducts(null);
-//            }
-//        }
-//
-//        return $this;
-//    }
-//
-//    public function getUsers(): ?Users
-//    {
-//        return $this->users;
-//    }
-//
-//    public function setUsers(?Users $users): self
-//    {
-//        $this->users = $users;
-//
-//        return $this;
-//    }
 }

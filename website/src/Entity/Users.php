@@ -108,9 +108,9 @@ class Users implements UserInterface
         $this->comments = new ArrayCollection();
         $this->purchases = new ArrayCollection();
         $this->carts = new ArrayCollection();
-        $this->commands = new ArrayCollection();
         $this->cartProduct = new ArrayCollection();
         $this->cartProducts = new ArrayCollection();
+        $this->commands = new ArrayCollection();
     }
 
     public function getId(): ?int

@@ -51,6 +51,11 @@ class Livraison
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Command", mappedBy="livraison")
+     */
+    private $commands;
+
     public function __construct()
     {
 //        $this->commands = new ArrayCollection();
@@ -129,6 +134,37 @@ class Livraison
     public function setUser(?Users $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Command[]
+     */
+    public function getCommands(): Collection
+    {
+        return $this->commands;
+    }
+
+    public function addCommand(Command $command): self
+    {
+        if (!$this->commands->contains($command)) {
+            $this->commands[] = $command;
+            $command->setLivraison($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommand(Command $command): self
+    {
+        if ($this->commands->contains($command)) {
+            $this->commands->removeElement($command);
+            // set the owning side to null (unless already changed)
+            if ($command->getLivraison() === $this) {
+                $command->setLivraison(null);
+            }
+        }
 
         return $this;
     }
