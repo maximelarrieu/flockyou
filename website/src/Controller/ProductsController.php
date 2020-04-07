@@ -46,6 +46,14 @@ class ProductsController extends AbstractController
     public function index(Product $product, Request $request, ObjectManager $manager, Favorites $service, $id)
     {
         $team = $product->getTeam()->getName();
+        $cartProduct = $product->getCartProducts();
+        $boughtProduct = [];
+
+        foreach ($cartProduct as $bproduct) {
+            $boughtProduct = $bproduct->getProduct();
+        }
+
+//        dd($cartProduct);
 
         $buyProduct = new CartProduct();
         $quantity = 1;
@@ -91,7 +99,8 @@ class ProductsController extends AbstractController
             'sizes' => $this->sizesRepository->findAll(),
             'form' => $form->createView(),
             'formP' => $formP->createView(),
-            'service' => $service
+            'service' => $service,
+            'command' => $boughtProduct
         ]);
     }
 
@@ -100,7 +109,7 @@ class ProductsController extends AbstractController
         return $this->render('products/cardProduct.html.twig', [
             'league_name' => $league_name,
             'products' => $this->productsRepository->getProductFromLeague($league_name),
-            'sizes' => $this->sizesRepository->findAll()
+            'sizes' => $this->sizesRepository->findAll(),
         ]);
     }
 

@@ -27,13 +27,14 @@ class CartController extends AbstractController
      * @param Livraison|null $livraison
      * @param Request $request
      * @param ObjectManager $manager
+     * @param \Swift_Mailer $mailer
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
     public function index(Cart $cart, Bank $bank = null, Livraison $livraison = null, Request $request, ObjectManager $manager, \Swift_Mailer $mailer)
     {
         $user = $this->getUser();
-        $total = 0;
+        $total = 0.00;
         $product = [];
         $cartProductQuantity = [];
 
@@ -63,38 +64,40 @@ class CartController extends AbstractController
                         $command->setCreatedAt(new \DateTime());
                         $command->setUser($user);
                         $command->setTotal($total);
+//                        dump($total);
+//                        dd($command->getTotal());
                         $product->getProduct()->setQuantity($product->getProduct()->getQuantity() - $product->getQuantity());
                     }
                     $user->setBudget($user->getBudget() - $total);
 
-//                $pdfOptions = new Options();
-//                $pdfOptions->set('defaultFont', 'Arial');
-//
-//                $dompdf = new Dompdf($pdfOptions);
-//
-//                $html = $this->render('pdf/commands.html.twig', [
-//                    'name' => $user->getUsername()
-//                ]);
-//                $dompdf->loadHtml($html->getContent());
-//                $dompdf->setPaper('A4', 'portrait');
-//                $dompdf->render();
+                $pdfOptions = new Options();
+                $pdfOptions->set('defaultFont', 'Arial');
+
+                $dompdf = new Dompdf($pdfOptions);
+
+                $html = $this->render('pdf/command.html.twig', [
+                    'name' => $user->getUsername()
+                ]);
+                $dompdf->loadHtml($html->getContent());
+                $dompdf->setPaper('A4', 'portrait');
+                $dompdf->render();
 //                $dompdf->stream("commands.pdf", [
 //                    'Attachment' => false
 //                ]);
-//                $logo = './assets/images/ressources/flockyou.png';
-                    $mail = (new \Swift_Message("Merci pour votre commande !"));
-//                    $mail->embed(new \Swift_Image(Image::class, $logo, 'image.jpeg'));
-                    $mail->setFrom('flockyou@support.store')
+                    $mail = (new \Swift_Message("Merci pour votre commande !"))
+                        ->setFrom(['maxime.larrieu0@gmail.com' => 'flockyou@support.store'])
                         ->setTo($user->getEmail())
                         ->setBody(
                             $this->renderView(
                                 'mails/command.html.twig',
-                                ['name' => $user->getUsername()]
-//                            ,'logo' => $logo]
+                                ['name' => $user->getUsername(),
+                                 'product' => $command->getCartProduct(),
+                                 'command' => $command
+                                ]
                             ),
                             'text/html'
                         )
-//                 ->attach(\Swift_Attachment::fromPath($dompdf));
+//                        ->attach( \Swift_Attachment::fromPath($dompdf->output()));
                     ;
                     $mailer->send($mail);
 
