@@ -36,8 +36,8 @@ class StatsService {
 //        return $this->manager->createQuery('SELECT COUNT(p) FROM App\Entity\Product p')->getSingleScalarResult();
         return $this->manager->createQuery(
             'SELECT COUNT(p.id) AS boughtProduct
-            FROM App\Entity\CommandProduct cp
-            JOIN cp.cartProduct cap
+            FROM App\Entity\Command c
+            JOIN c.cartProduct cap
             JOIN cap.product p'
         )
             ->getSingleScalarResult();
@@ -66,7 +66,7 @@ class StatsService {
 
     public function getRecentsCommands() {
         return $this->manager->createQuery(
-            'SELECT COUNT(c.id) AS command
+            'SELECT COUNT(c.id) AS commands
             FROM App\Entity\Command c
             WHERE c.createdAt > :lastdays'
         )
