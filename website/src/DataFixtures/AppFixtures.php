@@ -498,6 +498,72 @@ class AppFixtures extends Fixture
             $manager->persist($flocage);
             $floc_ir_tab[] = $flocage;
         }
+        /****------------- Turquie ------------ ****/
+        $floc_tur = ['10. Calhanoglu', '7. Kilinc', '11. Yazici'];
+        $floc_tur_tab = [];
+        for ($f = 0; $f < sizeof($floc_tur); $f++) {
+            $flocage = new Flocage();
+            $flocage->setFlocage($floc_tur[$f]);
+            $flocage->setTeam($euro_teams_tab[12]);
+
+            $manager->persist($flocage);
+            $floc_tur_tab[] = $flocage;
+        }
+        /****------------- Croatie ------------ ****/
+        $floc_cro = ['9. Jensen', '22. Raitala', '13. Solri'];
+        $floc_cro_tab = [];
+        for ($f = 0; $f < sizeof($floc_cro); $f++) {
+            $flocage = new Flocage();
+            $flocage->setFlocage($floc_cro[$f]);
+            $flocage->setTeam($euro_teams_tab[13]);
+
+            $manager->persist($flocage);
+            $floc_cro_tab[] = $flocage;
+        }
+        /****------------- Finlande ------------ ****/
+        $floc_fin = ['10. Calhanoglu', '7. Kilinc', '11. Yazici'];
+        $floc_fin_tab = [];
+        for ($f = 0; $f < sizeof($floc_fin); $f++) {
+            $flocage = new Flocage();
+            $flocage->setFlocage($floc_fin[$f]);
+            $flocage->setTeam($euro_teams_tab[14]);
+
+            $manager->persist($flocage);
+            $floc_fin_tab[] = $flocage;
+        }
+        /****------------- Pays de Galles ------------ ****/
+        $floc_pdg = ['7. Allen', '3. Taylor', '12. Vaulks'];
+        $floc_pdg_tab = [];
+        for ($f = 0; $f < sizeof($floc_pdg); $f++) {
+            $flocage = new Flocage();
+            $flocage->setFlocage($floc_pdg[$f]);
+            $flocage->setTeam($euro_teams_tab[15]);
+
+            $manager->persist($flocage);
+            $floc_pdg_tab[] = $flocage;
+        }
+        /****------------- Pologne ------------ ****/
+        $floc_pol = ['6. Golarski', '19. Szymanski', '14. Klich'];
+        $floc_pol_tab = [];
+        for ($f = 0; $f < sizeof($floc_pol); $f++) {
+            $flocage = new Flocage();
+            $flocage->setFlocage($floc_pol[$f]);
+            $flocage->setTeam($euro_teams_tab[16]);
+
+            $manager->persist($flocage);
+            $floc_pol_tab[] = $flocage;
+        }
+        /****------------- République Tchèque ------------ ****/
+        $floc_rp = ['9. Ondrasek', '15. Soucek', '8. Darida'];
+        $floc_rp_tab = [];
+        for ($f = 0; $f < sizeof($floc_rp); $f++) {
+            $flocage = new Flocage();
+            $flocage->setFlocage($floc_rp[$f]);
+            $flocage->setTeam($euro_teams_tab[17]);
+
+            $manager->persist($flocage);
+            $floc_rp_tab[] = $flocage;
+        }
         /****=====================================****/
         /****============== SIZES ==============****/
         $sizes = ['XS', 'S', 'M', 'L', 'XL'];
