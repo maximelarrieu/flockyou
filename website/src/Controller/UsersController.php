@@ -24,11 +24,12 @@ class UsersController extends AbstractController
     {
         $this->commandRepository = $commandRepository;
     }
+
     /**
      * @param Users $user
      * @param Livraison $livraison ;
      * @param Bank|null $bank
-     * @param Command $command
+     * @param Command|null $command
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(Users $user, Livraison $livraison = null, Bank $bank = null, Command $command = null)

@@ -45,21 +45,20 @@ class CartController extends AbstractController
             $total += $product->getProduct()->getPrice() * $product->getQuantity();
         }
 
-        $formq = $this->createForm(NbProductType::class, $product);
-        $formq->handleRequest($request);
+//        $formq = $this->createForm(NbProductType::class, $product);
+//        $formq->handleRequest($request);
 
-        $commandProducts = new CommandProduct();
         $command = new Command();
 
-        $form = $this->createForm(CommandType::class, $commandProducts);
+        $form = $this->createForm(CommandType::class, $command);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($user->getBudget() > $total) {
                 if ($product->getProduct()->getQuantity() >= $cartProductQuantity) {
                     foreach ($user->getCart()->getCartProduct() as $product) {
-                        $commandProducts->setCommand($command);
-                        $commandProducts->addCartProduct($product);
+                        $product->addCommand($command);
+                        $command->addCartProduct($product);
                         $command->setNbCommand(rand(10000, 30000));
                         $command->setCreatedAt(new \DateTime());
                         $command->setUser($user);
@@ -73,13 +72,13 @@ class CartController extends AbstractController
 //
 //                $dompdf = new Dompdf($pdfOptions);
 //
-//                $html = $this->render('pdf/command.html.twig', [
+//                $html = $this->render('pdf/commands.html.twig', [
 //                    'name' => $user->getUsername()
 //                ]);
 //                $dompdf->loadHtml($html->getContent());
 //                $dompdf->setPaper('A4', 'portrait');
 //                $dompdf->render();
-//                $dompdf->stream("command.pdf", [
+//                $dompdf->stream("commands.pdf", [
 //                    'Attachment' => false
 //                ]);
 //                $logo = './assets/images/ressources/flockyou.png';
@@ -102,7 +101,7 @@ class CartController extends AbstractController
                     $newCart = new Cart();
                     $user->setCart($newCart);
 
-                    $manager->persist($commandProducts);
+//                    $manager->persist($commandProducts);
                     $manager->persist($command);
                     $manager->flush();
 
@@ -126,7 +125,7 @@ class CartController extends AbstractController
                         'user' => $user,
                         'total' => $total,
                         'form' => $form->createView(),
-                        'formq' => $formq->createView()
+//                        'formq' => $formq->createView()
                     ]);
                 }
 
@@ -144,7 +143,7 @@ class CartController extends AbstractController
                     'user' => $user,
                     'total' => $total,
                     'form' => $form->createView(),
-                    'formq' => $formq->createView()
+//                    'formq' => $formq->createView()
                 ]);
             }
         }
@@ -157,7 +156,7 @@ class CartController extends AbstractController
             'user' => $user,
             'total' => $total,
             'form' => $form->createView(),
-            'formq' => $formq->createView()
+//            'formq' => $formq->createView()
         ]);
     }
 }
