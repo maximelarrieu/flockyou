@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ma commande{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('build/form.css') }}">
+
+    <div class="container">
+        <h2 class="deepshadow">Commande <br/>{{ command.nbCommand }}</h2>
+        <div class="login-form bg-light py-3 px-3">
+            <div class="card mb-3">
+                <div class="card-head p-2">
+                    <div>
+                        <h4><b>Commande passée le :</b> {{ command.createdAt | date('d/m/Y') }}</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card mb-3">
+                        <div class="card-head p-2">
+                            <h5>Détails de livraison</h5>
+                        </div>
+                        <div class="card-body p-2">
+                            {% for livraison in user.livraisons %}
+                                {{ livraison.name }}<br/>
+                                {{ livraison.phoneNumber }}<br/>
+                                {{ livraison.address }}<br/>
+                                {{ livraison.city }}<br/>
+                                {{ livraison.country }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Produit</th>
+                            <th></th>
+                            <th scope="col">Quantité</th>
+                            <th scope="col">Prix</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for commandProduct in command.cartProduct %}
+                            <tr>
+                                <td scope="row"><img style="width: 80px;"
+                                                     src="{{ asset(commandProduct.product.image) }}"></td>
+                                <td>
+                                    {{ commandProduct.product.team.name }} - {{ commandProduct.product.state.state }}<br />
+                                    <b>Flocage : </b>{{ commandProduct.flocage.flocage }}<br />
+                                    <b>Taille : </b>{{ commandProduct.size.name }}
+                                </td>
+                                <td>{{ commandProduct.quantity }}</td>
+                                <td>{{ commandProduct.product.price }} €</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="float-right"><b>Montant total :</b> {{ command.total }} €</div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
