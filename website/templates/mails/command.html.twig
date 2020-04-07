@@ -1,8 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/8100dbee1b.js" crossorigin="anonymous"></script>
+</head>
+<body>
 <div class="container">
-{#    <img src="{{ logo }}">#}
+        <img src="https://localhost:8000/assets/images/ressources/flockyou.png">
     <h1>Merci pour votre commande {{ name }} !</h1>
-    <p>Nous sommes ravis que vous ayez choisi FlockYou pour acheter vos maillots de football préférés. Nous espérons également que les produits
-    vous conviendrons.</p>
-    <p>N'hésitez pas à noter les produits que vous avez choisi afin d'aider les prochains clients à faire leur choix.</p>
+    <p>Nous sommes ravis que vous ayez choisi <a href="https://localhost:8000/">FlockYou</a> pour acheter vos maillots de
+        football préférés. Nous espérons également que les produits
+        vous conviendrons.</p>
+    <p>N'hésitez pas à noter les produits que vous avez choisi afin d'aider les prochains clients à faire leur
+        choix.</p>
     <p>Nous espérons vous revoir très vite vous revoir sur notre site web pour de futurs achats.</p>
+
+    <h3 style="color: red">Récapitulatif de votre commande :</h3>
+    Numéro de commande : {{ command.nbCommand }}<br>
+    Passée le : {{ command.createdAt|date("d/m/y") }}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Produit</th>
+            <th></th>
+            <th scope="col">Quantité</th>
+            <th scope="col">Prix</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for bproduct in product %}
+            <tr>
+                <td scope="row"><img style="width: 80px;"
+                                     src="{{ asset(bproduct.product.image) }}"></td>
+                <td>
+                    {{ bproduct.product.team.name }} - {{ bproduct.product.state.state }}<br/>
+                    <b>Flocage : </b>{{ bproduct.flocage.flocage }}<br/>
+                    <b>Taille : </b>{{ bproduct.size.name }}
+                </td>
+                <td>{{ bproduct.quantity }}</td>
+                <td>{{ bproduct.product.price }} €</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div><b>Montant total :</b> {{ command.total }} €</div>
 </div>
+</body>
+

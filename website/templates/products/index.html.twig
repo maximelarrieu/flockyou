@@ -31,21 +31,21 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     {#                                    {% for products in service.cart %}#}
-{#                                    {% if product in service.cart %}#}
-{#                                        {{ dump(service.cart) }}#}
-{#                                        <a class="btn btn-secondary" type="submit">#}
-{#                                            <i class="fas fa-heart"></i><br>#}
-{#                                            Ajouter aux favoris#}
-{#                                        </a>#}
-{#                                    {% else %}#}
+                                    {#                                    {% if product in service.cart %}#}
+                                    {#                                        {{ dump(service.cart) }}#}
+                                    {#                                        <a class="btn btn-secondary" type="submit">#}
+                                    {#                                            <i class="fas fa-heart"></i><br>#}
+                                    {#                                            Ajouter aux favoris#}
+                                    {#                                        </a>#}
+                                    {#                                    {% else %}#}
                                     {#                                    {% endfor %}#}
-{#                                    {% if product not in service.cart %}#}
-                                        <a href="{{ path('favorites_product_add', {'id': product.id}) }}"
-                                           class="btn btn-danger" type="submit">
-                                            <i class="fas fa-heart"></i><br>
-                                            Ajouter aux favoris
-                                        </a>
-{#                                    {% endif %}#}
+                                    {#                                    {% if product not in service.cart %}#}
+                                    <a href="{{ path('favorites_product_add', {'id': product.id}) }}"
+                                       class="btn btn-danger" type="submit">
+                                        <i class="fas fa-heart"></i><br>
+                                        Ajouter aux favoris
+                                    </a>
+                                    {#                                    {% endif %}#}
                                 </div>
                                 <div class="col">
                                     {% if app.user %}
@@ -96,6 +96,7 @@
                     </h4>
                 </div>
                 <div class="alert border-warning">
+                    {{ dump(command) }}
                     {% if app.user %}
                         {% set comment = product.getCommentFromAuthor(app.user) %}
                         {% if comment is not null %}
@@ -106,15 +107,15 @@
                             <strong>Note attribuée : </strong>
                             {% include 'products/rating.html.twig' with {'rating': comment.rating} %}
                         {% else %}
-                            {#                            {% if product in app.user.commands %}#}
-                            <h3 class="alert-heading">Donnez votre avis sur ce produit :</h3>
-                            {{ form_start(form) }}
-                            {{ form_widget(form) }}
-                            <button type="submit" class="btn btn-success">Envoyer le commentaire</button>
-                            {{ form_end(form) }}
-                            {#                            {% else %}#}
-                            {#                                <p>Vous pourrez donner votre avis lorsque vous aurez acheté le produit.</p>#}
-                            {#                            {% endif %}#}
+                            {% if product in product.cartProducts %}
+                                <h3 class="alert-heading">Donnez votre avis sur ce produit :</h3>
+                                {{ form_start(form) }}
+                                {{ form_widget(form) }}
+                                <button type="submit" class="btn btn-success">Envoyer le commentaire</button>
+                                {{ form_end(form) }}
+                            {% else %}
+                                <p>Vous pourrez donner votre avis lorsque vous aurez acheté le produit.</p>
+                            {% endif %}
                         {% endif %}
                     {% else %}
                         <div class="alert alert-warning">

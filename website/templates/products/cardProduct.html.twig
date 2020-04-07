@@ -8,8 +8,9 @@
         <img src="{{ asset(product.team.image) }}" alt="logo" class="card-logo">
         <img src="{{ asset(product.image) }}" alt="Jersey" class="product-img">
         <div class="product-detail">
-            <h3>Maillot football</h3> Support and Nike Zoom Air come together for a more supportive feel with high-speed
-            responsiveness
+            <h3>Maillot football</h3>
+            Deviens le meilleur joueur <br> en incarnant ton footballeur préféré <br> de ton équipe favorite.
+            Parcours <br> les terrains et bats tes adversaires.
         </div>
         <span class="back-text">
             {{ product.team.slug }}
@@ -30,7 +31,7 @@
                 {% if product.comments | length > 0 %}
                     {% include 'products/rating.html.twig' with {'rating': product.getAvgRating} %}
                 {% else %}
-                    (Ce produit n'a pas encoré été noté)
+                    (Ce produit n'a pas encore été noté)
                 {% endif %}
             </span>
         </div>

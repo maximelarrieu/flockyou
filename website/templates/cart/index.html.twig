@@ -44,7 +44,7 @@
                                 {% if product.product.comments | length > 0 %}
                                     {% include 'products/rating.html.twig' with {'rating': product.product.getAvgRating} %}
                                 {% else %}
-                                    (Ce produit n'a pas encoré été noté)
+                                    (Ce produit n'a pas encore été noté)
                                 {% endif %}
                                 <h5 class="mt-2">Taille : {{ product.size.name }} </h5>
                                 <h5>Flocage : {{ product.flocage.flocage }}</h5>
