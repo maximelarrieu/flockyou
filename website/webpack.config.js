@@ -1,7 +1,7 @@
 var Encore = require('@symfony/webpack-encore');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
-// Manually configure the runtime environment if not already configured yet by the "encore" command.
+// Manually configure the runtime environment if not already configured yet by the "encore" commands.
 // It's useful when you use tools that rely on webpack.config.js file.
 if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
