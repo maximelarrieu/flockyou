@@ -99,6 +99,11 @@ class Users implements UserInterface
      */
     private $commands;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $birthday;
+
     public function __construct()
     {
         $this->userRoles = new ArrayCollection();
@@ -425,6 +430,18 @@ class Users implements UserInterface
                 $command->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBirthday(): ?\DateTimeInterface
+    {
+        return $this->birthday;
+    }
+
+    public function setBirthday(?\DateTimeInterface $birthday): self
+    {
+        $this->birthday = $birthday;
 
         return $this;
     }
