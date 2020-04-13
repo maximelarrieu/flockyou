@@ -22,10 +22,9 @@ class StatsService {
         $recentsCommands = $this->getRecentsCommands();
         $totaux = $this->getTotaux();
         $recentsTotaux = $this->getRecentsTotaux();
+        $avgComments = $this->getAvgComments();
 
-//        return compact('users', 'comments');
-
-        return compact('users', 'products', 'comments', 'commands', 'recentsCommands', 'totaux', 'recentsTotaux');
+        return compact('users', 'products', 'comments', 'commands', 'recentsCommands', 'totaux', 'recentsTotaux', 'avgComments');
     }
 
     public function getUsersCount() {
@@ -53,10 +52,11 @@ class StatsService {
 
     public function getProductsStats($order) {
         return $this->manager->createQuery(
-            'SELECT AVG(c.rating) AS note, p.id, p.image, t.name
+            'SELECT AVG(c.rating) AS note, p.id, p.image, t.name, s.state
            FROM App\Entity\Comment c
            JOIN c.product p
            JOIN p.team t
+           JOIN p.state s
            GROUP BY p
            ORDER BY note ' . $order
         )
@@ -90,6 +90,14 @@ class StatsService {
              WHERE c.createdAt > :lastdays'
         )
             ->setParameter('lastdays', new \DateTime('- 7 days'))
+            ->getSingleScalarResult();
+    }
+
+    public function getAvgComments() {
+        return $this->manager->createQuery(
+            'SELECT AVG(c.rating)
+            FROM App\Entity\Comment c'
+        )
             ->getSingleScalarResult();
     }
 }
