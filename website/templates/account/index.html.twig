@@ -50,7 +50,7 @@
                                             <b>Numéro de commande :</b>
                                             {{ command.nbCommand }}<br />
                                             <b>Date de la commande :</b>
-                                            {{ command.createdAt | date("d/m/Y") }}<br />
+                                            {{ command.createdAt | date("d/m/Y - H:m:s") }}<br />
                                             <b>Montant total :</b>
                                             {{ command.total }} €
                                         {% endfor %}
@@ -144,7 +144,7 @@
                                     <td></td>
                                 {% endif %}
                                 <td>{{ bank.cartNumber }}</td>
-                                <td>{{ bank.expirationDate|date('M/Y') }}</td>
+                                <td>{{ bank.expirationDate|date('m/Y') }}</td>
                                 <td>{{ bank.cartCode }}</td>
                                 <td><a href="{{ path('account_bank_edit', {'id': bank.id}) }}"
                                        class="btn-sm btn-warning"><i
