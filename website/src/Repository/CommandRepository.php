@@ -20,14 +20,26 @@ class CommandRepository extends ServiceEntityRepository
     }
 
     public function findLastUserCommand($user, $limit) {
-        return $this->createQueryBuilder('commands')
-            ->innerJoin('commands.user', 'user')
-            ->where('commands.user = :user')
-            ->orderBy('commands.createdAt', 'DESC')
+        return $this->createQueryBuilder('command')
+            ->innerJoin('command.user', 'user')
+            ->where('command.user = :user')
+            ->orderBy('command.createdAt', 'DESC')
             ->setParameters([
                 'user' => $user
             ])
             ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getUserCommands($user) {
+        return $this->createQueryBuilder('command')
+            ->innerJoin('command.user', 'user')
+            ->where('command.user = :user')
+            ->orderBy('command.createdAt', 'DESC')
+            ->setParameters([
+                'user' => $user
+            ])
             ->getQuery()
             ->getResult();
     }
