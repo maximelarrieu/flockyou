@@ -14,9 +14,9 @@
                             </div>
                             <div class="col-8">
                                 {% if stats.users > 1 %}
-                                <h3 class="card-title">{{ stats.users }} utilisateurs</h3>
+                                    <h3 class="card-title">{{ stats.users }} utilisateurs</h3>
                                 {% else %}
-                                <h3 class="card-title">{{ stats.users }} utilisateur inscrit</h3>
+                                    <h3 class="card-title">{{ stats.users }} utilisateur inscrit</h3>
                                 {% endif %}
                             </div>
                         </div>
@@ -32,9 +32,9 @@
                             </div>
                             <div class="col-8">
                                 {% if stats.products > 1 %}
-                                <h3 class="card-title">{{ stats.products }} produits achetés</h3>
+                                    <h3 class="card-title">{{ stats.products }} produits achetés</h3>
                                 {% else %}
-                                <h3 class="card-title">{{ stats.products }} produit acheté</h3>
+                                    <h3 class="card-title">{{ stats.products }} produit acheté</h3>
                                 {% endif %}
                             </div>
                         </div>
@@ -50,9 +50,9 @@
                             </div>
                             <div class="col-8">
                                 {% if stats.commands > 1 %}
-                                <h3 class="card-title">{{ stats.commands }} commandes</h3>
+                                    <h3 class="card-title">{{ stats.commands }} commandes</h3>
                                 {% else %}
-                                <h3 class="card-title">{{ stats.commands }} commande</h3>
+                                    <h3 class="card-title">{{ stats.commands }} commande</h3>
                                 {% endif %}
                             </div>
                         </div>
@@ -102,6 +102,20 @@
                 </div>
             </div>
         </div>
+        <div class="col-4">
+            <div class="card text-white bg-info mt-3 text-center">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <i class="fas fa-star fa-3x"></i>
+                        </div>
+                        <div class="col-8">
+                            <h3 class="card-title">Note moyenne : {{ stats.avgComments | number_format(2)}}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <hr>
         <div class="row">
             <div class="col">
@@ -109,17 +123,17 @@
                     <h3 class="alert-heading mb-3"><i class="fas fa-arrow-up mr-3"></i>Les produits populaires</h3>
                     <table class="table table-hover table-dark">
                         <thead>
-                            <tr>
-                                <th>Produit</th>
-                                <th>Équipe</th>
-                                <th class="text-center">Moyenne</th>
-                            </tr>
+                        <tr>
+                            <th>Produit</th>
+                            <th>Équipe</th>
+                            <th class="text-center">Moyenne</th>
+                        </tr>
                         </thead>
                         <tbody>
                         {% for product in bestProducts %}
                             <tr>
                                 <td><img src="{{ asset(product.image) }}" style="width: 20%"></td>
-                                <td>{{ product.name }}</td>
+                                <td>{{ product.name }}<br>{{ product.state }}</td>
                                 <td class="text-center">
                                     <span class="badge badge-success">
                                         {{ product.note | number_format(1, ",", " ") }}
@@ -133,7 +147,8 @@
             </div>
             <div class="col">
                 <div class="cart bg-danger py-3 px-3">
-                    <h3 class="alert-heading mb-3"><i class="fas fa-arrow-down mr-3"></i>Les produits moins populaires</h3>
+                    <h3 class="alert-heading mb-3"><i class="fas fa-arrow-down mr-3"></i>Les produits moins populaires
+                    </h3>
                     <table class="table table-hover table-dark">
                         <thead>
                         <tr>
@@ -146,7 +161,7 @@
                         {% for product in worstProducts %}
                             <tr>
                                 <td><img src="{{ asset(product.image) }}" style="width: 20%"></td>
-                                <td>{{ product.name }}</td>
+                                <td>{{ product.name }}<br>{{ product.state }}</td>
                                 <td class="text-center">
                                     <span class="badge badge-danger">
                                         {{ product.note | number_format(1, ",", " ") }}
