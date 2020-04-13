@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commandes de {{ user }}{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('build/form.css') }}">
+
+    <div class="container">
+        <h2 class="deepshadow">Commandes de {{ user }}</h2>
+        <div class="login-form bg-light py-3 px-3">
+            {% for command in commands %}
+                <div class="card mb-3">
+                    <div class="card-head p-2">
+                        <div class="float-left">
+                            <b>Numéro de commande :</b> {{ command.nbCommand }}<br />
+                            <b>Date de la commande :</b> {{ command.createdAt | date('d/m/Y') }}<br/>
+                        </div>
+                        <div class="float-right">
+                            <a href="{{ path('show_command', {'id': command.id}) }}" class="btn btn-primary mt-1">Voir la commande</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="float-right"><b>Montant total :</b> {{ command.total }} €</div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
