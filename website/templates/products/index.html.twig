@@ -107,7 +107,7 @@
                             <strong>Note attribuée : </strong>
                             {% include 'products/rating.html.twig' with {'rating': comment.rating} %}
                         {% else %}
-                            {% if product in product.cartProducts %}
+                            {% if product in command %}
                                 <h3 class="alert-heading">Donnez votre avis sur ce produit :</h3>
                                 {{ form_start(form) }}
                                 {{ form_widget(form) }}
@@ -143,13 +143,20 @@
                     </div>
                 {% endfor %}
             {% else %}
+                <div class="alert alert-info">
+                    Ce produit n'a pas encore été noté.
+                </div>
                 <div class="alert border-warning">
                     {% if app.user %}
-                        <h3 class="alert-heading">Soyez le premier à donner un avis sur ce produit :</h3>
-                        {{ form_start(form) }}
-                        {{ form_widget(form) }}
-                        <button type="submit" class="btn btn-success">Envoyer le commentaire</button>
-                        {{ form_end(form) }}
+                        {% if product in command.product %}
+                            <h3 class="alert-heading">Donnez votre avis sur ce produit :</h3>
+                            {{ form_start(form) }}
+                            {{ form_widget(form) }}
+                            <button type="submit" class="btn btn-success">Envoyer le commentaire</button>
+                            {{ form_end(form) }}
+                        {% else %}
+                            <p>Vous pourrez donner votre avis lorsque vous aurez acheté le produit.</p>
+                        {% endif %}
                     {% else %}
                         <div class="alert alert-warning">
                             <p><a href="{{ path('login') }}">Connectez-vous </a>pour donner votre avis !</p>
