@@ -1,3 +1,3 @@
 swiftmailer:
-    url: 'gmail://maxime.larrieu0:Motdepasse47@localhost?encryption=tls&auth_mode=oauth'
+    url: 'gmail://maxime.larrieu0:yourpassword@localhost?encryption=tls&auth_mode=oauth'
     spool: { type: 'memory' }
