@@ -111,7 +111,7 @@ class ProductsController extends AbstractController
             'form' => $form->createView(),
             'formP' => $formP->createView(),
             'service' => $service,
-            'command' => $commandProducts
+            'command' => $cproduct
         ]);
     }
 
