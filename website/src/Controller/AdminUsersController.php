@@ -55,7 +55,8 @@ class AdminUsersController extends AbstractController
     public function commands(Users $users) {
         return $this->render('admin/users/commands.html.twig', [
             'commands' => $this->commandRepository->getUserCommands($users),
-            'user' => $users->getUsername()
+            'username' => $users->getUsername(),
+            'user' => $users
         ]);
     }
 }
