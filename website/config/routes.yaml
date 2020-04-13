@@ -133,6 +133,10 @@ admin_user_edit:
 admin_user_delete:
     path: /admin/user/{id}/destroy
     controller: App\Controller\AdminUsersController:destroy
+
+admin_user_commands:
+    path: /admin/user/{id}/commands
+    controller: App\Controller\AdminUsersController:commands
 #-----------------------------------------------------#
 #######################################################
 ##################### UTILISATEURS ########################
