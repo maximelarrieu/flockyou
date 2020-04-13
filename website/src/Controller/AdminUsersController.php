@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Users;
 use App\Form\AccountType;
+use App\Repository\CommandRepository;
 use App\Service\Pagination;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,6 +13,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AdminUsersController extends AbstractController
 {
+    /**
+     * @var CommandRepository
+     */
+    private $commandRepository;
+
+    public function __construct(CommandRepository $commandRepository) {
+        $this->commandRepository = $commandRepository;
+    }
+
     public function index($page, Pagination $pagination)
     {
         $pagination->setEntityClass(Users::class)
@@ -40,5 +50,12 @@ class AdminUsersController extends AbstractController
         $manager->flush();
 
         return $this->redirectToRoute('admin_users');
+    }
+
+    public function commands(Users $users) {
+        return $this->render('admin/users/commands.html.twig', [
+            'commands' => $this->commandRepository->getUserCommands($users),
+            'user' => $users->getUsername()
+        ]);
     }
 }
