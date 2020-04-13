@@ -30,22 +30,11 @@
                             {{ form_widget(formP) }}
                             <div class="row">
                                 <div class="col-md-6">
-                                    {#                                    {% for products in service.cart %}#}
-                                    {#                                    {% if product in service.cart %}#}
-                                    {#                                        {{ dump(service.cart) }}#}
-                                    {#                                        <a class="btn btn-secondary" type="submit">#}
-                                    {#                                            <i class="fas fa-heart"></i><br>#}
-                                    {#                                            Ajouter aux favoris#}
-                                    {#                                        </a>#}
-                                    {#                                    {% else %}#}
-                                    {#                                    {% endfor %}#}
-                                    {#                                    {% if product not in service.cart %}#}
                                     <a href="{{ path('favorites_product_add', {'id': product.id}) }}"
                                        class="btn btn-danger" type="submit">
                                         <i class="fas fa-heart"></i><br>
                                         Ajouter aux favoris
                                     </a>
-                                    {#                                    {% endif %}#}
                                 </div>
                                 <div class="col">
                                     {% if app.user %}
