@@ -11,24 +11,57 @@
             <div class="card mb-3">
                 <div class="card-head p-2">
                     <div>
-                        <h4><b>Commande passée le :</b> {{ command.createdAt | date('d/m/Y') }}</h4>
+                        <h4><b>Commande passée le :</b> {{ command.createdAt | date('d/m/Y - h:m:s') }}</h4>
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="card mb-3">
-                        <div class="card-head p-2">
-                            <h5>Détails de livraison</h5>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card mb-3">
+                                <div class="card-head p-2">
+                                    <h5>Détails de livraison</h5>
+                                </div>
+                                <div class="card-body p-2">
+                                    {% for livraison in user.livraisons %}
+                                        {{ livraison.name }}<br/>
+                                        {{ livraison.phoneNumber }}<br/>
+                                        {{ livraison.address }}<br/>
+                                        {{ livraison.city }}<br/>
+                                        {{ livraison.country }}
+                                    {% endfor %}
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body p-2">
-                            {% for livraison in user.livraisons %}
-                                {{ livraison.name }}<br/>
-                                {{ livraison.phoneNumber }}<br/>
-                                {{ livraison.address }}<br/>
-                                {{ livraison.city }}<br/>
-                                {{ livraison.country }}
-                            {% endfor %}
+                        <div class="col-6">
+                            <div class="card mb-3">
+                                <div class="card-head p-2">
+                                    <h5>Informations de paiement</h5>
+                                </div>
+                                <div class="card-body p-2">
+                                    <p>Carte de crédit</p>
+                                    {% for bank in user.banks %}
+                                        {{ bank.cartNumber }}<br/>
+                                        {{ bank.cartCode }}<br />
+                                        {{ bank.expirationDate|date('m/Y') }}<br/>
+                                    {% endfor %}
+                                </div>
+                            </div>
                         </div>
                     </div>
+{#                    <div class="card mb-3">#}
+{#                        <div class="card-head p-2">#}
+{#                            <h5>Détails de livraison</h5>#}
+{#                        </div>#}
+{#                        <div class="card-body p-2">#}
+{#                            {% for livraison in user.livraisons %}#}
+{#                                {{ livraison.name }}<br/>#}
+{#                                {{ livraison.phoneNumber }}<br/>#}
+{#                                {{ livraison.address }}<br/>#}
+{#                                {{ livraison.city }}<br/>#}
+{#                                {{ livraison.country }}#}
+{#                            {% endfor %}#}
+{#                        </div>#}
+{#                    </div>#}
                     <table class="table table-striped">
                         <thead>
                         <tr>
