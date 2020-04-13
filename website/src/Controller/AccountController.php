@@ -77,6 +77,10 @@ class AccountController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $manager->persist($user);
             $manager->flush();
+
+            return $this->redirectToRoute('account', [
+                'username' => $user->getUsername()
+            ]);
         }
 
         return $this->render("account/edit.html.twig", [
