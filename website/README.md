@@ -27,6 +27,19 @@ yarn install
 Parfait. Votre local possède tout le nécessaire pour lancer le projet.
 
 ### Démarrage du projet
+#### Base de donnée
+Tout d'abord, créer une base de données nommée : `flockyou`
+
+Exécuter la commande pour lancer les migrations qui construiront les tables de la base de donnée :
+```shell
+php bin/console d:m:m
+```
+
+Puis lancer la commande de la création des fixtures :
+```shell
+php bin/console d:f:l
+```
+
 #### Lancement du serveur
 Selon la version Symfony installée sur votre machine, la commande sera peût-être différente. Si vous possédez la plus récente, exécutez :
 ```shell
